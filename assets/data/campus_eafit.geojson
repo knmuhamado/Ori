@@ -1,0 +1,3360 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578561,
+              6.197406
+            ],
+            [
+              -75.578687,
+              6.197454
+            ],
+            [
+              -75.57943,
+              6.197555
+            ],
+            [
+              -75.57942,
+              6.197766
+            ],
+            [
+              -75.57939,
+              6.197774
+            ],
+            [
+              -75.57939,
+              6.19787
+            ],
+            [
+              -75.579337,
+              6.197875
+            ],
+            [
+              -75.579339,
+              6.198102
+            ],
+            [
+              -75.578977,
+              6.198086
+            ],
+            [
+              -75.579007,
+              6.197747
+            ],
+            [
+              -75.578953,
+              6.197731
+            ],
+            [
+              -75.578891,
+              6.197939
+            ],
+            [
+              -75.578781,
+              6.197926
+            ],
+            [
+              -75.578856,
+              6.197715
+            ],
+            [
+              -75.578792,
+              6.197691
+            ],
+            [
+              -75.578698,
+              6.197936
+            ],
+            [
+              -75.578363,
+              6.197886
+            ],
+            [
+              -75.578561,
+              6.197406
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Paraqueadero sur",
+        "description": "Parqueadero para carros"
+      },
+      "id": "Y1MjE"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579299,
+              6.199534
+            ],
+            [
+              -75.57906,
+              6.199536
+            ],
+            [
+              -75.579063,
+              6.199678
+            ],
+            [
+              -75.579302,
+              6.19968
+            ],
+            [
+              -75.579299,
+              6.199534
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Parqueadero de Argos",
+        "description": "Parqueadero para carros"
+      },
+      "id": "gyMDI"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.577875,
+              6.199896
+            ],
+            [
+              -75.577725,
+              6.199875
+            ],
+            [
+              -75.577886,
+              6.199083
+            ],
+            [
+              -75.57806,
+              6.199078
+            ],
+            [
+              -75.578049,
+              6.19991
+            ],
+            [
+              -75.577875,
+              6.199896
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Parqueadero de profesores, directivos y empleados",
+        "description": "Parqueadero para carros"
+      },
+      "id": "UxMzc"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.576306,
+              6.202248
+            ],
+            [
+              -75.576719,
+              6.201427
+            ],
+            [
+              -75.576542,
+              6.201331
+            ],
+            [
+              -75.576488,
+              6.201392
+            ],
+            [
+              -75.576314,
+              6.201304
+            ],
+            [
+              -75.576271,
+              6.201365
+            ],
+            [
+              -75.575871,
+              6.201189
+            ],
+            [
+              -75.575614,
+              6.201741
+            ],
+            [
+              -75.576306,
+              6.202248
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Parqueadero del Parque Los Guayabos",
+        "description": "Parqueadero para carros"
+      },
+      "id": "k2MDg"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.576265,
+              6.201355
+            ],
+            [
+              -75.576308,
+              6.201275
+            ],
+            [
+              -75.575954,
+              6.201085
+            ],
+            [
+              -75.575895,
+              6.201187
+            ],
+            [
+              -75.576265,
+              6.201355
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Parqueadero del Parque Los Guayabos",
+        "description": "Parqueadero para motos"
+      },
+      "id": "M4MzA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.577631,
+              6.200552
+            ],
+            [
+              -75.578263,
+              6.200553
+            ],
+            [
+              -75.578266,
+              6.20084
+            ],
+            [
+              -75.577931,
+              6.200835
+            ],
+            [
+              -75.577936,
+              6.201075
+            ],
+            [
+              -75.577931,
+              6.201325
+            ],
+            [
+              -75.577928,
+              6.201571
+            ],
+            [
+              -75.577934,
+              6.201821
+            ],
+            [
+              -75.577925,
+              6.202043
+            ],
+            [
+              -75.577926,
+              6.202843
+            ],
+            [
+              -75.57792,
+              6.202928
+            ],
+            [
+              -75.577904,
+              6.202971
+            ],
+            [
+              -75.577869,
+              6.202997
+            ],
+            [
+              -75.577781,
+              6.202965
+            ],
+            [
+              -75.5777,
+              6.202931
+            ],
+            [
+              -75.577641,
+              6.202899
+            ],
+            [
+              -75.577599,
+              6.202861
+            ],
+            [
+              -75.577531,
+              6.202806
+            ],
+            [
+              -75.577451,
+              6.202699
+            ],
+            [
+              -75.577424,
+              6.202611
+            ],
+            [
+              -75.577416,
+              6.202547
+            ],
+            [
+              -75.577631,
+              6.200552
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Parqueadero Norte",
+        "description": "Parqueadero para carros"
+      },
+      "id": "EzMzE"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578671,
+              6.198139
+            ],
+            [
+              -75.578929,
+              6.198155
+            ],
+            [
+              -75.57894,
+              6.197984
+            ],
+            [
+              -75.57835,
+              6.197899
+            ],
+            [
+              -75.578288,
+              6.198142
+            ],
+            [
+              -75.578671,
+              6.198139
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Parqueadero sur",
+        "description": "Parqueadero para motos"
+      },
+      "id": "c1NzQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.577116,
+              6.201864
+            ],
+            [
+              -75.577188,
+              6.201693
+            ],
+            [
+              -75.576727,
+              6.201501
+            ],
+            [
+              -75.576703,
+              6.201571
+            ],
+            [
+              -75.576721,
+              6.201589
+            ],
+            [
+              -75.576681,
+              6.201683
+            ],
+            [
+              -75.577116,
+              6.201864
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 1",
+        "description": "- On.going\n- Idiomas EAFIT\n- Baños"
+      },
+      "id": "IwNzQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578706,
+              6.200059
+            ],
+            [
+              -75.578698,
+              6.199574
+            ],
+            [
+              -75.578519,
+              6.199576
+            ],
+            [
+              -75.578521,
+              6.199966
+            ],
+            [
+              -75.578494,
+              6.199979
+            ],
+            [
+              -75.578494,
+              6.200054
+            ],
+            [
+              -75.578706,
+              6.200059
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 3",
+        "description": "- Oficinas de profesores\n- Oficinas de proyectos\n- Departamento de Marca\n- Dirección de Narrativas y Cultura\n- Editorial EAFIT\n- Área de Extensión Cultural\n- Oficinas de Desarrollo Estudiantil\n- Dpartamento de Deportes y Recreación\n- Departamento de Atracción y Atracción\n- Dirección de Investigación\n- Oficina de Carnetización\n- Oficina de Seguridad\n- Oficina de Parqueaderos"
+      },
+      "id": "kwNjM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578197,
+              6.199518
+            ],
+            [
+              -75.578194,
+              6.19908
+            ],
+            [
+              -75.578065,
+              6.19908
+            ],
+            [
+              -75.578065,
+              6.199518
+            ],
+            [
+              -75.578197,
+              6.199518
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 7",
+        "description": "-Aulas\n-Baños\n-Oficinas administrativas"
+      },
+      "id": "E4NzA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579119,
+              6.197435
+            ],
+            [
+              -75.579154,
+              6.197243
+            ],
+            [
+              -75.579012,
+              6.197216
+            ],
+            [
+              -75.578983,
+              6.197408
+            ],
+            [
+              -75.579119,
+              6.197435
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 12",
+        "description": "-Desarrollo Artístico\n-Aulas\n-Baños"
+      },
+      "id": "g2MjI"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.57895,
+              6.1984
+            ],
+            [
+              -75.578953,
+              6.198294
+            ],
+            [
+              -75.578773,
+              6.198291
+            ],
+            [
+              -75.578773,
+              6.1984
+            ],
+            [
+              -75.57895,
+              6.1984
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 13",
+        "description": "-Aulas\n-Baños\n-Laboratorios\n-Sushi Light"
+      },
+      "id": "k5MDI"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.57895,
+              6.198608
+            ],
+            [
+              -75.578953,
+              6.198494
+            ],
+            [
+              -75.578771,
+              6.198491
+            ],
+            [
+              -75.578771,
+              6.198606
+            ],
+            [
+              -75.57895,
+              6.198608
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 14",
+        "description": "-Aulas\n-Baños\n-Laboratorios\n-Chip Station"
+      },
+      "id": "c2NzM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578958,
+              6.198782
+            ],
+            [
+              -75.578956,
+              6.19867
+            ],
+            [
+              -75.578776,
+              6.19867
+            ],
+            [
+              -75.578771,
+              6.198774
+            ],
+            [
+              -75.578958,
+              6.198782
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 15",
+        "description": "-Aulas\n-Baños\n-Laboratorios\n-EXA\n-Papelería"
+      },
+      "id": "kxODY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579001,
+              6.198984
+            ],
+            [
+              -75.578999,
+              6.198867
+            ],
+            [
+              -75.57872,
+              6.19887
+            ],
+            [
+              -75.578714,
+              6.198984
+            ],
+            [
+              -75.579001,
+              6.198984
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 16",
+        "description": "-Aulas\n-Baños"
+      },
+      "id": "M0MjY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578964,
+              6.199203
+            ],
+            [
+              -75.578969,
+              6.199067
+            ],
+            [
+              -75.578746,
+              6.199072
+            ],
+            [
+              -75.578746,
+              6.199203
+            ],
+            [
+              -75.578964,
+              6.199203
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 17",
+        "description": "-Aulas\n-Baños\n-Laboratorio Financiero"
+      },
+      "id": "c2OTc"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578776,
+              6.199536
+            ],
+            [
+              -75.578867,
+              6.199539
+            ],
+            [
+              -75.578878,
+              6.199576
+            ],
+            [
+              -75.578945,
+              6.199579
+            ],
+            [
+              -75.578958,
+              6.199539
+            ],
+            [
+              -75.579047,
+              6.199534
+            ],
+            [
+              -75.579044,
+              6.199296
+            ],
+            [
+              -75.578969,
+              6.199299
+            ],
+            [
+              -75.578942,
+              6.199256
+            ],
+            [
+              -75.578889,
+              6.199256
+            ],
+            [
+              -75.578873,
+              6.199299
+            ],
+            [
+              -75.578768,
+              6.199294
+            ],
+            [
+              -75.578776,
+              6.199536
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 18",
+        "description": "-Librería\n-Centro de Visitantes\n-Laboratorio de Futuros\n-Aulas\n-Aula Móvil\n-Mesa de Servicio\n-Vicerrectoría de Aprendizaje\n-Dirección de Atracción y Experiencia\n-Dirección de TI\n-Departamento de Comunicación\n"
+      },
+      "id": "g4NTc"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579782,
+              6.198171
+            ],
+            [
+              -75.57979,
+              6.197944
+            ],
+            [
+              -75.579878,
+              6.197774
+            ],
+            [
+              -75.579599,
+              6.197688
+            ],
+            [
+              -75.579457,
+              6.197611
+            ],
+            [
+              -75.579479,
+              6.198158
+            ],
+            [
+              -75.579782,
+              6.198171
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 19",
+        "description": "-Aulas\n-Baños\n-Laboratorios\n-Oficinas de profesores\n-Oficinas de la Escuela de Ciencias Aplicadas e Ingeniería\n-Oficinas de la Escuela de Administración\n-Oficinas de la Escuela de Finanzas, Economía y Gobierno"
+      },
+      "id": "c1NTM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579044,
+              6.1988
+            ],
+            [
+              -75.579396,
+              6.198803
+            ],
+            [
+              -75.57939,
+              6.198214
+            ],
+            [
+              -75.579039,
+              6.198216
+            ],
+            [
+              -75.579044,
+              6.1988
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 20",
+        "description": "-Aulas\n-Baños\n-Laboratorios\n-Oficinas de profesores\n-Oficinas de la Escuela de Ciencias Aplicadas e Ingeniería"
+      },
+      "id": "MyMzI"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579439,
+              6.198576
+            ],
+            [
+              -75.579621,
+              6.198635
+            ],
+            [
+              -75.579701,
+              6.198352
+            ],
+            [
+              -75.579457,
+              6.19828
+            ],
+            [
+              -75.579439,
+              6.198576
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 21",
+        "description": "-Talleres\n-Laboratorios"
+      },
+      "id": "Q5Nzg"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579409,
+              6.199035
+            ],
+            [
+              -75.579409,
+              6.198923
+            ],
+            [
+              -75.579068,
+              6.198918
+            ],
+            [
+              -75.579066,
+              6.199032
+            ],
+            [
+              -75.579409,
+              6.199035
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 23",
+        "description": "-Aulas\n-Baños"
+      },
+      "id": "k4MTA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579025,
+              6.200038
+            ],
+            [
+              -75.579243,
+              6.20003
+            ],
+            [
+              -75.57924,
+              6.199912
+            ],
+            [
+              -75.579168,
+              6.199912
+            ],
+            [
+              -75.579162,
+              6.199854
+            ],
+            [
+              -75.579248,
+              6.199851
+            ],
+            [
+              -75.579243,
+              6.199731
+            ],
+            [
+              -75.579025,
+              6.199734
+            ],
+            [
+              -75.579025,
+              6.200038
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 26",
+        "description": "- Oficinas de profesores y de la decanatura de la Escuela de Administración\n- Oficinas de profesores y de la decanatura de la Escuela de Finanzas, Economía y Gobierno\n- Aulas\n- MercaLab\n- Laboratorio de Makers"
+      },
+      "id": "E3ODI"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579213,
+              6.200478
+            ],
+            [
+              -75.579208,
+              6.20027
+            ],
+            [
+              -75.579058,
+              6.20027
+            ],
+            [
+              -75.579066,
+              6.200483
+            ],
+            [
+              -75.579213,
+              6.200478
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "description": "- Aulas\n- Baños",
+        "name": "Bloque 27"
+      },
+      "id": "YwMDQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578838,
+              6.200246
+            ],
+            [
+              -75.578846,
+              6.200544
+            ],
+            [
+              -75.579025,
+              6.200542
+            ],
+            [
+              -75.57902,
+              6.200243
+            ],
+            [
+              -75.578838,
+              6.200246
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 28",
+        "description": "Auditorio Fundadores:\n- Auditorio Fundadores\n- Sala VIP / Camerinos\n- Baños"
+      },
+      "id": "I4MDY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578814,
+              6.200547
+            ],
+            [
+              -75.578803,
+              6.200248
+            ],
+            [
+              -75.578602,
+              6.200248
+            ],
+            [
+              -75.578596,
+              6.200542
+            ],
+            [
+              -75.578814,
+              6.200547
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 29",
+        "description": "Piso 1\n- Taquillas de Registro Académico\n- Taquillas de Caja\n- Taquillas de Apoyo Financiero\n- Taquillas de Educación Continua\n- Consultorios médicos y psicológicos\n- Consultorio odontológicos\n- Cajero\n- Baños\n\nPiso 2\n- Aulas\n- Baños\n\nPiso 3\n- Dirección Administrativa y Financiera\n- Talento EAFIT\n- Secretaría General\n\nPiso 4\n-Dirección de Desarrollo Humano - Bienestar Universitario\n- Oficinas de Educación Continua\n\nPiso 5\n- Oficinas de Grupos estudiantiles\n- Baños\n\nPiso 6\n- Azotea\n- Baños"
+      },
+      "id": "IwOTI"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579015,
+              6.200851
+            ],
+            [
+              -75.579184,
+              6.200853
+            ],
+            [
+              -75.579208,
+              6.200502
+            ],
+            [
+              -75.579031,
+              6.200494
+            ],
+            [
+              -75.579028,
+              6.200547
+            ],
+            [
+              -75.578972,
+              6.200547
+            ],
+            [
+              -75.578961,
+              6.200712
+            ],
+            [
+              -75.579015,
+              6.200717
+            ],
+            [
+              -75.579015,
+              6.200851
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 30",
+        "description": "-Aulas\n-Salas de ensayo\n-Sala de ensayo de la Orquesta Sinfónica\n-Oficinas de la Orquesta Sinfónica\n-Oficinas de profesores de Música"
+      },
+      "id": "cxNzY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578765,
+              6.200968
+            ],
+            [
+              -75.578063,
+              6.200965
+            ],
+            [
+              -75.578068,
+              6.201264
+            ],
+            [
+              -75.578398,
+              6.201269
+            ],
+            [
+              -75.578403,
+              6.201339
+            ],
+            [
+              -75.578304,
+              6.201339
+            ],
+            [
+              -75.578307,
+              6.201432
+            ],
+            [
+              -75.578535,
+              6.201427
+            ],
+            [
+              -75.578529,
+              6.201336
+            ],
+            [
+              -75.578454,
+              6.201336
+            ],
+            [
+              -75.578449,
+              6.201267
+            ],
+            [
+              -75.578768,
+              6.201261
+            ],
+            [
+              -75.578765,
+              6.200968
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 32",
+        "description": "Centro Cultural Biblioteca Luis Echavarría Villegas:\n-Biblioteca\n-Sala de Patrimonio Documental\n-Salas de aprendizaje activo\n-Salas de estudio\n-Cubículos de estudio individual\n-Centro de Administración Documental\n-Oratorio\n-Baños"
+      },
+      "id": "EyODQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579157,
+              6.201005
+            ],
+            [
+              -75.57916,
+              6.200872
+            ],
+            [
+              -75.578859,
+              6.200875
+            ],
+            [
+              -75.578862,
+              6.201005
+            ],
+            [
+              -75.579157,
+              6.201005
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 33",
+        "description": "-Aulas\n-Baños"
+      },
+      "id": "k3MDU"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.57913,
+              6.201184
+            ],
+            [
+              -75.579133,
+              6.201069
+            ],
+            [
+              -75.578902,
+              6.201064
+            ],
+            [
+              -75.578897,
+              6.201184
+            ],
+            [
+              -75.57913,
+              6.201184
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "description": "-Aulas\n-Baños\n-Papelería",
+        "name": "Bloque 34"
+      },
+      "id": "kyNTQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579095,
+              6.201389
+            ],
+            [
+              -75.579095,
+              6.201261
+            ],
+            [
+              -75.578867,
+              6.201267
+            ],
+            [
+              -75.578867,
+              6.201392
+            ],
+            [
+              -75.579095,
+              6.201389
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "description": "-Aulas\n-Baños",
+        "name": "Bloque 35"
+      },
+      "id": "czODY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578915,
+              6.202219
+            ],
+            [
+              -75.578921,
+              6.201893
+            ],
+            [
+              -75.578784,
+              6.201893
+            ],
+            [
+              -75.578781,
+              6.201981
+            ],
+            [
+              -75.578655,
+              6.201973
+            ],
+            [
+              -75.578658,
+              6.202213
+            ],
+            [
+              -75.578915,
+              6.202219
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 37",
+        "description": "Instituto de Capacitación e Investigación del Plástico y el Caucho. Conoce más en: https://icipc.org"
+      },
+      "id": "gzODY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578746,
+              6.201795
+            ],
+            [
+              -75.578746,
+              6.201472
+            ],
+            [
+              -75.578548,
+              6.201472
+            ],
+            [
+              -75.578548,
+              6.201592
+            ],
+            [
+              -75.578288,
+              6.201592
+            ],
+            [
+              -75.578288,
+              6.201477
+            ],
+            [
+              -75.57814,
+              6.201477
+            ],
+            [
+              -75.578146,
+              6.201592
+            ],
+            [
+              -75.578105,
+              6.201595
+            ],
+            [
+              -75.578105,
+              6.201795
+            ],
+            [
+              -75.578746,
+              6.201795
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 38",
+        "description": "- Oficinas de profesores y decanatura de la Escuela de Artes y Humanidades\n- Oficinas de profesores y decanatura de la Escuela de Derecho\n- Centro Multimedial\n- Auditorio 101\n- Auditorio 110\n- Baños"
+      },
+      "id": "A0NTM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578564,
+              6.202051
+            ],
+            [
+              -75.578559,
+              6.201885
+            ],
+            [
+              -75.578119,
+              6.201896
+            ],
+            [
+              -75.578122,
+              6.201968
+            ],
+            [
+              -75.578207,
+              6.201963
+            ],
+            [
+              -75.578202,
+              6.202
+            ],
+            [
+              -75.578473,
+              6.202003
+            ],
+            [
+              -75.578476,
+              6.202053
+            ],
+            [
+              -75.578564,
+              6.202051
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 39",
+        "description": "- Camerinos\n- Baños"
+      },
+      "id": "E5NzQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579186,
+              6.199499
+            ],
+            [
+              -75.57942,
+              6.199507
+            ],
+            [
+              -75.579476,
+              6.199128
+            ],
+            [
+              -75.5792,
+              6.199126
+            ],
+            [
+              -75.579186,
+              6.199499
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Centro Argos para la Innovación en EAFIT",
+        "description": "Centro Argos para la Innovación en EAFIT"
+      },
+      "id": "M0OTY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.576595,
+              6.202227
+            ],
+            [
+              -75.576805,
+              6.202333
+            ],
+            [
+              -75.576885,
+              6.202171
+            ],
+            [
+              -75.576679,
+              6.202067
+            ],
+            [
+              -75.576595,
+              6.202227
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Coliseo",
+        "description": "Coliseo del Parque Los Guayabos"
+      },
+      "id": "IwNTg"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579484,
+              6.198848
+            ],
+            [
+              -75.579594,
+              6.198854
+            ],
+            [
+              -75.579599,
+              6.198646
+            ],
+            [
+              -75.579492,
+              6.198643
+            ],
+            [
+              -75.579484,
+              6.198848
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Taller de metalmecánica",
+        "description": "Taller de metalmecánica"
+      },
+      "id": "E5NDk"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.580412,
+              6.196398
+            ],
+            [
+              -75.580375,
+              6.196384
+            ],
+            [
+              -75.580385,
+              6.196358
+            ],
+            [
+              -75.58042,
+              6.196368
+            ],
+            [
+              -75.580412,
+              6.196398
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Acceso a casas"
+      },
+      "id": "gzODQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579396,
+              6.196294
+            ],
+            [
+              -75.579404,
+              6.19628
+            ],
+            [
+              -75.579377,
+              6.196267
+            ],
+            [
+              -75.579363,
+              6.196288
+            ],
+            [
+              -75.579396,
+              6.196294
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Acceso a casas"
+      },
+      "id": "k5MTk"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.577794,
+              6.20028
+            ],
+            [
+              -75.577658,
+              6.200259
+            ],
+            [
+              -75.577692,
+              6.200043
+            ],
+            [
+              -75.577824,
+              6.200054
+            ],
+            [
+              -75.577794,
+              6.20028
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Portería 1",
+        "description": "- Ingreso y salida peatonal y para bicicletas desde la avenida Las Vegas"
+      },
+      "id": "Y3MDk"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.577835,
+              6.199587
+            ],
+            [
+              -75.577773,
+              6.199576
+            ],
+            [
+              -75.577789,
+              6.199486
+            ],
+            [
+              -75.577851,
+              6.199507
+            ],
+            [
+              -75.577835,
+              6.199587
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Portería 2",
+        "description": "- Ingreso y salida vehicular desde la avenida Las Vegas (solo para empleados administrativos, profesores, proveedores, prensa y autoridades)"
+      },
+      "id": "EzNTY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578494,
+              6.197366
+            ],
+            [
+              -75.57858,
+              6.197403
+            ],
+            [
+              -75.578529,
+              6.197523
+            ],
+            [
+              -75.578446,
+              6.197488
+            ],
+            [
+              -75.578494,
+              6.197366
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Portería 3",
+        "description": "- Ingreso y salida peatonal y para bicicletas desde la avenida Las Vegas\n- Punto de registro para visitantes\n- Ingreso y salida para motos desde la avenida Las Vegas\n- Ingreso y salida para carros desde la avenida Las Vegas"
+      },
+      "id": "g2ODk"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579642,
+              6.197656
+            ],
+            [
+              -75.57968,
+              6.197504
+            ],
+            [
+              -75.579945,
+              6.197582
+            ],
+            [
+              -75.579905,
+              6.197731
+            ],
+            [
+              -75.579642,
+              6.197656
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Portería 4",
+        "description": "- Ingreso y salida peatonal y para bicicletas desde la avenida Regional\n- Punto de registro para visitantes\n- Ingreso y salida vehicular para motos desde la avenida Regional\n- Ingreso y salida vehicular para carros desde la avenida Regional"
+      },
+      "id": "Y2MDU"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579315,
+              6.199747
+            ],
+            [
+              -75.579382,
+              6.199755
+            ],
+            [
+              -75.579393,
+              6.19952
+            ],
+            [
+              -75.57932,
+              6.19952
+            ],
+            [
+              -75.579315,
+              6.199747
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Portería 5",
+        "description": "- Ingreso y salida vehicular para carros desde la avenida Regional (solo para empleados administrativos, profesores, proveedores, prensa, autoridades y personal del Centro de Investigaciones Argos para la Innovación)"
+      },
+      "id": "Q1MDA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.57905,
+              6.201853
+            ],
+            [
+              -75.579055,
+              6.201771
+            ],
+            [
+              -75.57898,
+              6.201773
+            ],
+            [
+              -75.578983,
+              6.201853
+            ],
+            [
+              -75.57905,
+              6.201853
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Portería 6",
+        "description": "- Ingreso vehicular para carros desde la avenida Regional\n- Punto de registro para visitantes"
+      },
+      "id": "EyNzA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.577886,
+              6.203011
+            ],
+            [
+              -75.577886,
+              6.202963
+            ],
+            [
+              -75.577931,
+              6.202963
+            ],
+            [
+              -75.577934,
+              6.203029
+            ],
+            [
+              -75.577886,
+              6.203011
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Portería 7",
+        "description": "- Ingreso y salida peatonal y para bicicletas desde la calle 4 sur\n- Punto de registro para visitantes"
+      },
+      "id": "cxODY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.57754,
+              6.201845
+            ],
+            [
+              -75.577545,
+              6.201773
+            ],
+            [
+              -75.577491,
+              6.201773
+            ],
+            [
+              -75.577478,
+              6.201851
+            ],
+            [
+              -75.57754,
+              6.201845
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Portería 8",
+        "description": "- Salida vehicular para carros desde el parqueadero norte"
+      },
+      "id": "k3NDA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.576526,
+              6.201325
+            ],
+            [
+              -75.576485,
+              6.201397
+            ],
+            [
+              -75.576308,
+              6.201291
+            ],
+            [
+              -75.576327,
+              6.201229
+            ],
+            [
+              -75.576526,
+              6.201325
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Portería 9",
+        "description": "- Ingreso y salida peatonal y para bicicletas desde la calle 5 sur\n- Punto de registro para visitantes\n- Ingreso y salida vehicular para motos desde la calle 5 sur\n- Ingreso y salida para carros desde la calle 5 sur"
+      },
+      "id": "U4NTI"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.577202,
+              6.201973
+            ],
+            [
+              -75.57721,
+              6.201864
+            ],
+            [
+              -75.577172,
+              6.201869
+            ],
+            [
+              -75.577153,
+              6.201979
+            ],
+            [
+              -75.577202,
+              6.201973
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Portería 10",
+        "description": "- Ingreso y salida peatonal y para bicicletas desde la avenida Las Vegas"
+      },
+      "id": "g2ODI"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578524,
+              6.202995
+            ],
+            [
+              -75.578519,
+              6.202139
+            ],
+            [
+              -75.578502,
+              6.202115
+            ],
+            [
+              -75.578465,
+              6.202083
+            ],
+            [
+              -75.578392,
+              6.202048
+            ],
+            [
+              -75.578312,
+              6.202037
+            ],
+            [
+              -75.578237,
+              6.202032
+            ],
+            [
+              -75.578156,
+              6.20204
+            ],
+            [
+              -75.57806,
+              6.202064
+            ],
+            [
+              -75.578012,
+              6.20208
+            ],
+            [
+              -75.577966,
+              6.202128
+            ],
+            [
+              -75.577979,
+              6.202979
+            ],
+            [
+              -75.578022,
+              6.203016
+            ],
+            [
+              -75.578071,
+              6.203053
+            ],
+            [
+              -75.578156,
+              6.203088
+            ],
+            [
+              -75.578223,
+              6.203099
+            ],
+            [
+              -75.578325,
+              6.203088
+            ],
+            [
+              -75.578403,
+              6.203064
+            ],
+            [
+              -75.578492,
+              6.203019
+            ],
+            [
+              -75.578524,
+              6.202995
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Cancha norte",
+        "description": "Cancha norte"
+      },
+      "id": "E4NjM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578674,
+              6.198848
+            ],
+            [
+              -75.578671,
+              6.198176
+            ],
+            [
+              -75.578293,
+              6.198176
+            ],
+            [
+              -75.578293,
+              6.198848
+            ],
+            [
+              -75.578674,
+              6.198848
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Cancha sintética",
+        "description": "Cancha sintética"
+      },
+      "id": "A5MzQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578215,
+              6.199075
+            ],
+            [
+              -75.578226,
+              6.198827
+            ],
+            [
+              -75.578022,
+              6.198819
+            ],
+            [
+              -75.577961,
+              6.198971
+            ],
+            [
+              -75.577953,
+              6.199072
+            ],
+            [
+              -75.578215,
+              6.199075
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Gimnasio Vivo",
+        "description": "Gimnasio Vivo"
+      },
+      "id": "AyNzI"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578478,
+              6.199798
+            ],
+            [
+              -75.578473,
+              6.199566
+            ],
+            [
+              -75.578363,
+              6.19956
+            ],
+            [
+              -75.578368,
+              6.199795
+            ],
+            [
+              -75.578478,
+              6.199798
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Piscina",
+        "description": "- Piscina\n- Baños"
+      },
+      "id": "I0Mzc"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578307,
+              6.199904
+            ],
+            [
+              -75.578315,
+              6.199595
+            ],
+            [
+              -75.578063,
+              6.199595
+            ],
+            [
+              -75.57806,
+              6.199902
+            ],
+            [
+              -75.578307,
+              6.199904
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Placa polideportiva",
+        "description": "- Placa deportiva\n- Equipos de Tenis de mesa\n- Baños"
+      },
+      "id": "gwMzU"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.576829,
+              6.202149
+            ],
+            [
+              -75.576689,
+              6.202075
+            ],
+            [
+              -75.576638,
+              6.202179
+            ],
+            [
+              -75.576775,
+              6.202253
+            ],
+            [
+              -75.576829,
+              6.202149
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Placa polideportiva",
+        "description": "Placa polideportiva cubierta"
+      },
+      "id": "I5Nzg"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578875,
+              6.202789
+            ],
+            [
+              -75.578776,
+              6.202787
+            ],
+            [
+              -75.578771,
+              6.202565
+            ],
+            [
+              -75.578867,
+              6.202557
+            ],
+            [
+              -75.578875,
+              6.202789
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Placas polideportivas",
+        "description": "Placas polideportivas"
+      },
+      "id": "Q2ODQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.57869,
+              6.202904
+            ],
+            [
+              -75.578687,
+              6.20268
+            ],
+            [
+              -75.57858,
+              6.20268
+            ],
+            [
+              -75.578583,
+              6.202909
+            ],
+            [
+              -75.57869,
+              6.202904
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Placas polideportivas",
+        "description": "Placas polideportivas"
+      },
+      "id": "A1ODc"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.57869,
+              6.202581
+            ],
+            [
+              -75.57869,
+              6.202357
+            ],
+            [
+              -75.578586,
+              6.20236
+            ],
+            [
+              -75.578586,
+              6.202584
+            ],
+            [
+              -75.57869,
+              6.202581
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Placas polideportivas",
+        "description": "Placas polideportivas"
+      },
+      "id": "c5MjM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578891,
+              6.201723
+            ],
+            [
+              -75.57906,
+              6.20172
+            ],
+            [
+              -75.579055,
+              6.20144
+            ],
+            [
+              -75.578886,
+              6.201437
+            ],
+            [
+              -75.578891,
+              6.201723
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Bloque 36",
+        "description": "Cafetería norte:\n- El Tejadito\n- Juan Valdez\n- Recanto\n- Pimientos"
+      },
+      "id": "E1ODk"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578679,
+              6.199512
+            ],
+            [
+              -75.578374,
+              6.19951
+            ],
+            [
+              -75.578368,
+              6.198883
+            ],
+            [
+              -75.578658,
+              6.198878
+            ],
+            [
+              -75.578679,
+              6.199512
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Cafetería Central",
+        "description": "Piso 1:\n-Aldea Nikei\n-Home Food\n-Bigos\n-Frisby\n\nPiso 2:\n-El Corral\n-Taco Factory\n-Mi Buñuelo\n-Dunkin"
+      },
+      "id": "gzMzQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578253,
+              6.20052
+            ],
+            [
+              -75.578237,
+              6.200243
+            ],
+            [
+              -75.577953,
+              6.200238
+            ],
+            [
+              -75.577945,
+              6.20051
+            ],
+            [
+              -75.578253,
+              6.20052
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Domo y jardin",
+        "description": "Domo y jardin"
+      },
+      "id": "E1NDM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578974,
+              6.200056
+            ],
+            [
+              -75.578969,
+              6.19972
+            ],
+            [
+              -75.578714,
+              6.19972
+            ],
+            [
+              -75.578717,
+              6.200051
+            ],
+            [
+              -75.578974,
+              6.200056
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Parque de la Ceiba",
+        "description": "Parque de la Ceiba"
+      },
+      "id": "A2MTc"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.576829,
+              6.202352
+            ],
+            [
+              -75.577011,
+              6.202424
+            ],
+            [
+              -75.577129,
+              6.202053
+            ],
+            [
+              -75.576979,
+              6.201997
+            ],
+            [
+              -75.576829,
+              6.202352
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Parque Los Guayabos",
+        "description": "Parque Los Guayabos"
+      },
+      "id": "Q2ODU"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578996,
+              6.200853
+            ],
+            [
+              -75.578991,
+              6.20072
+            ],
+            [
+              -75.578953,
+              6.200723
+            ],
+            [
+              -75.578953,
+              6.200555
+            ],
+            [
+              -75.578572,
+              6.200552
+            ],
+            [
+              -75.578572,
+              6.200867
+            ],
+            [
+              -75.578996,
+              6.200853
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Parque Los Pimientos",
+        "description": "Parque Los Pimientos"
+      },
+      "id": "UzNzQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578561,
+              6.200877
+            ],
+            [
+              -75.578559,
+              6.200254
+            ],
+            [
+              -75.578256,
+              6.200248
+            ],
+            [
+              -75.57828,
+              6.200877
+            ],
+            [
+              -75.578561,
+              6.200877
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Plazoleta del Estudiante",
+        "description": "Plazoleta del Estudiante"
+      },
+      "id": "g0Mzk"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578293,
+              6.200019
+            ],
+            [
+              -75.57803,
+              6.199995
+            ],
+            [
+              -75.57803,
+              6.199931
+            ],
+            [
+              -75.578293,
+              6.199942
+            ],
+            [
+              -75.578293,
+              6.200019
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Quioscos",
+        "description": "Quioscos"
+      },
+      "id": "cxOTQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579527,
+              6.196326
+            ],
+            [
+              -75.579565,
+              6.196219
+            ],
+            [
+              -75.579414,
+              6.196166
+            ],
+            [
+              -75.579385,
+              6.196262
+            ],
+            [
+              -75.579527,
+              6.196326
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "_umap_options": {
+          "opacity": 0.5,
+          "fillOpacity": 0.3
+        },
+        "name": "Casa 4"
+      },
+      "id": "A2MTA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579656,
+              6.196267
+            ],
+            [
+              -75.579626,
+              6.196363
+            ],
+            [
+              -75.579782,
+              6.196411
+            ],
+            [
+              -75.579811,
+              6.196323
+            ],
+            [
+              -75.579656,
+              6.196267
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "_umap_options": {
+          "fillOpacity": 0.3,
+          "opacity": 0.3
+        },
+        "name": "Casa 5"
+      },
+      "id": "U0MDc"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579479,
+              6.196464
+            ],
+            [
+              -75.579511,
+              6.196368
+            ],
+            [
+              -75.579406,
+              6.196323
+            ],
+            [
+              -75.579404,
+              6.196352
+            ],
+            [
+              -75.57935,
+              6.196331
+            ],
+            [
+              -75.579326,
+              6.196411
+            ],
+            [
+              -75.579479,
+              6.196464
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "_umap_options": {
+          "fillOpacity": 0.3,
+          "opacity": 0.6
+        },
+        "name": "Casa 6"
+      },
+      "id": "MyNjM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579186,
+              6.197408
+            ],
+            [
+              -75.579272,
+              6.197411
+            ],
+            [
+              -75.579286,
+              6.197259
+            ],
+            [
+              -75.579184,
+              6.197232
+            ],
+            [
+              -75.579186,
+              6.197408
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "_umap_options": {
+          "opacity": 0.6,
+          "fillOpacity": 0.3
+        },
+        "name": "Casa 9"
+      },
+      "id": "c4MjQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.58023,
+              6.196336
+            ],
+            [
+              -75.580249,
+              6.196264
+            ],
+            [
+              -75.580216,
+              6.196259
+            ],
+            [
+              -75.580235,
+              6.196219
+            ],
+            [
+              -75.580034,
+              6.196136
+            ],
+            [
+              -75.579994,
+              6.196246
+            ],
+            [
+              -75.58023,
+              6.196336
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "_umap_options": {
+          "fillOpacity": 0.3,
+          "opacity": 0.6
+        },
+        "name": "Casa 10"
+      },
+      "id": "cxMzU"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.580227,
+              6.196184
+            ],
+            [
+              -75.580265,
+              6.196062
+            ],
+            [
+              -75.580066,
+              6.195998
+            ],
+            [
+              -75.580045,
+              6.196051
+            ],
+            [
+              -75.580085,
+              6.196142
+            ],
+            [
+              -75.580227,
+              6.196184
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "_umap_options": {
+          "fillOpacity": 0.3,
+          "opacity": 0.6
+        },
+        "name": "Casa graduados"
+      },
+      "id": "c0ODM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579876,
+              6.196144
+            ],
+            [
+              -75.579897,
+              6.196067
+            ],
+            [
+              -75.579739,
+              6.195998
+            ],
+            [
+              -75.579723,
+              6.196091
+            ],
+            [
+              -75.579876,
+              6.196144
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "_umap_options": {
+          "fillOpacity": 0.3,
+          "opacity": 0.6
+        },
+        "name": "Casa Urbam"
+      },
+      "id": "A2NDA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579876,
+              6.197536
+            ],
+            [
+              -75.579956,
+              6.197552
+            ],
+            [
+              -75.580002,
+              6.197379
+            ],
+            [
+              -75.579766,
+              6.197323
+            ],
+            [
+              -75.579734,
+              6.197515
+            ],
+            [
+              -75.579833,
+              6.197539
+            ],
+            [
+              -75.579844,
+              6.197462
+            ],
+            [
+              -75.579876,
+              6.197464
+            ],
+            [
+              -75.579876,
+              6.197536
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "_umap_options": {
+          "fillOpacity": 0.3,
+          "opacity": 0.6
+        },
+        "name": "Casas 1 y 2"
+      },
+      "id": "IwNTg"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.578492,
+              6.197323
+            ],
+            [
+              -75.578709,
+              6.197408
+            ],
+            [
+              -75.578948,
+              6.197459
+            ],
+            [
+              -75.579012,
+              6.19719
+            ],
+            [
+              -75.579296,
+              6.197251
+            ],
+            [
+              -75.579275,
+              6.19744
+            ],
+            [
+              -75.579709,
+              6.197504
+            ],
+            [
+              -75.579734,
+              6.197278
+            ],
+            [
+              -75.58009,
+              6.19736
+            ],
+            [
+              -75.57975,
+              6.198347
+            ],
+            [
+              -75.579452,
+              6.199568
+            ],
+            [
+              -75.579205,
+              6.201035
+            ],
+            [
+              -75.579114,
+              6.201771
+            ],
+            [
+              -75.579023,
+              6.202752
+            ],
+            [
+              -75.578966,
+              6.202819
+            ],
+            [
+              -75.578682,
+              6.202963
+            ],
+            [
+              -75.578331,
+              6.203107
+            ],
+            [
+              -75.578245,
+              6.203123
+            ],
+            [
+              -75.578135,
+              6.203115
+            ],
+            [
+              -75.577958,
+              6.203045
+            ],
+            [
+              -75.577639,
+              6.202907
+            ],
+            [
+              -75.577531,
+              6.202805
+            ],
+            [
+              -75.577456,
+              6.202712
+            ],
+            [
+              -75.577408,
+              6.202581
+            ],
+            [
+              -75.577419,
+              6.202443
+            ],
+            [
+              -75.577625,
+              6.200552
+            ],
+            [
+              -75.577714,
+              6.199822
+            ],
+            [
+              -75.577886,
+              6.199
+            ],
+            [
+              -75.577977,
+              6.198755
+            ],
+            [
+              -75.578119,
+              6.198779
+            ],
+            [
+              -75.578213,
+              6.198232
+            ],
+            [
+              -75.578151,
+              6.198155
+            ],
+            [
+              -75.578492,
+              6.197323
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Perímetro del campus",
+        "_umap_options": {
+          "stroke": true,
+          "opacity": 0.6
+        }
+      },
+      "id": "Q3NTA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.580418,
+              6.196406
+            ],
+            [
+              -75.57994,
+              6.196246
+            ],
+            [
+              -75.580042,
+              6.19596
+            ],
+            [
+              -75.580305,
+              6.196051
+            ],
+            [
+              -75.580267,
+              6.196208
+            ],
+            [
+              -75.58045,
+              6.196272
+            ],
+            [
+              -75.580418,
+              6.196406
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Perímetro del campus",
+        "_umap_options": {
+          "opacity": 0.6
+        }
+      },
+      "id": "gwOTU"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579897,
+              6.196174
+            ],
+            [
+              -75.579943,
+              6.196032
+            ],
+            [
+              -75.579701,
+              6.195928
+            ],
+            [
+              -75.579648,
+              6.196094
+            ],
+            [
+              -75.579897,
+              6.196174
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Perímetro del campus",
+        "_umap_options": {
+          "opacity": 0.6
+        }
+      },
+      "id": "I2NzM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.579404,
+              6.19612
+            ],
+            [
+              -75.579846,
+              6.196302
+            ],
+            [
+              -75.579806,
+              6.19643
+            ],
+            [
+              -75.579573,
+              6.196355
+            ],
+            [
+              -75.579511,
+              6.196491
+            ],
+            [
+              -75.579288,
+              6.196419
+            ],
+            [
+              -75.579404,
+              6.19612
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Perímetro del campus",
+        "_umap_options": {
+          "opacity": 0.6
+        }
+      },
+      "id": "M3Njc"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -75.577202,
+              6.201984
+            ],
+            [
+              -75.577151,
+              6.202443
+            ],
+            [
+              -75.576968,
+              6.20256
+            ],
+            [
+              -75.576861,
+              6.202573
+            ],
+            [
+              -75.575705,
+              6.202061
+            ],
+            [
+              -75.575614,
+              6.201912
+            ],
+            [
+              -75.575592,
+              6.201781
+            ],
+            [
+              -75.575858,
+              6.201187
+            ],
+            [
+              -75.575906,
+              6.201083
+            ],
+            [
+              -75.575981,
+              6.201045
+            ],
+            [
+              -75.576062,
+              6.201088
+            ],
+            [
+              -75.57633,
+              6.201219
+            ],
+            [
+              -75.576531,
+              6.201331
+            ],
+            [
+              -75.57718,
+              6.201645
+            ],
+            [
+              -75.577231,
+              6.201693
+            ],
+            [
+              -75.577202,
+              6.201984
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "name": "Perímetro del campus",
+        "_umap_options": {
+          "opacity": 0.6
+        }
+      },
+      "id": "YwOTE"
+    }
+  ]
+}
