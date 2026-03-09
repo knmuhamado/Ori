@@ -3,13 +3,10 @@
     <!-- Ubicación precisa (GPS) -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
     <!-- Vibración para feedback táctil (TalkBack) -->
     <uses-permission android:name="android.permission.VIBRATE"/>
-
     <!-- Micrófono para comandos de voz -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-
     <!-- Internet (por si se necesita en el futuro) -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
