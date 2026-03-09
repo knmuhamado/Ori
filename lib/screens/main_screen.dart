@@ -117,10 +117,10 @@ class _MainScreenState extends State<MainScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // ── Cerca de ti ──
+                      //  Sección Cerca de ti
                       const _NearbySection(),
 
-                      // ── Separador decorativo ──
+                      // Separador decorativo
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
                         child: Row(
@@ -136,7 +136,7 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ),
 
-                      // ── Título ──
+                      // Título
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 14, 20, 12),
                         child: Semantics(
@@ -155,7 +155,7 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ),
 
-                      // ── Grid 3 filas ──
+                      // Grid 3 filas
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Column(
@@ -208,10 +208,7 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-
-// ══════════════════════════════════════════════════════════════
 // Header con gradiente e icono a la derecha
-// ══════════════════════════════════════════════════════════════
 class _LocationHeader extends StatefulWidget {
   const _LocationHeader();
   @override
@@ -382,10 +379,7 @@ class _LocationHeaderState extends State<_LocationHeader> {
     );
   }
 }
-
-// ══════════════════════════════════════════════════════════════
 // Sección Cerca de ti
-// ══════════════════════════════════════════════════════════════
 class _NearbySection extends StatelessWidget {
   const _NearbySection();
 
@@ -504,10 +498,7 @@ class _NearbySection extends StatelessWidget {
     );
   }
 }
-
-// ══════════════════════════════════════════════════════════════
 // Botón de categoría
-// ══════════════════════════════════════════════════════════════
 class _CatBtn extends StatelessWidget {
   final PlaceCategory cat;
   final void Function(PlaceCategory) onTap;
