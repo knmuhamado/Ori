@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final FocusNode _mainButtonFocusNode = FocusNode();
-  bool _checking = true; // mientras revisamos SharedPreferences
+  bool _checking = true; 
 
   static const _prefKey = 'permissions_accepted';
 
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
       MaterialPageRoute(
         builder: (_) => PermissionScreen(
           onPermissionsHandled: () async {
-            // Guardar que ya aceptó → próxima vez va directo
+            // Guardar que ya aceptó para que la próxima vez vaya directo
             final prefs = await SharedPreferences.getInstance();
             await prefs.setBool(_prefKey, true);
             if (!mounted) return;
@@ -109,7 +109,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Mostrar spinner mientras se revisa la preferencia
     if (_checking) {
       return const Scaffold(
         backgroundColor: Color(0xFF0D1B2A),
