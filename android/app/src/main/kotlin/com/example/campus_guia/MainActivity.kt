@@ -15,7 +15,7 @@ class MainActivity : FlutterActivity() {
     // Debe coincidir exactamente con el nombre en permission_service.dart
     private val CHANNEL = "campus_guia/permissions"
 
-    // Mapa de nombre → permiso Android
+
     private val permissionMap = mapOf(
         "location" to Manifest.permission.ACCESS_FINE_LOCATION,
         "microphone" to Manifest.permission.RECORD_AUDIO
@@ -38,7 +38,7 @@ class MainActivity : FlutterActivity() {
 
             when (call.method) {
 
-                // ── Solicitar un permiso ──
+                // Solicitar un permiso 
                 "requestPermission" -> {
                     val permissionKey = call.argument<String>("permission")
                         ?: return@setMethodCallHandler result.error(
@@ -72,7 +72,7 @@ class MainActivity : FlutterActivity() {
                     )
                 }
 
-                // ── Verificar estado sin pedir ──
+                // Verificar estado sin pedir 
                 "checkPermission" -> {
                     val permissionKey = call.argument<String>("permission")
                         ?: return@setMethodCallHandler result.error(
@@ -101,7 +101,7 @@ class MainActivity : FlutterActivity() {
         }
     }
 
-    // ── Callback del sistema cuando el usuario responde al diálogo ──
+    // Callback del sistema cuando el usuario responde al diálogo 
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -128,8 +128,7 @@ class MainActivity : FlutterActivity() {
                 result.success("granted")
             }
             else -> {
-                // Verificar si fue "no preguntar de nuevo" (denegación permanente)
-                // shouldShowRequestPermissionRationale devuelve false en ese caso
+                // Verificar si fue "no preguntar de nuevo" 
                 val androidPermission = permissionMap[permissionKey] ?: ""
                 val isPermanent = !ActivityCompat
                     .shouldShowRequestPermissionRationale(this, androidPermission)
