@@ -75,7 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  // ── Navegar a permisos antes de iniciar navegación ──
   void _onStartNavigation() {
     HapticFeedback.heavyImpact();
     _announce('Abriendo pantalla de permisos necesarios.');
@@ -84,9 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
       MaterialPageRoute(
         builder: (_) => PermissionScreen(
           onPermissionsHandled: () {
-            // Volver al home y luego ir a navegación
             Navigator.of(context).pop();
-            // TODO: Navigator.of(context).pushNamed('/navigation');
             _announce('Permisos procesados. Listo para navegar.');
           },
         ),
