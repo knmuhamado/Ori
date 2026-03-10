@@ -46,15 +46,22 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final FocusNode _mainButtonFocusNode = FocusNode();
 
+  Future<void> _announce(String message) {
+    return SemanticsService.sendAnnouncement(
+      View.of(context),
+      message,
+      Directionality.of(context),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      SemanticsService.announce(
+      _announce(
         'Bienvenido a CampusGuía. '
         'Aplicación de navegación para el campus universitario. '
         'El botón principal Iniciar navegación se encuentra al centro de la pantalla.',
-        TextDirection.ltr,
       );
       Future.delayed(const Duration(milliseconds: 800), () {
         if (mounted) _mainButtonFocusNode.requestFocus();
@@ -71,10 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // ── Navegar a permisos antes de iniciar navegación ──
   void _onStartNavigation() {
     HapticFeedback.heavyImpact();
-    SemanticsService.announce(
-      'Abriendo pantalla de permisos necesarios.',
-      TextDirection.ltr,
-    );
+    _announce('Abriendo pantalla de permisos necesarios.');
 
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -83,10 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Volver al home y luego ir a navegación
             Navigator.of(context).pop();
             // TODO: Navigator.of(context).pushNamed('/navigation');
-            SemanticsService.announce(
-              'Permisos procesados. Listo para navegar.',
-              TextDirection.ltr,
-            );
+            _announce('Permisos procesados. Listo para navegar.');
           },
         ),
       ),
@@ -95,18 +96,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onHelp() {
     HapticFeedback.mediumImpact();
-    SemanticsService.announce(
-      'Sección de ayuda. Próximamente disponible.',
-      TextDirection.ltr,
-    );
+    _announce('Sección de ayuda. Próximamente disponible.');
   }
 
   void _onSettings() {
     HapticFeedback.mediumImpact();
-    SemanticsService.announce(
-      'Sección de configuración. Próximamente disponible.',
-      TextDirection.ltr,
-    );
+    _announce('Sección de configuración. Próximamente disponible.');
   }
 
   @override
@@ -159,35 +154,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const Spacer(),
-                Semantics(
-                  button: true,
-                  label: 'Iniciar navegación. Activa el modo de guía de voz.',
-                  hint: 'Toca dos veces para comenzar. Se solicitarán permisos necesarios.',
-                  onTap: _onStartNavigation,
-                  child: ElevatedButton(
-                    focusNode: _mainButtonFocusNode,
-                    onPressed: _onStartNavigation,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1565C0),
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 24),
-                      minimumSize: const Size(double.infinity, 80),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+                FocusTraversalOrder(
+                  order: const NumericFocusOrder(1),
+                  child: Semantics(
+                    sortKey: const OrdinalSortKey(1),
+                    button: true,
+                    label: 'Iniciar navegación. Activa el modo de guía de voz.',
+                    hint: 'Toca dos veces para comenzar. Se solicitarán permisos necesarios.',
+                    onTap: _onStartNavigation,
+                    child: ElevatedButton(
+                      focusNode: _mainButtonFocusNode,
+                      onPressed: _onStartNavigation,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1565C0),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        minimumSize: const Size(double.infinity, 80),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        textStyle: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      textStyle: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    child: ExcludeSemantics(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(Icons.play_arrow_rounded, size: 32),
-                          SizedBox(width: 12),
-                          Text('Iniciar navegación'),
-                        ],
+                      child: ExcludeSemantics(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(Icons.play_arrow_rounded, size: 32),
+                            SizedBox(width: 12),
+                            Text('Iniciar navegación'),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -196,30 +195,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: Semantics(
-                        button: true,
-                        label: 'Ayuda',
-                        hint: 'Toca dos veces para escuchar instrucciones de uso.',
-                        onTap: _onHelp,
-                        child: OutlinedButton(
-                          onPressed: _onHelp,
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.white70,
-                            side: const BorderSide(color: Colors.white38),
-                            padding: const EdgeInsets.symmetric(vertical: 18),
-                            minimumSize: const Size(0, 60),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                      child: FocusTraversalOrder(
+                        order: const NumericFocusOrder(2),
+                        child: Semantics(
+                          sortKey: const OrdinalSortKey(2),
+                          button: true,
+                          label: 'Ayuda',
+                          hint: 'Toca dos veces para escuchar instrucciones de uso.',
+                          onTap: _onHelp,
+                          child: OutlinedButton(
+                            onPressed: _onHelp,
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.white70,
+                              side: const BorderSide(color: Colors.white38),
+                              padding: const EdgeInsets.symmetric(vertical: 18),
+                              minimumSize: const Size(0, 60),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
-                          ),
-                          child: ExcludeSemantics(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.help_outline_rounded, size: 22),
-                                SizedBox(width: 8),
-                                Text('Ayuda'),
-                              ],
+                            child: ExcludeSemantics(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(Icons.help_outline_rounded, size: 22),
+                                  SizedBox(width: 8),
+                                  Text('Ayuda'),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -227,30 +230,34 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: Semantics(
-                        button: true,
-                        label: 'Configuración',
-                        hint: 'Toca dos veces para ajustar preferencias.',
-                        onTap: _onSettings,
-                        child: OutlinedButton(
-                          onPressed: _onSettings,
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.white70,
-                            side: const BorderSide(color: Colors.white38),
-                            padding: const EdgeInsets.symmetric(vertical: 18),
-                            minimumSize: const Size(0, 60),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                      child: FocusTraversalOrder(
+                        order: const NumericFocusOrder(3),
+                        child: Semantics(
+                          sortKey: const OrdinalSortKey(3),
+                          button: true,
+                          label: 'Configuración',
+                          hint: 'Toca dos veces para ajustar preferencias.',
+                          onTap: _onSettings,
+                          child: OutlinedButton(
+                            onPressed: _onSettings,
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.white70,
+                              side: const BorderSide(color: Colors.white38),
+                              padding: const EdgeInsets.symmetric(vertical: 18),
+                              minimumSize: const Size(0, 60),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
-                          ),
-                          child: ExcludeSemantics(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.settings_outlined, size: 22),
-                                SizedBox(width: 8),
-                                Text('Ajustes'),
-                              ],
+                            child: ExcludeSemantics(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(Icons.settings_outlined, size: 22),
+                                  SizedBox(width: 8),
+                                  Text('Ajustes'),
+                                ],
+                              ),
                             ),
                           ),
                         ),
