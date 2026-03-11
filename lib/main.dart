@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'services/location_service.dart';
@@ -21,6 +22,16 @@ class CampusGuiaApp extends StatelessWidget {
       child: MaterialApp(
         title: 'CampusGuía EAFIT',
         debugShowCheckedModeBanner: false,
+        locale: const Locale('es', 'CO'),
+        supportedLocales: const [
+          Locale('es', 'CO'),
+          Locale('es'),
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: const Color(0xFF1A237E),
