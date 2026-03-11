@@ -23,14 +23,21 @@ class DestinationScreen extends StatefulWidget {
 class _DestinationScreenState extends State<DestinationScreen> {
   CampusPlace? _selected;
 
+  Future<void> _announce(String message) {
+    return SemanticsService.sendAnnouncement(
+      View.of(context),
+      message,
+      Directionality.of(context),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      SemanticsService.announce(
+      _announce(
         'Lista de ${widget.categoryName}. '
         'Desliza para explorar los lugares. Toca dos veces para seleccionar.',
-        TextDirection.ltr,
       );
     });
   }
@@ -38,10 +45,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
   void _onTap(CampusPlace place) {
     setState(() => _selected = place);
     HapticFeedback.lightImpact();
-    SemanticsService.announce(
-      'Seleccionado: ${place.name}. Toca Confirmar al final para continuar.',
-      TextDirection.ltr,
-    );
+    _announce('Seleccionado: ${place.name}. Toca Confirmar al final para continuar.');
   }
 
   void _confirm() {
@@ -151,8 +155,8 @@ class _PlaceList extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(bottom: 8),
                 decoration: BoxDecoration(
-                  color: isSelected
-                      ? const Color(0xFF1565C0).withOpacity(0.25)
+                    color: isSelected
+                      ? const Color(0xFF1565C0).withValues(alpha: 0.25)
                       : const Color(0xFF1A2A3A),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(

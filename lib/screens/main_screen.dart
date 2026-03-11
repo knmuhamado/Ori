@@ -26,22 +26,27 @@ class _MainScreenState extends State<MainScreen> {
     PlaceCategory.deporte,
   ];
 
+  Future<void> _announce(String message) {
+    return SemanticsService.sendAnnouncement(
+      View.of(context),
+      message,
+      Directionality.of(context),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<LocationService>(context, listen: false).initialize();
       Provider.of<GeoJsonService>(context, listen: false).load();
-      SemanticsService.announce(
-        'Pantalla principal de CampusGuía. Siete categorías disponibles.',
-        TextDirection.ltr,
-      );
+      _announce('Pantalla principal de CampusGuía. Siete categorías disponibles.');
     });
   }
 
   void _openCategory(PlaceCategory cat) {
     HapticFeedback.lightImpact();
-    SemanticsService.announce('Abriendo ${cat.displayName}', TextDirection.ltr);
+    _announce('Abriendo ${cat.displayName}');
     final geo = Provider.of<GeoJsonService>(context, listen: false);
     final loc = Provider.of<LocationService>(context, listen: false);
     geo.filterByCategory(cat);
@@ -64,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
 
   void _onSelected(CampusPlace place) {
     HapticFeedback.heavyImpact();
-    SemanticsService.announce('Destino: ${place.name}.', TextDirection.ltr);
+    _announce('Destino: ${place.name}.');
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -163,22 +168,22 @@ class _MainScreenState extends State<MainScreen> {
                             // Fila 1: Cafeterías, Bloques, Baños
                             Row(
                               children: <Widget>[
-                                _CatBtn(cat: _cats[0], onTap: _openCategory),
+                                _CatBtn(cat: _cats[0], onTap: _openCategory, order: 1),
                                 const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[1], onTap: _openCategory),
+                                _CatBtn(cat: _cats[1], onTap: _openCategory, order: 2),
                                 const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[2], onTap: _openCategory),
+                                _CatBtn(cat: _cats[2], onTap: _openCategory, order: 3),
                               ],
                             ),
                             const SizedBox(height: 12),
                             // Fila 2: Porterías, Parqueaderos, Jardines
                             Row(
                               children: <Widget>[
-                                _CatBtn(cat: _cats[3], onTap: _openCategory),
+                                _CatBtn(cat: _cats[3], onTap: _openCategory, order: 4),
                                 const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[4], onTap: _openCategory),
+                                _CatBtn(cat: _cats[4], onTap: _openCategory, order: 5),
                                 const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[5], onTap: _openCategory),
+                                _CatBtn(cat: _cats[5], onTap: _openCategory, order: 6),
                               ],
                             ),
                             const SizedBox(height: 12),
@@ -187,7 +192,7 @@ class _MainScreenState extends State<MainScreen> {
                               children: <Widget>[
                                 Expanded(child: SizedBox(height: 90)),
                                 const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[6], onTap: _openCategory),
+                                _CatBtn(cat: _cats[6], onTap: _openCategory, order: 7),
                                 const SizedBox(width: 12),
                                 Expanded(child: SizedBox(height: 90)),
                               ],
@@ -502,57 +507,63 @@ class _NearbySection extends StatelessWidget {
 class _CatBtn extends StatelessWidget {
   final PlaceCategory cat;
   final void Function(PlaceCategory) onTap;
-  const _CatBtn({required this.cat, required this.onTap});
+  final int order;
+  const _CatBtn({required this.cat, required this.onTap, required this.order});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Semantics(
-        button: true,
-        label: cat.displayName,
-        hint: 'Toca dos veces para ver ${cat.displayName}',
-        child: GestureDetector(
+      child: FocusTraversalOrder(
+        order: NumericFocusOrder(order.toDouble()),
+        child: Semantics(
+          sortKey: OrdinalSortKey(order.toDouble()),
+          button: true,
+          label: cat.displayName,
+          hint: 'Toca dos veces para ver ${cat.displayName}',
           onTap: () => onTap(cat),
-          child: Container(
-            height: 90,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.06),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
-              boxShadow: const [
-                BoxShadow(
-                    color: Color(0x22000000),
-                    blurRadius: 6,
-                    offset: Offset(0, 3)),
-              ],
-            ),
-            child: ExcludeSemantics(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1565C0).withOpacity(0.22),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Icon(cat.icon,
-                        color: const Color(0xFF82B1FF), size: 22),
-                  ),
-                  const SizedBox(height: 7),
-                  Text(
-                    cat.displayName,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+          child: GestureDetector(
+            onTap: () => onTap(cat),
+            child: Container(
+              height: 90,
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.06),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                boxShadow: const [
+                  BoxShadow(
+                      color: Color(0x22000000),
+                      blurRadius: 6,
+                      offset: Offset(0, 3)),
                 ],
+              ),
+              child: ExcludeSemantics(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1565C0).withValues(alpha: 0.22),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(cat.icon,
+                          color: const Color(0xFF82B1FF), size: 22),
+                    ),
+                    const SizedBox(height: 7),
+                    Text(
+                      cat.displayName,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -18,6 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const _prefKey = 'permissions_accepted';
 
+  Future<void> _announce(String message) {
+    return SemanticsService.sendAnnouncement(
+      View.of(context),
+      message,
+      Directionality.of(context),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -37,11 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
     } else {
       setState(() => _checking = false);
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        SemanticsService.announce(
+        _announce(
           'Bienvenido a CampusGuía. '
           'Aplicación de navegación para el campus universitario EAFIT. '
           'El botón Iniciar navegación se encuentra al centro de la pantalla.',
-          TextDirection.ltr,
         );
         Future.delayed(const Duration(milliseconds: 800), () {
           if (mounted) _mainButtonFocusNode.requestFocus();
@@ -58,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onStartNavigation() {
     HapticFeedback.heavyImpact();
-    SemanticsService.announce('Abriendo pantalla de permisos.', TextDirection.ltr);
+    _announce('Abriendo pantalla de permisos.');
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => PermissionScreen(
@@ -71,10 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialPageRoute(builder: (_) => const MainScreen()),
               (route) => false,
             );
-            SemanticsService.announce(
-              'Permisos listos. Abriendo navegación.',
-              TextDirection.ltr,
-            );
+            _announce('Permisos listos. Abriendo navegación.');
           },
         ),
       ),
@@ -151,53 +155,62 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const Spacer(),
-                Semantics(
-                  button: true,
-                  label: 'Iniciar navegación',
-                  hint: 'Toca dos veces para comenzar. Se solicitarán permisos de ubicación.',
-                  onTap: _onStartNavigation,
-                  child: ElevatedButton(
-                    focusNode: _mainButtonFocusNode,
-                    onPressed: _onStartNavigation,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1565C0),
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 24),
-                      minimumSize: const Size(double.infinity, 88),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                      textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    child: const ExcludeSemantics(
-                      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        Icon(Icons.play_arrow_rounded, size: 32),
-                        SizedBox(width: 12),
-                        Text('Iniciar navegación'),
-                      ]),
+                FocusTraversalOrder(
+                  order: const NumericFocusOrder(1),
+                  child: Semantics(
+                    sortKey: const OrdinalSortKey(1),
+                    button: true,
+                    label: 'Iniciar navegación',
+                    hint: 'Toca dos veces para comenzar. Se solicitarán permisos de ubicación.',
+                    onTap: _onStartNavigation,
+                    child: ElevatedButton(
+                      focusNode: _mainButtonFocusNode,
+                      onPressed: _onStartNavigation,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1565C0),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        minimumSize: const Size(double.infinity, 88),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                      child: const ExcludeSemantics(
+                        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          Icon(Icons.play_arrow_rounded, size: 32),
+                          SizedBox(width: 12),
+                          Text('Iniciar navegación'),
+                        ]),
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 32),
                 Row(children: [
                   Expanded(
-                    child: Semantics(
-                      button: true, label: 'Ayuda',
-                      hint: 'Toca dos veces para escuchar instrucciones de uso.',
-                      onTap: _onHelp,
-                      child: OutlinedButton(
-                        onPressed: _onHelp,
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.white70,
-                          side: const BorderSide(color: Colors.white38),
-                          padding: const EdgeInsets.symmetric(vertical: 18),
-                          minimumSize: const Size(0, 64),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        child: const ExcludeSemantics(
-                          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                            Icon(Icons.help_outline_rounded, size: 22),
-                            SizedBox(width: 8),
-                            Text('Ayuda'),
-                          ]),
+                    child: FocusTraversalOrder(
+                      order: const NumericFocusOrder(2),
+                      child: Semantics(
+                        sortKey: const OrdinalSortKey(2),
+                        button: true,
+                        label: 'Ayuda',
+                        hint: 'Toca dos veces para escuchar instrucciones de uso.',
+                        onTap: _onHelp,
+                        child: OutlinedButton(
+                          onPressed: _onHelp,
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.white70,
+                            side: const BorderSide(color: Colors.white38),
+                            padding: const EdgeInsets.symmetric(vertical: 18),
+                            minimumSize: const Size(0, 64),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          ),
+                          child: const ExcludeSemantics(
+                            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                              Icon(Icons.help_outline_rounded, size: 22),
+                              SizedBox(width: 8),
+                              Text('Ayuda'),
+                            ]),
+                          ),
                         ),
                       ),
                     ),

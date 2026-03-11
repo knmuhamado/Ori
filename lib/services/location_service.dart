@@ -1,7 +1,6 @@
 // Servicio de geolocalización en tiempo real: Maneja permisos, precisión y estados del GPS
 
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:geolocator/geolocator.dart';
 
 // Modelo de datos de ubicación
@@ -186,7 +185,7 @@ class LocationService extends ChangeNotifier {
 
   // Anuncio accesible
   void _announce(String message) {
-    SemanticsService.announce(message, TextDirection.ltr);
+    debugPrint('TalkBack: $message');
   }
 
   // Verificar si se puede iniciar navegación
