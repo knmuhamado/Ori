@@ -44,24 +44,17 @@ class _PermissionScreenState extends State<PermissionScreen> {
   // FocusNode para el botón de acción principal
   final FocusNode _actionButtonFocus = FocusNode();
 
-  Future<void> _announce(String message) {
-    return SemanticsService.sendAnnouncement(
-      View.of(context),
-      message,
-      Directionality.of(context),
-    );
-  }
-
   @override
   void initState() {
     super.initState();
     // Anunciar la pantalla al abrirse
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _announce(
+      SemanticsService.announce(
         'Pantalla de permisos. '
         'Para navegar por el campus necesitamos tu permiso de ubicación. '
         'Para usar comandos de voz necesitamos acceso al micrófono. '
         'El botón Conceder permisos se encuentra al centro de la pantalla.',
+        TextDirection.ltr,
       );
       Future.delayed(
         const Duration(milliseconds: 800),
@@ -87,9 +80,10 @@ class _PermissionScreenState extends State<PermissionScreen> {
     HapticFeedback.mediumImpact();
 
     // ── 1. Permiso de ubicación ──
-    _announce(
+    SemanticsService.announce(
       'Solicitando permiso de ubicación. '
       'Aparecerá un cuadro de diálogo del sistema.',
+      TextDirection.ltr,
     );
 
     final locationResult = await PermissionService.request(
@@ -100,13 +94,17 @@ class _PermissionScreenState extends State<PermissionScreen> {
     setState(() => _locationResult = locationResult);
 
     // Anunciar resultado de ubicación
-    _announce(locationResult.message);
+    SemanticsService.announce(
+      locationResult.message,
+      TextDirection.ltr,
+    );
     await Future.delayed(const Duration(milliseconds: 1500));
 
     // ── 2. Permiso de micrófono ──
-    _announce(
+    SemanticsService.announce(
       'Solicitando permiso de micrófono. '
       'Aparecerá un cuadro de diálogo del sistema.',
+      TextDirection.ltr,
     );
 
     final micResult = await PermissionService.request(
@@ -121,7 +119,10 @@ class _PermissionScreenState extends State<PermissionScreen> {
     });
 
     // Anunciar resultado de micrófono
-    _announce(micResult.message);
+    SemanticsService.announce(
+      micResult.message,
+      TextDirection.ltr,
+    );
 
     await Future.delayed(const Duration(milliseconds: 1500));
 
@@ -129,11 +130,12 @@ class _PermissionScreenState extends State<PermissionScreen> {
     final bool allGranted =
         locationResult.isGranted && micResult.isGranted;
 
-    _announce(
+    SemanticsService.announce(
       allGranted
           ? 'Todos los permisos concedidos. La aplicación está lista.'
           : 'Permisos procesados con limitaciones. '
             'Puedes continuar usando las funciones disponibles.',
+      TextDirection.ltr,
     );
 
     HapticFeedback.heavyImpact();
@@ -142,7 +144,10 @@ class _PermissionScreenState extends State<PermissionScreen> {
   // ── Continuar hacia la navegación ──
   void _continueToNavigation() {
     HapticFeedback.heavyImpact();
-    _announce('Continuando a la pantalla de navegación.');
+    SemanticsService.announce(
+      'Continuando a la pantalla de navegación.',
+      TextDirection.ltr,
+    );
     widget.onPermissionsHandled();
   }
 
@@ -187,33 +192,24 @@ class _PermissionScreenState extends State<PermissionScreen> {
                 const SizedBox(height: 24),
 
                 // ── Tarjetas de permiso ──
-                Semantics(
-                  container: true,
-                  sortKey: const OrdinalSortKey(1),
-                  label: 'Lista de permisos. Dos elementos.',
-                  child: Column(
-                    children: [
-                      _PermissionCard(
-                        icon: Icons.location_on_rounded,
-                        title: 'Ubicación',
-                        reason:
-                            'Para guiarte por los caminos y edificios del campus '
-                            'con instrucciones precisas de a dónde girar.',
-                        result: _locationResult,
-                      ),
+                _PermissionCard(
+                  icon: Icons.location_on_rounded,
+                  title: 'Ubicación',
+                  reason:
+                      'Para guiarte por los caminos y edificios del campus '
+                      'con instrucciones precisas de a dónde girar.',
+                  result: _locationResult,
+                ),
 
-                      const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-                      _PermissionCard(
-                        icon: Icons.mic_rounded,
-                        title: 'Micrófono',
-                        reason:
-                            'Para que puedas decir tu destino con tu voz '
-                            'en lugar de escribirlo.',
-                        result: _micResult,
-                      ),
-                    ],
-                  ),
+                _PermissionCard(
+                  icon: Icons.mic_rounded,
+                  title: 'Micrófono',
+                  reason:
+                      'Para que puedas decir tu destino con tu voz '
+                      'en lugar de escribirlo.',
+                  result: _micResult,
                 ),
 
                 const Spacer(),
@@ -234,62 +230,57 @@ class _PermissionScreenState extends State<PermissionScreen> {
   }
 
   Widget _buildRequestButton() {
-    return FocusTraversalOrder(
-      order: const NumericFocusOrder(1),
-      child: Semantics(
-        sortKey: const OrdinalSortKey(2),
-        button: true,
-        liveRegion: _isProcessing,
-        label: _isProcessing
-            ? 'Solicitando permisos, por favor espere.'
-            : 'Conceder permisos. Permite que la app funcione correctamente.',
-        hint: _isProcessing
-            ? null
-            : 'Toca dos veces para conceder los permisos de ubicación y micrófono.',
-        onTap: _isProcessing ? null : _requestAllPermissions,
-        child: ElevatedButton(
-          focusNode: _actionButtonFocus,
-          onPressed: _isProcessing ? null : _requestAllPermissions,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF1565C0),
-            foregroundColor: Colors.white,
-            disabledBackgroundColor: const Color(0xFF1565C0).withValues(alpha: 0.5),
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            minimumSize: const Size(double.infinity, 80),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            textStyle: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+    return Semantics(
+      button: true,
+      label: _isProcessing
+          ? 'Solicitando permisos, por favor espere.'
+          : 'Conceder permisos. Permite que la app funcione correctamente.',
+      hint: _isProcessing
+          ? null
+          : 'Toca dos veces para conceder los permisos de ubicación y micrófono.',
+      onTap: _isProcessing ? null : _requestAllPermissions,
+      child: ElevatedButton(
+        focusNode: _actionButtonFocus,
+        onPressed: _isProcessing ? null : _requestAllPermissions,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF1565C0),
+          foregroundColor: Colors.white,
+          disabledBackgroundColor: const Color(0xFF1565C0).withOpacity(0.5),
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          minimumSize: const Size(double.infinity, 80),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
           ),
-          child: ExcludeSemantics(
-            child: _isProcessing
-                ? const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2.5,
-                        ),
+          textStyle: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        child: ExcludeSemantics(
+          child: _isProcessing
+              ? const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 2.5,
                       ),
-                      SizedBox(width: 16),
-                      Text('Solicitando...'),
-                    ],
-                  )
-                : const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.check_circle_outline_rounded, size: 28),
-                      SizedBox(width: 12),
-                      Text('Conceder permisos'),
-                    ],
-                  ),
-          ),
+                    ),
+                    SizedBox(width: 16),
+                    Text('Solicitando...'),
+                  ],
+                )
+              : const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.check_circle_outline_rounded, size: 28),
+                    SizedBox(width: 12),
+                    Text('Conceder permisos'),
+                  ],
+                ),
         ),
       ),
     );
@@ -300,52 +291,47 @@ class _PermissionScreenState extends State<PermissionScreen> {
         (_locationResult?.isGranted ?? false) &&
         (_micResult?.isGranted ?? false);
 
-    return FocusTraversalOrder(
-      order: const NumericFocusOrder(1),
-      child: Semantics(
-        sortKey: const OrdinalSortKey(2),
-        button: true,
-        liveRegion: true,
-        label: allGranted
-            ? 'Continuar a navegación. Todos los permisos están activos.'
-            : 'Continuar con funciones limitadas. '
-              'Algunos permisos no fueron concedidos.',
-        hint: 'Toca dos veces para ir a la pantalla de navegación.',
-        onTap: _continueToNavigation,
-        child: ElevatedButton(
-          focusNode: _actionButtonFocus,
-          onPressed: _continueToNavigation,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: allGranted
-                ? const Color(0xFF2E7D32) // Verde si todo OK
-                : const Color(0xFFE65100), // Naranja si hay limitaciones
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            minimumSize: const Size(double.infinity, 80),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            textStyle: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+    return Semantics(
+      button: true,
+      label: allGranted
+          ? 'Continuar a navegación. Todos los permisos están activos.'
+          : 'Continuar con funciones limitadas. '
+            'Algunos permisos no fueron concedidos.',
+      hint: 'Toca dos veces para ir a la pantalla de navegación.',
+      onTap: _continueToNavigation,
+      child: ElevatedButton(
+        focusNode: _actionButtonFocus,
+        onPressed: _continueToNavigation,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: allGranted
+              ? const Color(0xFF2E7D32) // Verde si todo OK
+              : const Color(0xFFE65100), // Naranja si hay limitaciones
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          minimumSize: const Size(double.infinity, 80),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
           ),
-          child: ExcludeSemantics(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  allGranted
-                      ? Icons.navigation_rounded
-                      : Icons.warning_amber_rounded,
-                  size: 28,
-                ),
-                const SizedBox(width: 12),
-                Text(
-                  allGranted ? 'Iniciar navegación' : 'Continuar (limitado)',
-                ),
-              ],
-            ),
+          textStyle: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        child: ExcludeSemantics(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                allGranted
+                    ? Icons.navigation_rounded
+                    : Icons.warning_amber_rounded,
+                size: 28,
+              ),
+              const SizedBox(width: 12),
+              Text(
+                allGranted ? 'Iniciar navegación' : 'Continuar (limitado)',
+              ),
+            ],
           ),
         ),
       ),
@@ -382,7 +368,6 @@ class _PermissionCard extends StatelessWidget {
 
     return Semantics(
       label: semanticLabel,
-      sortKey: OrdinalSortKey(title == 'Ubicación' ? 1 : 2),
       // Las tarjetas no son botones, solo información de estado
       child: ExcludeSemantics(
         child: Container(
@@ -477,9 +462,9 @@ class _StatusChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: _color().withValues(alpha: 0.15),
+        color: _color().withOpacity(0.15),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: _color().withValues(alpha: 0.4)),
+        border: Border.all(color: _color().withOpacity(0.4)),
       ),
       child: Text(
         _label(),

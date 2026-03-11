@@ -5,7 +5,7 @@
 // Usa platform channels de Flutter
 // ============================================================
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // ── Enumeración de permisos que maneja la app ──
@@ -40,15 +40,6 @@ class PermissionService {
 
   // Solicita un permiso y retorna el resultado con mensaje accesible
   static Future<PermissionResult> request(AppPermission permission) async {
-    if (kIsWeb) {
-      return PermissionResult(
-        permission: permission,
-        status: PermissionStatus.denied,
-        message: 'Gestión de permisos nativos no disponible en versión web. '
-            'Puedes continuar con funciones compatibles con navegador.',
-      );
-    }
-
     try {
       final String permissionKey = _toKey(permission);
       final String result = await _channel.invokeMethod(
@@ -70,10 +61,6 @@ class PermissionService {
 
   // Verifica si un permiso ya fue concedido sin pedirlo de nuevo
   static Future<PermissionStatus> check(AppPermission permission) async {
-    if (kIsWeb) {
-      return PermissionStatus.unknown;
-    }
-
     try {
       final String permissionKey = _toKey(permission);
       final String result = await _channel.invokeMethod(
