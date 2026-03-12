@@ -31,6 +31,13 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+android/build/
+ios/build/
+
+# Gradle
+android/.gradle/
+
+.flutter-plugins
 /coverage/
 
 # Symbolication related
@@ -43,3 +50,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/app/build/
+
+# FVM Version Cache
+.fvm/

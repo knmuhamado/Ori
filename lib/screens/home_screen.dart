@@ -1,40 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'permission_screen.dart';
-
-class CampusGuiaApp extends StatelessWidget {
-  const CampusGuiaApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'CampusGuía',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1A237E),
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-        textTheme: const TextTheme(
-          displaySmall: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            height: 1.3,
-          ),
-          bodyLarge: TextStyle(
-            fontSize: 20,
-            color: Colors.white70,
-            height: 1.5,
-          ),
-        ),
-      ),
-      home: const HomeScreen(),
-    );
-  }
-}
+import 'main_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,21 +14,47 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final FocusNode _mainButtonFocusNode = FocusNode();
+  bool _checking = true; 
+
+  static const _prefKey = 'permissions_accepted';
+
+  Future<void> _announce(String message) {
+    return SemanticsService.sendAnnouncement(
+      View.of(context),
+      message,
+      Directionality.of(context),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      SemanticsService.announce(
-        'Bienvenido a CampusGuía. '
-        'Aplicación de navegación para el campus universitario. '
-        'El botón principal Iniciar navegación se encuentra al centro de la pantalla.',
-        TextDirection.ltr,
+    _checkIfAlreadyAccepted();
+  }
+
+  /// Si ya aceptó permisos antes, va directo a MainScreen
+  Future<void> _checkIfAlreadyAccepted() async {
+    final prefs = await SharedPreferences.getInstance();
+    final accepted = prefs.getBool(_prefKey) ?? false;
+    if (!mounted) return;
+    if (accepted) {
+      // Saltar directo sin animación de bienvenida
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const MainScreen()),
       );
-      Future.delayed(const Duration(milliseconds: 800), () {
-        if (mounted) _mainButtonFocusNode.requestFocus();
+    } else {
+      setState(() => _checking = false);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _announce(
+          'Bienvenido a CampusGuía. '
+          'Aplicación de navegación para el campus universitario EAFIT. '
+          'El botón Iniciar navegación se encuentra al centro de la pantalla.',
+        );
+        Future.delayed(const Duration(milliseconds: 800), () {
+          if (mounted) _mainButtonFocusNode.requestFocus();
+        });
       });
-    });
+    }
   }
 
   @override
@@ -68,25 +63,22 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  // ── Navegar a permisos antes de iniciar navegación ──
   void _onStartNavigation() {
     HapticFeedback.heavyImpact();
-    SemanticsService.announce(
-      'Abriendo pantalla de permisos necesarios.',
-      TextDirection.ltr,
-    );
-
+    _announce('Abriendo pantalla de permisos.');
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => PermissionScreen(
-          onPermissionsHandled: () {
-            // Volver al home y luego ir a navegación
-            Navigator.of(context).pop();
-            // TODO: Navigator.of(context).pushNamed('/navigation');
-            SemanticsService.announce(
-              'Permisos procesados. Listo para navegar.',
-              TextDirection.ltr,
+          onPermissionsHandled: () async {
+            // Guardar que ya aceptó para que la próxima vez vaya directo
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setBool(_prefKey, true);
+            if (!mounted) return;
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => const MainScreen()),
+              (route) => false,
             );
+            _announce('Permisos listos. Abriendo navegación.');
           },
         ),
       ),
@@ -95,108 +87,110 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onHelp() {
     HapticFeedback.mediumImpact();
-    SemanticsService.announce(
-      'Sección de ayuda. Próximamente disponible.',
-      TextDirection.ltr,
-    );
-  }
-
-  void _onSettings() {
-    HapticFeedback.mediumImpact();
-    SemanticsService.announce(
-      'Sección de configuración. Próximamente disponible.',
-      TextDirection.ltr,
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        backgroundColor: const Color(0xFF1A2A3A),
+        title: const Text('Ayuda', style: TextStyle(color: Colors.white, fontSize: 20)),
+        content: const Text(
+          'CampusGuía te ayuda a navegar por el campus EAFIT.\n\n'
+          '1. Toca "Iniciar navegación" para comenzar.\n'
+          '2. Acepta los permisos de ubicación.\n'
+          '3. Selecciona una categoría.\n'
+          '4. Elige tu destino de la lista.\n\n'
+          'Diseñada para ser compatible con TalkBack.',
+          style: TextStyle(color: Colors.white70, fontSize: 16, height: 1.6),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Entendido', style: TextStyle(color: Color(0xFF82B1FF))),
+          ),
+        ],
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_checking) {
+      return const Scaffold(
+        backgroundColor: Color(0xFF0D1B2A),
+        body: Center(
+          child: CircularProgressIndicator(color: Color(0xFF82B1FF)),
+        ),
+      );
+    }
+
     return FocusTraversalGroup(
       policy: ReadingOrderTraversalPolicy(),
       child: Scaffold(
         backgroundColor: const Color(0xFF0D1B2A),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 24.0,
-              vertical: 32.0,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Semantics(
                   header: true,
-                  label: 'CampusGuía, aplicación de navegación universitaria',
-                  child: ExcludeSemantics(
-                    child: Column(
-                      children: [
-                        const Icon(
-                          Icons.navigation_rounded,
-                          size: 64,
-                          color: Color(0xFF82B1FF),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          'CampusGuía',
-                          style: Theme.of(context).textTheme.displaySmall,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+                  label: 'CampusGuía, aplicación de navegación universitaria EAFIT',
+                  child: const ExcludeSemantics(
+                    child: Column(children: [
+                      Icon(Icons.navigation_rounded, size: 64, color: Color(0xFF82B1FF)),
+                      SizedBox(height: 12),
+                      Text('CampusGuía',
+                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+                        textAlign: TextAlign.center),
+                    ]),
                   ),
                 ),
                 const SizedBox(height: 16),
                 Semantics(
-                  label:
-                      'Descripción: Aplicación de navegación por voz y audio '
-                      'para desplazarte dentro del campus universitario.',
-                  child: ExcludeSemantics(
-                    child: Text(
-                      'Navegación por voz y audio dentro del campus universitario.',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      textAlign: TextAlign.center,
-                    ),
+                  label: 'Navegación por voz y audio dentro del campus universitario EAFIT.',
+                  child: const ExcludeSemantics(
+                    child: Text('Navegación por voz y audio dentro del campus universitario.',
+                      style: TextStyle(fontSize: 20, color: Colors.white70, height: 1.5),
+                      textAlign: TextAlign.center),
                   ),
                 ),
                 const Spacer(),
-                Semantics(
-                  button: true,
-                  label: 'Iniciar navegación. Activa el modo de guía de voz.',
-                  hint: 'Toca dos veces para comenzar. Se solicitarán permisos necesarios.',
-                  onTap: _onStartNavigation,
-                  child: ElevatedButton(
-                    focusNode: _mainButtonFocusNode,
-                    onPressed: _onStartNavigation,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1565C0),
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 24),
-                      minimumSize: const Size(double.infinity, 80),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+                FocusTraversalOrder(
+                  order: const NumericFocusOrder(1),
+                  child: Semantics(
+                    sortKey: const OrdinalSortKey(1),
+                    button: true,
+                    label: 'Iniciar navegación',
+                    hint: 'Toca dos veces para comenzar. Se solicitarán permisos de ubicación.',
+                    onTap: _onStartNavigation,
+                    child: ElevatedButton(
+                      focusNode: _mainButtonFocusNode,
+                      onPressed: _onStartNavigation,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1565C0),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        minimumSize: const Size(double.infinity, 88),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                       ),
-                      textStyle: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    child: ExcludeSemantics(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                      child: const ExcludeSemantics(
+                        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                           Icon(Icons.play_arrow_rounded, size: 32),
                           SizedBox(width: 12),
                           Text('Iniciar navegación'),
-                        ],
+                        ]),
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 32),
-                Row(
-                  children: [
-                    Expanded(
+                Row(children: [
+                  Expanded(
+                    child: FocusTraversalOrder(
+                      order: const NumericFocusOrder(2),
                       child: Semantics(
+                        sortKey: const OrdinalSortKey(2),
                         button: true,
                         label: 'Ayuda',
                         hint: 'Toca dos veces para escuchar instrucciones de uso.',
@@ -207,64 +201,26 @@ class _HomeScreenState extends State<HomeScreen> {
                             foregroundColor: Colors.white70,
                             side: const BorderSide(color: Colors.white38),
                             padding: const EdgeInsets.symmetric(vertical: 18),
-                            minimumSize: const Size(0, 60),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                            minimumSize: const Size(0, 64),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           ),
-                          child: ExcludeSemantics(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.help_outline_rounded, size: 22),
-                                SizedBox(width: 8),
-                                Text('Ayuda'),
-                              ],
-                            ),
+                          child: const ExcludeSemantics(
+                            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                              Icon(Icons.help_outline_rounded, size: 22),
+                              SizedBox(width: 8),
+                              Text('Ayuda'),
+                            ]),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Semantics(
-                        button: true,
-                        label: 'Configuración',
-                        hint: 'Toca dos veces para ajustar preferencias.',
-                        onTap: _onSettings,
-                        child: OutlinedButton(
-                          onPressed: _onSettings,
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.white70,
-                            side: const BorderSide(color: Colors.white38),
-                            padding: const EdgeInsets.symmetric(vertical: 18),
-                            minimumSize: const Size(0, 60),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: ExcludeSemantics(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.settings_outlined, size: 22),
-                                SizedBox(width: 8),
-                                Text('Ajustes'),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                ExcludeSemantics(
-                  child: Text(
-                    'Requiere TalkBack activo',
-                    style: TextStyle(fontSize: 13, color: Colors.white24),
-                    textAlign: TextAlign.center,
                   ),
+                ]),
+                const SizedBox(height: 16),
+                const ExcludeSemantics(
+                  child: Text('Compatible con TalkBack',
+                    style: TextStyle(fontSize: 13, color: Colors.white24),
+                    textAlign: TextAlign.center),
                 ),
               ],
             ),

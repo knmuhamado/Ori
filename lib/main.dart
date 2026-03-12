@@ -1,6 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
+import 'services/location_service.dart';
+import 'services/geojson_service.dart';
 
 void main() {
   runApp(const CampusGuiaApp());
+}
+
+class CampusGuiaApp extends StatelessWidget {
+  const CampusGuiaApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => LocationService()),
+        ChangeNotifierProvider(create: (_) => GeoJsonService()),
+      ],
+      child: MaterialApp(
+        title: 'CampusGuía EAFIT',
+        debugShowCheckedModeBanner: false,
+        locale: const Locale('es', 'CO'),
+        supportedLocales: const [
+          Locale('es', 'CO'),
+          Locale('es'),
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF1A237E),
+            brightness: Brightness.dark,
+          ),
+          useMaterial3: true,
+          fontFamily: 'Roboto',
+        ),
+        home: const HomeScreen(),
+      ),
+    );
+  }
 }
