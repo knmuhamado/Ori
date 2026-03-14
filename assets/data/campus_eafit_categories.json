@@ -1,0 +1,39 @@
+{
+  "categories": {
+    "cafeteria": {
+      "label": "Cafeterías",
+      "icon": "restaurant",
+      "order": 1
+    },
+    "bloque": {
+      "label": "Bloques",
+      "icon": "apartment",
+      "order": 2
+    },
+    "bano": {
+      "label": "Baños",
+      "icon": "wc",
+      "order": 3
+    },
+    "porteria": {
+      "label": "Porterías",
+      "icon": "door_front_door",
+      "order": 4
+    },
+    "parqueadero": {
+      "label": "Parqueaderos",
+      "icon": "directions_car",
+      "order": 5
+    },
+    "jardin": {
+      "label": "Jardines",
+      "icon": "park",
+      "order": 6
+    },
+    "deporte": {
+      "label": "Deportes",
+      "icon": "sports_soccer",
+      "order": 7
+    }
+  }
+}

@@ -177,10 +177,10 @@ class _PlaceList extends StatelessWidget {
                           : const Color(0xFF0D1B2A),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(place.category.icon,
+                    child: Icon(geo.iconForPlace(place),
                         color: isSelected
-                            ? Colors.white
-                            : const Color(0xFF82B1FF),
+                          ? Colors.white
+                          : const Color(0xFF82B1FF),
                         size: 22),
                   ),
                   title: ExcludeSemantics(

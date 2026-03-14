@@ -16,16 +16,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static const _cats = [
-    PlaceCategory.cafeteria,
-    PlaceCategory.bloque,
-    PlaceCategory.bano,
-    PlaceCategory.porteria,
-    PlaceCategory.parqueadero,
-    PlaceCategory.jardin,
-    PlaceCategory.deporte,
-  ];
-
   Future<void> _announce(String message) {
     return SemanticsService.sendAnnouncement(
       View.of(context),
@@ -44,12 +34,12 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-  void _openCategory(PlaceCategory cat) {
+  void _openCategory(CategoryMeta cat) {
     HapticFeedback.lightImpact();
-    _announce('Abriendo ${cat.displayName}');
+    _announce('Abriendo ${cat.label}');
     final geo = Provider.of<GeoJsonService>(context, listen: false);
     final loc = Provider.of<LocationService>(context, listen: false);
-    geo.filterByCategory(cat);
+    geo.filterByCategory(cat.id);
     Navigator.of(context).push(MaterialPageRoute(
       builder: (_) => MultiProvider(
         providers: [
@@ -57,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
           ChangeNotifierProvider.value(value: loc),
         ],
         child: DestinationScreen(
-          categoryName: cat.displayName,
+          categoryName: cat.label,
           onDestinationSelected: (place) {
             Navigator.of(context).pop();
             _onSelected(place);
@@ -160,44 +150,23 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ),
 
-                      // Grid 3 filas
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
-                          children: [
-                            // Fila 1: Cafeterías, Bloques, Baños
-                            Row(
-                              children: <Widget>[
-                                _CatBtn(cat: _cats[0], onTap: _openCategory, order: 1),
-                                const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[1], onTap: _openCategory, order: 2),
-                                const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[2], onTap: _openCategory, order: 3),
+                        child: Consumer<GeoJsonService>(
+                          builder: (_, geo, __) {
+                            final cats = geo.categories;
+                            return Wrap(
+                              spacing: 12,
+                              runSpacing: 12,
+                              children: [
+                                for (final cat in cats)
+                                  SizedBox(
+                                    width: (MediaQuery.of(context).size.width - 56) / 3,
+                                    child: _CatBtn(cat: cat, onTap: _openCategory),
+                                  ),
                               ],
-                            ),
-                            const SizedBox(height: 12),
-                            // Fila 2: Porterías, Parqueaderos, Jardines
-                            Row(
-                              children: <Widget>[
-                                _CatBtn(cat: _cats[3], onTap: _openCategory, order: 4),
-                                const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[4], onTap: _openCategory, order: 5),
-                                const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[5], onTap: _openCategory, order: 6),
-                              ],
-                            ),
-                            const SizedBox(height: 12),
-                            // Fila 3: Deportes centrado (mismo tamaño)
-                            Row(
-                              children: <Widget>[
-                                Expanded(child: SizedBox(height: 90)),
-                                const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[6], onTap: _openCategory, order: 7),
-                                const SizedBox(width: 12),
-                                Expanded(child: SizedBox(height: 90)),
-                              ],
-                            ),
-                          ],
+                            );
+                          },
                         ),
                       ),
 
@@ -466,7 +435,7 @@ class _NearbySection extends StatelessWidget {
                             color: const Color(0xFF1565C0).withOpacity(0.2),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Icon(p.category.icon,
+                            child: Icon(geo.iconForPlace(p),
                               color: const Color(0xFF82B1FF), size: 18),
                         ),
                         const SizedBox(width: 12),
@@ -505,65 +474,62 @@ class _NearbySection extends StatelessWidget {
 }
 // Botón de categoría
 class _CatBtn extends StatelessWidget {
-  final PlaceCategory cat;
-  final void Function(PlaceCategory) onTap;
-  final int order;
-  const _CatBtn({required this.cat, required this.onTap, required this.order});
+  final CategoryMeta cat;
+  final void Function(CategoryMeta) onTap;
+  const _CatBtn({required this.cat, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: FocusTraversalOrder(
-        order: NumericFocusOrder(order.toDouble()),
-        child: Semantics(
-          sortKey: OrdinalSortKey(order.toDouble()),
-          button: true,
-          label: cat.displayName,
-          hint: 'Toca dos veces para ver ${cat.displayName}',
+    return FocusTraversalOrder(
+      order: NumericFocusOrder(cat.order.toDouble()),
+      child: Semantics(
+        sortKey: OrdinalSortKey(cat.order.toDouble()),
+        button: true,
+        label: cat.label,
+        hint: 'Toca dos veces para ver ${cat.label}',
+        onTap: () => onTap(cat),
+        child: GestureDetector(
           onTap: () => onTap(cat),
-          child: GestureDetector(
-            onTap: () => onTap(cat),
-            child: Container(
-              height: 90,
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.06),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Color(0x22000000),
-                      blurRadius: 6,
-                      offset: Offset(0, 3)),
+          child: Container(
+            height: 90,
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.06),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+              boxShadow: const [
+                BoxShadow(
+                    color: Color(0x22000000),
+                    blurRadius: 6,
+                    offset: Offset(0, 3)),
+              ],
+            ),
+            child: ExcludeSemantics(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1565C0).withValues(alpha: 0.22),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Icon(cat.iconData,
+                        color: const Color(0xFF82B1FF), size: 22),
+                  ),
+                  const SizedBox(height: 7),
+                  Text(
+                    cat.label,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
-              ),
-              child: ExcludeSemantics(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF1565C0).withValues(alpha: 0.22),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(cat.icon,
-                          color: const Color(0xFF82B1FF), size: 22),
-                    ),
-                    const SizedBox(height: 7),
-                    Text(
-                      cat.displayName,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
               ),
             ),
           ),
