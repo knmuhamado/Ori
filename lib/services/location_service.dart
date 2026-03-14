@@ -164,7 +164,11 @@ class LocationService extends ChangeNotifier {
     }
 
     _currentLocation = newLocation;
+    final statusChanged = _status != newStatus;
     _updateStatus(newStatus);
+    if (!statusChanged) {
+      notifyListeners();
+    }
   }
 
   // Manejar errores del stream

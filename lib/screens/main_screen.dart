@@ -8,6 +8,7 @@ import '../services/location_service.dart';
 import '../services/geojson_service.dart';
 import '../models/campus_place.dart';
 import 'destination_screen.dart';
+import 'navigation_map_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -59,34 +60,30 @@ class _MainScreenState extends State<MainScreen> {
 
   void _onSelected(CampusPlace place) {
     HapticFeedback.heavyImpact();
-    _announce('Destino: ${place.name}.');
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF1A2A3A),
-        title: const Text('Destino seleccionado',
-            style: TextStyle(color: Colors.white)),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(place.name,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            Text(place.description.split('\n').first,
-                style: const TextStyle(color: Colors.white70)),
-          ],
+    final loc = Provider.of<LocationService>(context, listen: false);
+    final current = loc.currentLocation;
+
+    if (current == null) {
+      _announce('No hay señal GPS suficiente para iniciar navegación.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No pudimos obtener tu ubicación actual.'),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cerrar',
-                style: TextStyle(color: Color(0xFF82B1FF))),
-          ),
-        ],
+      );
+      return;
+    }
+
+    _announce('Destino ${place.name} seleccionado. Iniciando navegación.');
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => NavigationMapScreen(
+          destinationName: place.name,
+          startLat: current.latitude,
+          startLng: current.longitude,
+          destLat: place.latitude,
+          destLng: place.longitude,
+          highlightCategoryId: place.primaryCategory,
+        ),
       ),
     );
   }
