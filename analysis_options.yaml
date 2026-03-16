@@ -9,6 +9,23 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  exclude:
+    - build/**
+    - .dart_tool/**
+  errors:
+    camel_case_extensions: error
+    camel_case_types: error
+    constant_identifier_names: error
+    file_names: error
+    library_prefixes: error
+    non_constant_identifier_names: error
+    package_names: error
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`
@@ -21,8 +38,19 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    always_declare_return_types: true
+    camel_case_extensions: true
+    camel_case_types: true
+    directives_ordering: true
+    file_names: true
+    library_names: true
+    library_prefixes: true
+    no_leading_underscores_for_local_identifiers: true
+    non_constant_identifier_names: true
+    package_names: true
+    prefer_final_locals: true
+    unnecessary_lambdas: true
+    use_super_parameters: true
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
