@@ -201,7 +201,7 @@ class GeoJsonService extends ChangeNotifier {
     double bestDistance = double.infinity;
 
     for (final place in _all) {
-      if (place.category != PlaceCategory.bloque) continue;
+      if (place.primaryCategory != 'bloque') continue;
       final d = place.distanceFrom(lat, lng);
       if (d < bestDistance) {
         bestDistance = d;
