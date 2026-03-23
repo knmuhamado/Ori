@@ -63,16 +63,6 @@ class _MainScreenState extends State<MainScreen> {
 
   Future<void> _onSelected(CampusPlace place) async {
     HapticFeedback.heavyImpact();
-<<<<<<< Updated upstream
-    final loc = Provider.of<LocationService>(context, listen: false);
-    final current = loc.currentLocation;
-
-    if (current == null) {
-      _announce('No hay señal GPS suficiente para iniciar navegación.');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No pudimos obtener tu ubicación actual.'),
-=======
     final location = Provider.of<LocationService>(context, listen: false);
     final routing = Provider.of<RoutingService>(context, listen: false);
     final geo = Provider.of<GeoJsonService>(context, listen: false);
@@ -84,24 +74,11 @@ class _MainScreenState extends State<MainScreen> {
         const SnackBar(
           content: Text('Activa el GPS para generar la ruta.'),
           backgroundColor: Color(0xFFB00020),
->>>>>>> Stashed changes
         ),
       );
       return;
     }
 
-<<<<<<< Updated upstream
-    _announce('Destino ${place.name} seleccionado. Iniciando navegación.');
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => NavigationMapScreen(
-          destinationName: place.name,
-          startLat: current.latitude,
-          startLng: current.longitude,
-          destLat: place.latitude,
-          destLng: place.longitude,
-          highlightCategoryId: place.primaryCategory,
-=======
     final origin = location.currentLocation!;
     final route = await routing.buildRoute(
       originLat: origin.latitude,
@@ -175,8 +152,14 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ],
           ],
->>>>>>> Stashed changes
         ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cerrar',
+                style: TextStyle(color: Color(0xFF82B1FF))),
+          ),
+        ],
       ),
     );
   }
@@ -648,7 +631,6 @@ class _CatBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
     return FocusTraversalOrder(
       order: NumericFocusOrder(cat.order.toDouble()),
       child: Semantics(
@@ -700,62 +682,6 @@ class _CatBtn extends StatelessWidget {
                   ),
                 ],
               ),
-=======
-    return Expanded(
-      child: FocusTraversalOrder(
-        order: NumericFocusOrder(order.toDouble()),
-        child: Semantics(
-          container: true,
-          explicitChildNodes: true,
-          excludeSemantics: true,
-          sortKey: OrdinalSortKey(order.toDouble()),
-          button: true,
-          enabled: true,
-          label: 'Categoria ${cat.displayName}',
-          hint: 'Toca dos veces para abrir ${cat.displayName}',
-          onTap: () => onTap(cat),
-          child: SizedBox(
-            height: 90,
-            child: ElevatedButton(
-              onPressed: () => onTap(cat),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white.withValues(alpha: 0.06),
-                foregroundColor: Colors.white,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
-                ),
-              ),
-              child: ExcludeSemantics(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF1565C0).withValues(alpha: 0.22),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(cat.icon, color: const Color(0xFF82B1FF), size: 22),
-                    ),
-                    const SizedBox(height: 7),
-                    Text(
-                      cat.displayName,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
->>>>>>> Stashed changes
             ),
           ),
         ),
