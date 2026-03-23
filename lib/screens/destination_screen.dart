@@ -21,7 +21,13 @@ class DestinationScreen extends StatefulWidget {
 }
 
 class _DestinationScreenState extends State<DestinationScreen> {
+  static const int _groupSize = 6;
+
   CampusPlace? _selected;
+  GeoJsonService? _geo;
+  bool _didAnnounceOptions = false;
+  List<List<CampusPlace>> _optionGroups = const [];
+  int _nextGroupIndex = 0;
 
   Future<void> _announce(String message) {
     return SemanticsService.sendAnnouncement(
@@ -39,7 +45,78 @@ class _DestinationScreenState extends State<DestinationScreen> {
         'Lista de ${widget.categoryName}. '
         'Desliza para explorar los lugares. Toca dos veces para seleccionar.',
       );
+      _geo = Provider.of<GeoJsonService>(context, listen: false);
+      _geo?.addListener(_onGeoUpdated);
+      _announceOptionsIfReady();
     });
+  }
+
+  @override
+  void dispose() {
+    _geo?.removeListener(_onGeoUpdated);
+    super.dispose();
+  }
+
+  void _onGeoUpdated() {
+    _announceOptionsIfReady();
+  }
+
+  Future<void> _announceOptionsIfReady() async {
+    if (!mounted || _didAnnounceOptions) return;
+    final geo = _geo;
+    if (geo == null || !geo.isLoaded) return;
+
+    final places = geo.places;
+    if (places.isEmpty) {
+      _didAnnounceOptions = true;
+      await _announce('No hay opciones disponibles en ${widget.categoryName}.');
+      return;
+    }
+
+    _optionGroups = _buildGroups(places);
+    _nextGroupIndex = 0;
+    _didAnnounceOptions = true;
+    await _announce(
+      'En ${widget.categoryName} hay ${places.length} opciones. '
+      'Estan organizadas en ${_optionGroups.length} grupos. '
+      'Voy a leerte el primer grupo. Usa el boton escuchar opciones para oir el siguiente grupo.',
+    );
+    await _announceNextGroup();
+  }
+
+  List<List<CampusPlace>> _buildGroups(List<CampusPlace> places) {
+    final groups = <List<CampusPlace>>[];
+    for (int i = 0; i < places.length; i += _groupSize) {
+      final end = (i + _groupSize < places.length) ? i + _groupSize : places.length;
+      groups.add(places.sublist(i, end));
+    }
+    return groups;
+  }
+
+  Future<void> _announceNextGroup() async {
+    if (_optionGroups.isEmpty) {
+      await _announce('No hay opciones para leer en este momento.');
+      return;
+    }
+
+    if (_nextGroupIndex >= _optionGroups.length) {
+      _nextGroupIndex = 0;
+    }
+
+    final group = _optionGroups[_nextGroupIndex];
+    final start = _nextGroupIndex * _groupSize + 1;
+    final end = start + group.length - 1;
+    final names = group.map((p) => p.name).join('. ');
+
+    await _announce(
+      'Grupo ${_nextGroupIndex + 1} de ${_optionGroups.length}. '
+      'Opciones $start a $end: $names.',
+    );
+
+    _nextGroupIndex++;
+    if (_nextGroupIndex >= _optionGroups.length) {
+      _nextGroupIndex = 0;
+    }
   }
 
   void _onTap(CampusPlace place) {
@@ -85,6 +162,30 @@ class _DestinationScreenState extends State<DestinationScreen> {
               selected: _selected,
               onTap: _onTap,
             )),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Semantics(
+                button: true,
+                label: 'Escuchar opciones de nuevo',
+                hint: 'Lee el siguiente grupo de opciones de ruta',
+                child: SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: () async {
+                      HapticFeedback.selectionClick();
+                      await _announceNextGroup();
+                    },
+                    icon: const Icon(Icons.record_voice_over_rounded),
+                    label: const Text('Escuchar opciones de nuevo'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      side: const BorderSide(color: Color(0xFF82B1FF)),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             _ConfirmButton(
               selected: _selected,
               onConfirm: _confirm,
@@ -144,14 +245,19 @@ class _PlaceList extends StatelessWidget {
             }
 
             return Semantics(
+              container: true,
+              explicitChildNodes: true,
+              excludeSemantics: true,
               button: true,
               selected: isSelected,
+              enabled: true,
               label: isSelected
-                  ? '${place.name}${distText.isNotEmpty ? ", $distText" : ""}. Seleccionado'
-                  : '${place.name}${distText.isNotEmpty ? ", $distText" : ""}',
+                ? 'Opción ${i + 1} de ${places.length}: ${place.name}${distText.isNotEmpty ? ", $distText" : ""}. Seleccionado'
+                : 'Opción ${i + 1} de ${places.length}: ${place.name}${distText.isNotEmpty ? ", $distText" : ""}',
               hint: isSelected
                   ? 'Ya seleccionado. Toca Confirmar para continuar'
                   : 'Toca dos veces para seleccionar',
+              onTap: () => onTap(place),
               child: Container(
                 margin: const EdgeInsets.only(bottom: 8),
                 decoration: BoxDecoration(

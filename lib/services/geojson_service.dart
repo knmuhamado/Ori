@@ -189,4 +189,27 @@ class GeoJsonService extends ChangeNotifier {
       ..sort((a, b) => a.distanceFrom(lat, lng).compareTo(b.distanceFrom(lat, lng)));
     return sorted.take(limit).toList();
   }
+
+  String? getNearestBlockReference(
+    double lat,
+    double lng, {
+    double maxDistanceMeters = 45,
+  }) {
+    if (_all.isEmpty) return null;
+
+    CampusPlace? nearest;
+    double bestDistance = double.infinity;
+
+    for (final place in _all) {
+      if (place.category != PlaceCategory.bloque) continue;
+      final d = place.distanceFrom(lat, lng);
+      if (d < bestDistance) {
+        bestDistance = d;
+        nearest = place;
+      }
+    }
+
+    if (nearest == null || bestDistance > maxDistanceMeters) return null;
+    return nearest.name;
+  }
 }
