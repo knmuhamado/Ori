@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'services/location_service.dart';
 import 'services/geojson_service.dart';
+import 'services/routing_service.dart';
+import 'services/voice_guidance_service.dart';
 
 void main() {
   runApp(const CampusGuiaApp());
@@ -18,6 +20,8 @@ class CampusGuiaApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => LocationService()),
         ChangeNotifierProvider(create: (_) => GeoJsonService()),
+        ChangeNotifierProvider(create: (_) => RoutingService()),
+        ChangeNotifierProvider(create: (_) => VoiceGuidanceService()),
       ],
       child: MaterialApp(
         title: 'CampusGuía EAFIT',

@@ -6,8 +6,11 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import '../services/location_service.dart';
 import '../services/geojson_service.dart';
+import '../services/routing_service.dart';
+import '../services/voice_guidance_service.dart';
 import '../models/campus_place.dart';
 import 'destination_screen.dart';
+import 'navigation_map_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -16,16 +19,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static const _cats = [
-    PlaceCategory.cafeteria,
-    PlaceCategory.bloque,
-    PlaceCategory.bano,
-    PlaceCategory.porteria,
-    PlaceCategory.parqueadero,
-    PlaceCategory.jardin,
-    PlaceCategory.deporte,
-  ];
-
   Future<void> _announce(String message) {
     return SemanticsService.sendAnnouncement(
       View.of(context),
@@ -40,16 +33,17 @@ class _MainScreenState extends State<MainScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<LocationService>(context, listen: false).initialize();
       Provider.of<GeoJsonService>(context, listen: false).load();
+      Provider.of<RoutingService>(context, listen: false).load();
       _announce('Pantalla principal de CampusGuía. Siete categorías disponibles.');
     });
   }
 
-  void _openCategory(PlaceCategory cat) {
+  void _openCategory(CategoryMeta cat) {
     HapticFeedback.lightImpact();
-    _announce('Abriendo ${cat.displayName}');
+    _announce('Abriendo ${cat.label}');
     final geo = Provider.of<GeoJsonService>(context, listen: false);
     final loc = Provider.of<LocationService>(context, listen: false);
-    geo.filterByCategory(cat);
+    geo.filterByCategory(cat.id);
     Navigator.of(context).push(MaterialPageRoute(
       builder: (_) => MultiProvider(
         providers: [
@@ -57,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
           ChangeNotifierProvider.value(value: loc),
         ],
         child: DestinationScreen(
-          categoryName: cat.displayName,
+          categoryName: cat.label,
           onDestinationSelected: (place) {
             Navigator.of(context).pop();
             _onSelected(place);
@@ -67,14 +61,57 @@ class _MainScreenState extends State<MainScreen> {
     ));
   }
 
-  void _onSelected(CampusPlace place) {
+  Future<void> _onSelected(CampusPlace place) async {
     HapticFeedback.heavyImpact();
-    _announce('Destino: ${place.name}.');
+    final location = Provider.of<LocationService>(context, listen: false);
+    final routing = Provider.of<RoutingService>(context, listen: false);
+    final geo = Provider.of<GeoJsonService>(context, listen: false);
+
+    if (location.currentLocation == null) {
+      _announce('No se pudo generar la ruta. Ubicación actual no disponible.');
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Activa el GPS para generar la ruta.'),
+          backgroundColor: Color(0xFFB00020),
+        ),
+      );
+      return;
+    }
+
+    final origin = location.currentLocation!;
+    final route = await routing.buildRoute(
+      originLat: origin.latitude,
+      originLng: origin.longitude,
+      destinationLat: place.latitude,
+      destinationLng: place.longitude,
+    );
+
+    final hasRoute = route != null;
+    _announce(hasRoute
+        ? 'Destino: ${place.name}. Ruta generada localmente.'
+        : 'Destino: ${place.name}. No se pudo generar una ruta conectada.');
+    if (!mounted) return;
+
+    if (hasRoute) {
+      final voice = Provider.of<VoiceGuidanceService>(context, listen: false);
+      await voice.startNavigation(
+        route: route,
+        locationService: location,
+        routingService: routing,
+        destinationName: place.name,
+        destinationLat: place.latitude,
+        destinationLng: place.longitude,
+        announceForTalkBack: _announce,
+        landmarkResolver: (lat, lng) => geo.getNearestBlockReference(lat, lng),
+      );
+    }
+
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: const Color(0xFF1A2A3A),
-        title: const Text('Destino seleccionado',
+        title: Text(hasRoute ? 'Ruta generada' : 'Ruta no disponible',
             style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -88,6 +125,32 @@ class _MainScreenState extends State<MainScreen> {
             const SizedBox(height: 8),
             Text(place.description.split('\n').first,
                 style: const TextStyle(color: Colors.white70)),
+            const SizedBox(height: 14),
+            if (hasRoute) ...[
+              Text(
+                'Distancia: ${route.totalDistanceMeters.round()} m',
+                style: const TextStyle(color: Color(0xFF82B1FF)),
+              ),
+              Text(
+                'Tiempo estimado: ${route.estimatedWalkTime.inMinutes} min',
+                style: const TextStyle(color: Color(0xFF82B1FF)),
+              ),
+              Text(
+                'Nodos de ruta: ${route.nodePath.length}',
+                style: const TextStyle(color: Color(0xFF82B1FF)),
+              ),
+              Text(
+                'Cálculo: ${route.computationTimeMs} ms',
+                style: const TextStyle(color: Color(0xFF82B1FF)),
+              ),
+            ] else ...[
+              Text(
+                routing.lastError.isEmpty
+                    ? 'No hay conexión peatonal entre origen y destino.'
+                    : routing.lastError,
+                style: const TextStyle(color: Color(0xFFFF8A80)),
+              ),
+            ],
           ],
         ),
         actions: [
@@ -122,6 +185,8 @@ class _MainScreenState extends State<MainScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const _VoiceGuidanceCard(),
+
                       //  Sección Cerca de ti
                       const _NearbySection(),
 
@@ -160,44 +225,23 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ),
 
-                      // Grid 3 filas
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
-                          children: [
-                            // Fila 1: Cafeterías, Bloques, Baños
-                            Row(
-                              children: <Widget>[
-                                _CatBtn(cat: _cats[0], onTap: _openCategory, order: 1),
-                                const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[1], onTap: _openCategory, order: 2),
-                                const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[2], onTap: _openCategory, order: 3),
+                        child: Consumer<GeoJsonService>(
+                          builder: (_, geo, __) {
+                            final cats = geo.categories;
+                            return Wrap(
+                              spacing: 12,
+                              runSpacing: 12,
+                              children: [
+                                for (final cat in cats)
+                                  SizedBox(
+                                    width: (MediaQuery.of(context).size.width - 56) / 3,
+                                    child: _CatBtn(cat: cat, onTap: _openCategory),
+                                  ),
                               ],
-                            ),
-                            const SizedBox(height: 12),
-                            // Fila 2: Porterías, Parqueaderos, Jardines
-                            Row(
-                              children: <Widget>[
-                                _CatBtn(cat: _cats[3], onTap: _openCategory, order: 4),
-                                const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[4], onTap: _openCategory, order: 5),
-                                const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[5], onTap: _openCategory, order: 6),
-                              ],
-                            ),
-                            const SizedBox(height: 12),
-                            // Fila 3: Deportes centrado (mismo tamaño)
-                            Row(
-                              children: <Widget>[
-                                Expanded(child: SizedBox(height: 90)),
-                                const SizedBox(width: 12),
-                                _CatBtn(cat: _cats[6], onTap: _openCategory, order: 7),
-                                const SizedBox(width: 12),
-                                Expanded(child: SizedBox(height: 90)),
-                              ],
-                            ),
-                          ],
+                            );
+                          },
                         ),
                       ),
 
@@ -466,7 +510,7 @@ class _NearbySection extends StatelessWidget {
                             color: const Color(0xFF1565C0).withOpacity(0.2),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Icon(p.category.icon,
+                            child: Icon(geo.iconForPlace(p),
                               color: const Color(0xFF82B1FF), size: 18),
                         ),
                         const SizedBox(width: 12),
@@ -503,67 +547,140 @@ class _NearbySection extends StatelessWidget {
     );
   }
 }
-// Botón de categoría
-class _CatBtn extends StatelessWidget {
-  final PlaceCategory cat;
-  final void Function(PlaceCategory) onTap;
-  final int order;
-  const _CatBtn({required this.cat, required this.onTap, required this.order});
+
+class _VoiceGuidanceCard extends StatelessWidget {
+  const _VoiceGuidanceCard();
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: FocusTraversalOrder(
-        order: NumericFocusOrder(order.toDouble()),
-        child: Semantics(
-          sortKey: OrdinalSortKey(order.toDouble()),
-          button: true,
-          label: cat.displayName,
-          hint: 'Toca dos veces para ver ${cat.displayName}',
-          onTap: () => onTap(cat),
-          child: GestureDetector(
-            onTap: () => onTap(cat),
-            child: Container(
-              height: 90,
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.06),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Color(0x22000000),
-                      blurRadius: 6,
-                      offset: Offset(0, 3)),
+    return Consumer<VoiceGuidanceService>(
+      builder: (_, voice, __) {
+        if (!voice.isNavigating) return const SizedBox.shrink();
+
+        return Container(
+          margin: const EdgeInsets.fromLTRB(16, 20, 16, 0),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: const Color(0xFF2E7D32).withValues(alpha: 0.22),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: const Color(0xFF66BB6A), width: 1),
+          ),
+          child: Semantics(
+            label:
+                'Navegación por voz activa. ${voice.currentInstruction}. Pasos restantes ${voice.remainingSteps}.',
+            child: ExcludeSemantics(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: const [
+                      Icon(Icons.record_voice_over_rounded,
+                          color: Color(0xFFA5D6A7), size: 20),
+                      SizedBox(width: 8),
+                      Text(
+                        'Guía por voz activa',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    voice.currentInstruction,
+                    style: const TextStyle(color: Colors.white70, fontSize: 13),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Pasos restantes: ${voice.remainingSteps}',
+                    style: const TextStyle(color: Color(0xFFA5D6A7), fontSize: 12),
+                  ),
+                  const SizedBox(height: 10),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton.icon(
+                      onPressed: () {
+                        Provider.of<VoiceGuidanceService>(context, listen: false)
+                            .stopNavigation();
+                      },
+                      icon: const Icon(Icons.stop_circle_rounded,
+                          color: Color(0xFFFFCDD2), size: 18),
+                      label: const Text(
+                        'Detener voz',
+                        style: TextStyle(color: Color(0xFFFFCDD2)),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              child: ExcludeSemantics(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF1565C0).withValues(alpha: 0.22),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(cat.icon,
-                          color: const Color(0xFF82B1FF), size: 22),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// Botón de categoría
+class _CatBtn extends StatelessWidget {
+  final CategoryMeta cat;
+  final void Function(CategoryMeta) onTap;
+  const _CatBtn({required this.cat, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return FocusTraversalOrder(
+      order: NumericFocusOrder(cat.order.toDouble()),
+      child: Semantics(
+        sortKey: OrdinalSortKey(cat.order.toDouble()),
+        button: true,
+        label: cat.label,
+        hint: 'Toca dos veces para ver ${cat.label}',
+        onTap: () => onTap(cat),
+        child: GestureDetector(
+          onTap: () => onTap(cat),
+          child: Container(
+            height: 90,
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.06),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+              boxShadow: const [
+                BoxShadow(
+                    color: Color(0x22000000),
+                    blurRadius: 6,
+                    offset: Offset(0, 3)),
+              ],
+            ),
+            child: ExcludeSemantics(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1565C0).withValues(alpha: 0.22),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    const SizedBox(height: 7),
-                    Text(
-                      cat.displayName,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    child: Icon(cat.iconData,
+                        color: const Color(0xFF82B1FF), size: 22),
+                  ),
+                  const SizedBox(height: 7),
+                  Text(
+                    cat.label,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ],
-                ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
             ),
           ),

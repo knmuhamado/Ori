@@ -1,0 +1,6070 @@
+{
+  "nodes": {
+    "5408098320": {
+      "lat": 6.1987608,
+      "lon": -75.5787302,
+      "neighbors": [
+        {
+          "id": 13165784923,
+          "distance": 23.69,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216575,
+          "distance": 9.22,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784928,
+          "distance": 24.9,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9700343825": {
+      "lat": 6.197455,
+      "lon": -75.5785504,
+      "neighbors": [
+        {
+          "id": 4121140516,
+          "distance": 9.11,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140514,
+          "distance": 7.15,
+          "surface": "asphalt",
+          "name": ""
+        }
+      ]
+    },
+    "6425980985": {
+      "lat": 6.2010004,
+      "lon": -75.5778371,
+      "neighbors": [
+        {
+          "id": 4121140497,
+          "distance": 21.32,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980773,
+          "distance": 19.74,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980784,
+          "distance": 24.23,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980986": {
+      "lat": 6.2007688,
+      "lon": -75.5782603,
+      "neighbors": [
+        {
+          "id": 9869056574,
+          "distance": 37.59,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980771,
+          "distance": 17.21,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980989": {
+      "lat": 6.2006228,
+      "lon": -75.5776615,
+      "neighbors": [
+        {
+          "id": 4121140499,
+          "distance": 21.36,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980988": {
+      "lat": 6.2006282,
+      "lon": -75.57797,
+      "neighbors": [
+        {
+          "id": 9869056573,
+          "distance": 5.73,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980987,
+          "distance": 30.91,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980987": {
+      "lat": 6.2006268,
+      "lon": -75.5782496,
+      "neighbors": [
+        {
+          "id": 6425980988,
+          "distance": 30.91,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172280794,
+          "distance": 18.35,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980992": {
+      "lat": 6.2019319,
+      "lon": -75.5778003,
+      "neighbors": [
+        {
+          "id": 12264340406,
+          "distance": 4.84,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980990,
+          "distance": 115.7,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980990": {
+      "lat": 6.2019187,
+      "lon": -75.5767537,
+      "neighbors": [
+        {
+          "id": 6425980992,
+          "distance": 115.7,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12264340408,
+          "distance": 13.19,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4449251433": {
+      "lat": 6.1998685,
+      "lon": -75.5750321,
+      "neighbors": [
+        {
+          "id": 9378853033,
+          "distance": 6.92,
+          "surface": "asphalt",
+          "name": "Calle 6 Sur"
+        }
+      ]
+    },
+    "9378853033": {
+      "lat": 6.1998366,
+      "lon": -75.5749783,
+      "neighbors": [
+        {
+          "id": 4449251433,
+          "distance": 6.92,
+          "surface": "asphalt",
+          "name": "Calle 6 Sur"
+        }
+      ]
+    },
+    "11987927248": {
+      "lat": 6.1974954,
+      "lon": -75.5786674,
+      "neighbors": [
+        {
+          "id": 13165784904,
+          "distance": 5.0,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140510,
+          "distance": 9.92,
+          "surface": "asphalt",
+          "name": ""
+        }
+      ]
+    },
+    "5408082192": {
+      "lat": 6.1995411,
+      "lon": -75.577808,
+      "neighbors": [
+        {
+          "id": 5408064832,
+          "distance": 1.48,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991073,
+          "distance": 2.04,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408082191": {
+      "lat": 6.1995883,
+      "lon": -75.5793599,
+      "neighbors": [
+        {
+          "id": 9868991082,
+          "distance": 3.88,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991081,
+          "distance": 4.05,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408082197": {
+      "lat": 6.1975813,
+      "lon": -75.5794051,
+      "neighbors": [
+        {
+          "id": 4121140511,
+          "distance": 14.41,
+          "surface": "asphalt",
+          "name": ""
+        }
+      ]
+    },
+    "5408098621": {
+      "lat": 6.1987632,
+      "lon": -75.579012,
+      "neighbors": [
+        {
+          "id": 13165784922,
+          "distance": 23.84,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172077638,
+          "distance": 19.87,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784928,
+          "distance": 6.26,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098622": {
+      "lat": 6.1989755,
+      "lon": -75.5786975,
+      "neighbors": [
+        {
+          "id": 13172216575,
+          "distance": 15.39,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216579,
+          "distance": 5.24,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216577,
+          "distance": 2.01,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098623": {
+      "lat": 6.1989737,
+      "lon": -75.5790122,
+      "neighbors": [
+        {
+          "id": 13172077638,
+          "distance": 3.54,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098625,
+          "distance": 23.58,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216576,
+          "distance": 1.87,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098624": {
+      "lat": 6.1991841,
+      "lon": -75.5787077,
+      "neighbors": [
+        {
+          "id": 13172216579,
+          "distance": 17.98,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054620,
+          "distance": 11.3,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098625,
+          "distance": 33.68,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434886,
+          "distance": 4.17,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098625": {
+      "lat": 6.1991858,
+      "lon": -75.5790124,
+      "neighbors": [
+        {
+          "id": 5408098623,
+          "distance": 23.58,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098624,
+          "distance": 33.68,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140571,
+          "distance": 10.86,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098626": {
+      "lat": 6.1989413,
+      "lon": -75.5790644,
+      "neighbors": [
+        {
+          "id": 13172077638,
+          "distance": 5.73,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9737539907": {
+      "lat": 6.2018181,
+      "lon": -75.578951,
+      "neighbors": [
+        {
+          "id": 9691856265,
+          "distance": 3.33,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172290909,
+          "distance": 12.21,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098628": {
+      "lat": 6.200173,
+      "lon": -75.5778103,
+      "neighbors": [
+        {
+          "id": 5408098632,
+          "distance": 3.46,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098629,
+          "distance": 7.35,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098629": {
+      "lat": 6.2001637,
+      "lon": -75.5777445,
+      "neighbors": [
+        {
+          "id": 5408098628,
+          "distance": 7.35,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098634,
+          "distance": 3.62,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098631": {
+      "lat": 6.2001626,
+      "lon": -75.5779195,
+      "neighbors": [
+        {
+          "id": 13179434884,
+          "distance": 15.11,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098632,
+          "distance": 8.74,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098632": {
+      "lat": 6.2001755,
+      "lon": -75.5778415,
+      "neighbors": [
+        {
+          "id": 5408098628,
+          "distance": 3.46,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098631,
+          "distance": 8.74,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991619,
+          "distance": 14.4,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098634": {
+      "lat": 6.2001598,
+      "lon": -75.577712,
+      "neighbors": [
+        {
+          "id": 5408098629,
+          "distance": 3.62,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098635,
+          "distance": 11.42,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408098635": {
+      "lat": 6.2000573,
+      "lon": -75.5777185,
+      "neighbors": [
+        {
+          "id": 5408098634,
+          "distance": 11.42,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10537412032,
+          "distance": 5.38,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "7029819731": {
+      "lat": 6.2019365,
+      "lon": -75.5778721,
+      "neighbors": [
+        {
+          "id": 6425980778,
+          "distance": 12.03,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140494,
+          "distance": 9.85,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12264340407,
+          "distance": 7.95,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "7029819732": {
+      "lat": 6.2015268,
+      "lon": -75.5767415,
+      "neighbors": [
+        {
+          "id": 7029819733,
+          "distance": 12.01,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12264340417,
+          "distance": 12.3,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "7029819733": {
+      "lat": 6.2016218,
+      "lon": -75.5767931,
+      "neighbors": [
+        {
+          "id": 7029819732,
+          "distance": 12.01,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12264340418,
+          "distance": 17.12,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408074095": {
+      "lat": 6.197603,
+      "lon": -75.5795875,
+      "neighbors": [
+        {
+          "id": 5408054597,
+          "distance": 5.27,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054598,
+          "distance": 11.78,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408074096": {
+      "lat": 6.1981094,
+      "lon": -75.5795486,
+      "neighbors": [
+        {
+          "id": 5408054608,
+          "distance": 7.78,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054609,
+          "distance": 6.83,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "386271622": {
+      "lat": 6.2018494,
+      "lon": -75.5779258,
+      "neighbors": [
+        {
+          "id": 13172288635,
+          "distance": 63.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140494,
+          "distance": 5.83,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288632,
+          "distance": 7.53,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293417,
+          "distance": 42.35,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "386271623": {
+      "lat": 6.2018153,
+      "lon": -75.5790245,
+      "neighbors": [
+        {
+          "id": 386271624,
+          "distance": 7.82,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9691856265,
+          "distance": 4.8,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "386271624": {
+      "lat": 6.2017982,
+      "lon": -75.5790931,
+      "neighbors": [
+        {
+          "id": 386271623,
+          "distance": 7.82,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10716587792,
+          "distance": 40.44,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9691988371": {
+      "lat": 6.199541,
+      "lon": -75.5786808,
+      "neighbors": [
+        {
+          "id": 5408064829,
+          "distance": 2.63,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991075,
+          "distance": 2.17,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9691988372": {
+      "lat": 6.199651,
+      "lon": -75.5788018,
+      "neighbors": [
+        {
+          "id": 5408064828,
+          "distance": 10.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064833,
+          "distance": 2.62,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9691988373": {
+      "lat": 6.1995965,
+      "lon": -75.5790482,
+      "neighbors": [
+        {
+          "id": 5408064826,
+          "distance": 4.09,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064827,
+          "distance": 4.44,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9378605515": {
+      "lat": 6.2012755,
+      "lon": -75.5764049,
+      "neighbors": [
+        {
+          "id": 4121140534,
+          "distance": 15.23,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140535,
+          "distance": 9.1,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9378605516": {
+      "lat": 6.2013231,
+      "lon": -75.5765079,
+      "neighbors": [
+        {
+          "id": 4121140540,
+          "distance": 9.85,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140541,
+          "distance": 14.64,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172224471": {
+      "lat": 6.2002507,
+      "lon": -75.5789312,
+      "neighbors": [
+        {
+          "id": 13172224475,
+          "distance": 7.71,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172224472": {
+      "lat": 6.2002519,
+      "lon": -75.5788233,
+      "neighbors": [
+        {
+          "id": 13172224473,
+          "distance": 7.65,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172224474,
+          "distance": 74.17,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172224473": {
+      "lat": 6.2001831,
+      "lon": -75.5788233,
+      "neighbors": [
+        {
+          "id": 13172224472,
+          "distance": 7.65,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216584,
+          "distance": 9.89,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 13172224475,
+          "distance": 11.62,
+          "surface": "sett",
+          "name": ""
+        }
+      ]
+    },
+    "13172224474": {
+      "lat": 6.2009189,
+      "lon": -75.5788284,
+      "neighbors": [
+        {
+          "id": 13172224472,
+          "distance": 74.17,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9869056575,
+          "distance": 45.55,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12200079861,
+          "distance": 3.26,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172290903,
+          "distance": 20.25,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172224475": {
+      "lat": 6.2001814,
+      "lon": -75.5789284,
+      "neighbors": [
+        {
+          "id": 13172224471,
+          "distance": 7.71,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172224473,
+          "distance": 11.62,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 4121140570,
+          "distance": 6.25,
+          "surface": "sett",
+          "name": ""
+        }
+      ]
+    },
+    "13172224476": {
+      "lat": 6.2002321,
+      "lon": -75.579084,
+      "neighbors": [
+        {
+          "id": 4121140570,
+          "distance": 12.37,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172280792,
+          "distance": 4.53,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172224477": {
+      "lat": 6.2004952,
+      "lon": -75.5790769,
+      "neighbors": [
+        {
+          "id": 13172280793,
+          "distance": 1.87,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172224478,
+          "distance": 8.27,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172224478": {
+      "lat": 6.2004968,
+      "lon": -75.5791517,
+      "neighbors": [
+        {
+          "id": 13172224477,
+          "distance": 8.27,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172224479,
+          "distance": 9.83,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172224479": {
+      "lat": 6.2005841,
+      "lon": -75.5791377,
+      "neighbors": [
+        {
+          "id": 13172224478,
+          "distance": 9.83,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172224480,
+          "distance": 4.94,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172224480": {
+      "lat": 6.2005966,
+      "lon": -75.5790948,
+      "neighbors": [
+        {
+          "id": 13172224479,
+          "distance": 4.94,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172224481,
+          "distance": 3.96,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172224481": {
+      "lat": 6.2005948,
+      "lon": -75.579059,
+      "neighbors": [
+        {
+          "id": 13172224480,
+          "distance": 3.96,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172224482,
+          "distance": 35.97,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172224482": {
+      "lat": 6.2009183,
+      "lon": -75.579059,
+      "neighbors": [
+        {
+          "id": 13172224481,
+          "distance": 35.97,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12200079861,
+          "distance": 22.23,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "12200079861": {
+      "lat": 6.2009191,
+      "lon": -75.5788579,
+      "neighbors": [
+        {
+          "id": 13172224474,
+          "distance": 3.26,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172224482,
+          "distance": 22.23,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172261371": {
+      "lat": 6.1994756,
+      "lon": -75.5790102,
+      "neighbors": [
+        {
+          "id": 13172216583,
+          "distance": 3.84,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216582,
+          "distance": 2.18,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172261372,
+          "distance": 25.77,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172261372": {
+      "lat": 6.1994749,
+      "lon": -75.5792433,
+      "neighbors": [
+        {
+          "id": 13172261371,
+          "distance": 25.77,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250120,
+          "distance": 8.57,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172261373,
+          "distance": 3.94,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172261373": {
+      "lat": 6.1994395,
+      "lon": -75.5792443,
+      "neighbors": [
+        {
+          "id": 13172261372,
+          "distance": 3.94,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250119,
+          "distance": 14.71,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9869056573": {
+      "lat": 6.2006273,
+      "lon": -75.5779182,
+      "neighbors": [
+        {
+          "id": 6425980988,
+          "distance": 5.73,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140499,
+          "distance": 7.02,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9869056574,
+          "distance": 15.88,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9737570878": {
+      "lat": 6.2018094,
+      "lon": -75.5775288,
+      "neighbors": [
+        {
+          "id": 4121140494,
+          "distance": 38.3,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9691866147,
+          "distance": 1.08,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9869056575": {
+      "lat": 6.2009173,
+      "lon": -75.5784164,
+      "neighbors": [
+        {
+          "id": 13172224474,
+          "distance": 45.55,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140523,
+          "distance": 12.12,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 6425980771,
+          "distance": 16.51,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 13172293447,
+          "distance": 44.24,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9869056574": {
+      "lat": 6.2007701,
+      "lon": -75.5779203,
+      "neighbors": [
+        {
+          "id": 6425980986,
+          "distance": 37.59,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9869056573,
+          "distance": 15.88,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140498,
+          "distance": 7.85,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9869056576,
+          "distance": 17.19,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9869056576": {
+      "lat": 6.2009247,
+      "lon": -75.5779235,
+      "neighbors": [
+        {
+          "id": 9869056574,
+          "distance": 17.19,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172280399,
+          "distance": 43.57,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293447,
+          "distance": 10.25,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9869056577": {
+      "lat": 6.2027194,
+      "lon": -75.577915,
+      "neighbors": [
+        {
+          "id": 13172288632,
+          "distance": 89.22,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991062": {
+      "lat": 6.1982393,
+      "lon": -75.5795436,
+      "neighbors": [
+        {
+          "id": 5408054610,
+          "distance": 4.22,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054609,
+          "distance": 7.62,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991069": {
+      "lat": 6.1980874,
+      "lon": -75.5792495,
+      "neighbors": [
+        {
+          "id": 5408054604,
+          "distance": 8.11,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054605,
+          "distance": 26.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140512,
+          "distance": 6.37,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991071": {
+      "lat": 6.1995446,
+      "lon": -75.5779679,
+      "neighbors": [
+        {
+          "id": 5408064831,
+          "distance": 29.0,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991074,
+          "distance": 14.92,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991072,
+          "distance": 21.18,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991070,
+          "distance": 31.15,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991072": {
+      "lat": 6.199735,
+      "lon": -75.5779747,
+      "neighbors": [
+        {
+          "id": 9868991071,
+          "distance": 21.18,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991070": {
+      "lat": 6.199268,
+      "lon": -75.5780127,
+      "neighbors": [
+        {
+          "id": 9868991071,
+          "distance": 31.15,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991074": {
+      "lat": 6.1995455,
+      "lon": -75.5778329,
+      "neighbors": [
+        {
+          "id": 9868991071,
+          "distance": 14.92,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064832,
+          "distance": 1.31,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991075": {
+      "lat": 6.1995364,
+      "lon": -75.5786617,
+      "neighbors": [
+        {
+          "id": 9691988371,
+          "distance": 2.17,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064830,
+          "distance": 42.75,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991076": {
+      "lat": 6.1995662,
+      "lon": -75.5787119,
+      "neighbors": [
+        {
+          "id": 13172216585,
+          "distance": 1.55,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064829,
+          "distance": 1.86,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991077": {
+      "lat": 6.1996168,
+      "lon": -75.5787452,
+      "neighbors": [
+        {
+          "id": 9868991078,
+          "distance": 2.55,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216585,
+          "distance": 5.17,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991078": {
+      "lat": 6.1996341,
+      "lon": -75.5787603,
+      "neighbors": [
+        {
+          "id": 9868991077,
+          "distance": 2.55,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064833,
+          "distance": 2.4,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991079": {
+      "lat": 6.1996474,
+      "lon": -75.5789255,
+      "neighbors": [
+        {
+          "id": 9868991080,
+          "distance": 3.5,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064828,
+          "distance": 3.37,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991080": {
+      "lat": 6.1996369,
+      "lon": -75.5789554,
+      "neighbors": [
+        {
+          "id": 9868991079,
+          "distance": 3.5,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408056121,
+          "distance": 3.85,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991081": {
+      "lat": 6.1995877,
+      "lon": -75.5793233,
+      "neighbors": [
+        {
+          "id": 5408082191,
+          "distance": 4.05,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064826,
+          "distance": 26.37,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991073": {
+      "lat": 6.1995378,
+      "lon": -75.5777898,
+      "neighbors": [
+        {
+          "id": 5408082192,
+          "distance": 2.04,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10537412033,
+          "distance": 3.08,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991082": {
+      "lat": 6.1995884,
+      "lon": -75.579395,
+      "neighbors": [
+        {
+          "id": 5408082191,
+          "distance": 3.88,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172216575": {
+      "lat": 6.1988371,
+      "lon": -75.5786975,
+      "neighbors": [
+        {
+          "id": 5408098320,
+          "distance": 9.22,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098622,
+          "distance": 15.39,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172216576": {
+      "lat": 6.1989724,
+      "lon": -75.5789953,
+      "neighbors": [
+        {
+          "id": 5408098623,
+          "distance": 1.87,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216577,
+          "distance": 30.92,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172216577": {
+      "lat": 6.1989742,
+      "lon": -75.5787156,
+      "neighbors": [
+        {
+          "id": 5408098622,
+          "distance": 2.01,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216576,
+          "distance": 30.92,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172216578": {
+      "lat": 6.1991921,
+      "lon": -75.5782264,
+      "neighbors": [
+        {
+          "id": 5408102237,
+          "distance": 14.45,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102238,
+          "distance": 9.59,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434888,
+          "distance": 8.42,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172216579": {
+      "lat": 6.1990226,
+      "lon": -75.5786998,
+      "neighbors": [
+        {
+          "id": 5408098622,
+          "distance": 5.24,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098624,
+          "distance": 17.98,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434887,
+          "distance": 3.86,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172216580": {
+      "lat": 6.1990286,
+      "lon": -75.5782275,
+      "neighbors": [
+        {
+          "id": 5408102238,
+          "distance": 8.61,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102239,
+          "distance": 21.27,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434889,
+          "distance": 7.57,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172216582": {
+      "lat": 6.199456,
+      "lon": -75.5790104,
+      "neighbors": [
+        {
+          "id": 13172261371,
+          "distance": 2.18,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 3276242874,
+          "distance": 15.36,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172216583": {
+      "lat": 6.1995101,
+      "lon": -75.5790098,
+      "neighbors": [
+        {
+          "id": 13172261371,
+          "distance": 3.84,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250122,
+          "distance": 1.64,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250113,
+          "distance": 11.0,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172216584": {
+      "lat": 6.2001846,
+      "lon": -75.5787338,
+      "neighbors": [
+        {
+          "id": 13172224473,
+          "distance": 9.89,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 4121140569,
+          "distance": 16.93,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 13172216585,
+          "distance": 67.48,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172216585": {
+      "lat": 6.1995779,
+      "lon": -75.5787196,
+      "neighbors": [
+        {
+          "id": 9868991076,
+          "distance": 1.55,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991077,
+          "distance": 5.17,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216584,
+          "distance": 67.48,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250112,
+          "distance": 7.53,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408056121": {
+      "lat": 6.1996198,
+      "lon": -75.5789857,
+      "neighbors": [
+        {
+          "id": 9868991080,
+          "distance": 3.85,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172217358,
+          "distance": 15.5,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408056122,
+          "distance": 7.29,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064827,
+          "distance": 2.96,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408056122": {
+      "lat": 6.1995585,
+      "lon": -75.5790092,
+      "neighbors": [
+        {
+          "id": 5408056121,
+          "distance": 7.29,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250122,
+          "distance": 3.75,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "12264340404": {
+      "lat": 6.2019225,
+      "lon": -75.5776479,
+      "neighbors": [
+        {
+          "id": 12264340405,
+          "distance": 5.21,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12264340407,
+          "distance": 16.88,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "12264340405": {
+      "lat": 6.2019694,
+      "lon": -75.5776481,
+      "neighbors": [
+        {
+          "id": 12264340404,
+          "distance": 5.21,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12264340406,
+          "distance": 16.96,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "12264340406": {
+      "lat": 6.2019754,
+      "lon": -75.5778014,
+      "neighbors": [
+        {
+          "id": 6425980992,
+          "distance": 4.84,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12264340405,
+          "distance": 16.96,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "12264340407": {
+      "lat": 6.2019319,
+      "lon": -75.5778003,
+      "neighbors": [
+        {
+          "id": 7029819731,
+          "distance": 7.95,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12264340404,
+          "distance": 16.88,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "12264340408": {
+      "lat": 6.201834,
+      "lon": -75.5768372,
+      "neighbors": [
+        {
+          "id": 6425980990,
+          "distance": 13.19,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6458072675,
+          "distance": 9.46,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "12264340417": {
+      "lat": 6.2014892,
+      "lon": -75.5766369,
+      "neighbors": [
+        {
+          "id": 7029819732,
+          "distance": 12.3,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140539,
+          "distance": 2.39,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "12264340418": {
+      "lat": 6.2016878,
+      "lon": -75.576933,
+      "neighbors": [
+        {
+          "id": 7029819733,
+          "distance": 17.12,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6458072675,
+          "distance": 10.3,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9378798586": {
+      "lat": 6.2020294,
+      "lon": -75.5775569,
+      "neighbors": [
+        {
+          "id": 6425980778,
+          "distance": 34.75,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9691866147": {
+      "lat": 6.2018065,
+      "lon": -75.5775195,
+      "neighbors": [
+        {
+          "id": 9737570878,
+          "distance": 1.08,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140581,
+          "distance": 2.08,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172077638": {
+      "lat": 6.1989419,
+      "lon": -75.5790126,
+      "neighbors": [
+        {
+          "id": 5408098621,
+          "distance": 19.87,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098623,
+          "distance": 3.54,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098626,
+          "distance": 5.73,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172280399": {
+      "lat": 6.2013165,
+      "lon": -75.5779227,
+      "neighbors": [
+        {
+          "id": 9869056576,
+          "distance": 43.57,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293417,
+          "distance": 16.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293446,
+          "distance": 10.47,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172290901": {
+      "lat": 6.2013112,
+      "lon": -75.5784611,
+      "neighbors": [
+        {
+          "id": 13172293421,
+          "distance": 15.86,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293419,
+          "distance": 14.72,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172290902,
+          "distance": 5.43,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408103830,
+          "distance": 2.32,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172290902": {
+      "lat": 6.2012624,
+      "lon": -75.5784599,
+      "neighbors": [
+        {
+          "id": 13172290901,
+          "distance": 5.43,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172290903": {
+      "lat": 6.201101,
+      "lon": -75.5788315,
+      "neighbors": [
+        {
+          "id": 13172224474,
+          "distance": 20.25,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172290905,
+          "distance": 20.79,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172290908,
+          "distance": 7.34,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784929": {
+      "lat": 6.1985511,
+      "lon": -75.5789522,
+      "neighbors": [
+        {
+          "id": 13165784923,
+          "distance": 23.69,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784922,
+          "distance": 6.59,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784930": {
+      "lat": 6.1983502,
+      "lon": -75.578953,
+      "neighbors": [
+        {
+          "id": 13165784924,
+          "distance": 23.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784925,
+          "distance": 6.48,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784931": {
+      "lat": 6.1985439,
+      "lon": -75.5790852,
+      "neighbors": [
+        {
+          "id": 13165784932,
+          "distance": 38.51,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784922,
+          "distance": 8.13,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784932": {
+      "lat": 6.1985457,
+      "lon": -75.5794336,
+      "neighbors": [
+        {
+          "id": 13165784931,
+          "distance": 38.51,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784921,
+          "distance": 3.2,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784933": {
+      "lat": 6.198401,
+      "lon": -75.5794623,
+      "neighbors": [
+        {
+          "id": 13165784919,
+          "distance": 33.02,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784920,
+          "distance": 7.56,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784934,
+          "distance": 1.87,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172290907": {
+      "lat": 6.2012879,
+      "lon": -75.5788704,
+      "neighbors": [
+        {
+          "id": 13172290905,
+          "distance": 3.95,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172290906,
+          "distance": 16.28,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172290908": {
+      "lat": 6.201101,
+      "lon": -75.5788979,
+      "neighbors": [
+        {
+          "id": 13172290903,
+          "distance": 7.34,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172290904,
+          "distance": 19.04,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288632": {
+      "lat": 6.2019171,
+      "lon": -75.577925,
+      "neighbors": [
+        {
+          "id": 386271622,
+          "distance": 7.53,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9869056577,
+          "distance": 89.22,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288633,
+          "distance": 21.57,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288627": {
+      "lat": 6.2015473,
+      "lon": -75.5788377,
+      "neighbors": [
+        {
+          "id": 13172293416,
+          "distance": 10.82,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293440,
+          "distance": 24.86,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288628,
+          "distance": 5.71,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784934": {
+      "lat": 6.1984021,
+      "lon": -75.5794792,
+      "neighbors": [
+        {
+          "id": 13165784933,
+          "distance": 1.87,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288635": {
+      "lat": 6.2018261,
+      "lon": -75.5785034,
+      "neighbors": [
+        {
+          "id": 386271622,
+          "distance": 63.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140582,
+          "distance": 12.16,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288631,
+          "distance": 5.39,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288634,
+          "distance": 6.79,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288636": {
+      "lat": 6.2018198,
+      "lon": -75.5787934,
+      "neighbors": [
+        {
+          "id": 13172290909,
+          "distance": 5.22,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140582,
+          "distance": 19.91,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288637,
+          "distance": 8.37,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288630": {
+      "lat": 6.2017786,
+      "lon": -75.5783476,
+      "neighbors": [
+        {
+          "id": 13172293439,
+          "distance": 28.98,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288631,
+          "distance": 17.12,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288631": {
+      "lat": 6.2017776,
+      "lon": -75.5785025,
+      "neighbors": [
+        {
+          "id": 13172288635,
+          "distance": 5.39,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288630,
+          "distance": 17.12,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288629,
+          "distance": 11.02,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288633": {
+      "lat": 6.201915,
+      "lon": -75.5781201,
+      "neighbors": [
+        {
+          "id": 13172288632,
+          "distance": 21.57,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288634": {
+      "lat": 6.2018872,
+      "lon": -75.5785046,
+      "neighbors": [
+        {
+          "id": 13172288635,
+          "distance": 6.79,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288637": {
+      "lat": 6.201895,
+      "lon": -75.5787965,
+      "neighbors": [
+        {
+          "id": 13172288636,
+          "distance": 8.37,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991619": {
+      "lat": 6.2003046,
+      "lon": -75.5778522,
+      "neighbors": [
+        {
+          "id": 5408098632,
+          "distance": 14.4,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991620,
+          "distance": 9.7,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991620": {
+      "lat": 6.2003914,
+      "lon": -75.5778607,
+      "neighbors": [
+        {
+          "id": 9868991619,
+          "distance": 9.7,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991621,
+          "distance": 10.82,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9868991621": {
+      "lat": 6.2004887,
+      "lon": -75.5778639,
+      "neighbors": [
+        {
+          "id": 9868991620,
+          "distance": 10.82,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140499,
+          "distance": 15.32,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "10716587794": {
+      "lat": 6.1985556,
+      "lon": -75.5796933,
+      "neighbors": [
+        {
+          "id": 10716587795,
+          "distance": 98.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250121,
+          "distance": 111.18,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140489": {
+      "lat": 6.2028532,
+      "lon": -75.5778617,
+      "neighbors": [
+        {
+          "id": 4121140490,
+          "distance": 14.95,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140490": {
+      "lat": 6.2027188,
+      "lon": -75.5778633,
+      "neighbors": [
+        {
+          "id": 4121140489,
+          "distance": 14.95,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140491,
+          "distance": 16.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980774,
+          "distance": 36.24,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140491": {
+      "lat": 6.2025668,
+      "lon": -75.577865,
+      "neighbors": [
+        {
+          "id": 4121140490,
+          "distance": 16.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140492,
+          "distance": 18.84,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980775,
+          "distance": 39.78,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140492": {
+      "lat": 6.2023974,
+      "lon": -75.5778669,
+      "neighbors": [
+        {
+          "id": 4121140491,
+          "distance": 18.84,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140493,
+          "distance": 19.72,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980776,
+          "distance": 37.63,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140493": {
+      "lat": 6.2022201,
+      "lon": -75.5778689,
+      "neighbors": [
+        {
+          "id": 4121140492,
+          "distance": 19.72,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980778,
+          "distance": 19.5,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980777,
+          "distance": 35.17,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140494": {
+      "lat": 6.2018479,
+      "lon": -75.5778731,
+      "neighbors": [
+        {
+          "id": 7029819731,
+          "distance": 9.85,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 386271622,
+          "distance": 5.83,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9737570878,
+          "distance": 38.3,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980780,
+          "distance": 16.43,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140495": {
+      "lat": 6.2015292,
+      "lon": -75.5778623,
+      "neighbors": [
+        {
+          "id": 6425980780,
+          "distance": 19.04,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140496,
+          "distance": 19.47,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980781,
+          "distance": 32.38,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140496": {
+      "lat": 6.2013559,
+      "lon": -75.5778374,
+      "neighbors": [
+        {
+          "id": 4121140495,
+          "distance": 19.47,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140497,
+          "distance": 18.25,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980782,
+          "distance": 28.21,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140497": {
+      "lat": 6.201192,
+      "lon": -75.5778287,
+      "neighbors": [
+        {
+          "id": 6425980985,
+          "distance": 21.32,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140496,
+          "distance": 18.25,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980783,
+          "distance": 26.23,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140498": {
+      "lat": 6.2007704,
+      "lon": -75.5778493,
+      "neighbors": [
+        {
+          "id": 9869056574,
+          "distance": 7.85,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980773,
+          "distance": 5.87,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140499,
+          "distance": 16.05,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140499": {
+      "lat": 6.2006262,
+      "lon": -75.5778547,
+      "neighbors": [
+        {
+          "id": 6425980989,
+          "distance": 21.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9869056573,
+          "distance": 7.02,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991621,
+          "distance": 15.32,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140498,
+          "distance": 16.05,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140510": {
+      "lat": 6.1975058,
+      "lon": -75.5787565,
+      "neighbors": [
+        {
+          "id": 11987927248,
+          "distance": 9.92,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140517,
+          "distance": 12.96,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140513,
+          "distance": 41.67,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140511": {
+      "lat": 6.1975662,
+      "lon": -75.5792756,
+      "neighbors": [
+        {
+          "id": 5408082197,
+          "distance": 14.41,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140519,
+          "distance": 14.77,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140512,
+          "distance": 51.66,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140512": {
+      "lat": 6.1980302,
+      "lon": -75.5792517,
+      "neighbors": [
+        {
+          "id": 9868991069,
+          "distance": 6.37,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140511,
+          "distance": 51.66,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140513": {
+      "lat": 6.1978561,
+      "lon": -75.5786226,
+      "neighbors": [
+        {
+          "id": 4121140510,
+          "distance": 41.67,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140514": {
+      "lat": 6.197476,
+      "lon": -75.5786115,
+      "neighbors": [
+        {
+          "id": 9700343825,
+          "distance": 7.15,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 13165784904,
+          "distance": 1.55,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140515,
+          "distance": 41.52,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140516": {
+      "lat": 6.1974278,
+      "lon": -75.5784727,
+      "neighbors": [
+        {
+          "id": 9700343825,
+          "distance": 9.11,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 10537412036,
+          "distance": 4.05,
+          "surface": "asphalt",
+          "name": ""
+        }
+      ]
+    },
+    "4121140517": {
+      "lat": 6.197524,
+      "lon": -75.5788723,
+      "neighbors": [
+        {
+          "id": 4121140510,
+          "distance": 12.96,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140521,
+          "distance": 17.66,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 5408054615,
+          "distance": 42.53,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140521": {
+      "lat": 6.1975378,
+      "lon": -75.5790314,
+      "neighbors": [
+        {
+          "id": 4121140517,
+          "distance": 17.66,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140519,
+          "distance": 12.41,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140522,
+          "distance": 20.59,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140519": {
+      "lat": 6.1975508,
+      "lon": -75.5791429,
+      "neighbors": [
+        {
+          "id": 4121140511,
+          "distance": 14.77,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140521,
+          "distance": 12.41,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140520,
+          "distance": 46.3,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140520": {
+      "lat": 6.1979669,
+      "lon": -75.5791265,
+      "neighbors": [
+        {
+          "id": 4121140519,
+          "distance": 46.3,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140522": {
+      "lat": 6.1977127,
+      "lon": -75.5789702,
+      "neighbors": [
+        {
+          "id": 4121140521,
+          "distance": 20.59,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140523": {
+      "lat": 6.2010263,
+      "lon": -75.5784181,
+      "neighbors": [
+        {
+          "id": 9869056575,
+          "distance": 12.12,
+          "surface": "sett",
+          "name": ""
+        }
+      ]
+    },
+    "4121140524": {
+      "lat": 6.2001895,
+      "lon": -75.5784143,
+      "neighbors": [
+        {
+          "id": 13179434883,
+          "distance": 6.46,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 4121140569,
+          "distance": 18.4,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 5408102234,
+          "distance": 8.4,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140534": {
+      "lat": 6.2011545,
+      "lon": -75.5764695,
+      "neighbors": [
+        {
+          "id": 9378605515,
+          "distance": 15.23,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140535": {
+      "lat": 6.2013478,
+      "lon": -75.5763663,
+      "neighbors": [
+        {
+          "id": 9378605515,
+          "distance": 9.1,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140540,
+          "distance": 12.08,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140547,
+          "distance": 4.83,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140536": {
+      "lat": 6.201251,
+      "lon": -75.5761895,
+      "neighbors": [
+        {
+          "id": 4121140547,
+          "distance": 17.49,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140550,
+          "distance": 26.29,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140537,
+          "distance": 75.8,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140537": {
+      "lat": 6.201867,
+      "lon": -75.5758959,
+      "neighbors": [
+        {
+          "id": 4121140536,
+          "distance": 75.8,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140548,
+          "distance": 16.47,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140551,
+          "distance": 24.16,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140538": {
+      "lat": 6.2021461,
+      "lon": -75.5762634,
+      "neighbors": [
+        {
+          "id": 4121140549,
+          "distance": 17.88,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140539,
+          "distance": 83.54,
+          "surface": "asphalt",
+          "name": ""
+        }
+      ]
+    },
+    "4121140539": {
+      "lat": 6.2014819,
+      "lon": -75.5766166,
+      "neighbors": [
+        {
+          "id": 12264340417,
+          "distance": 2.39,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140538,
+          "distance": 83.54,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140540,
+          "distance": 19.35,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140540": {
+      "lat": 6.2013993,
+      "lon": -75.5764625,
+      "neighbors": [
+        {
+          "id": 9378605516,
+          "distance": 9.85,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140535,
+          "distance": 12.08,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140539,
+          "distance": 19.35,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140549,
+          "distance": 80.76,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140541": {
+      "lat": 6.2012076,
+      "lon": -75.5765714,
+      "neighbors": [
+        {
+          "id": 9378605516,
+          "distance": 14.64,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408064826": {
+      "lat": 6.1995913,
+      "lon": -75.5790848,
+      "neighbors": [
+        {
+          "id": 9691988373,
+          "distance": 4.09,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991081,
+          "distance": 26.37,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408064827": {
+      "lat": 6.1996085,
+      "lon": -75.5790099,
+      "neighbors": [
+        {
+          "id": 9691988373,
+          "distance": 4.44,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408056121,
+          "distance": 2.96,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408064828": {
+      "lat": 6.1996528,
+      "lon": -75.5788955,
+      "neighbors": [
+        {
+          "id": 9691988372,
+          "distance": 10.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991079,
+          "distance": 3.37,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408064833": {
+      "lat": 6.1996454,
+      "lon": -75.5787788,
+      "neighbors": [
+        {
+          "id": 9691988372,
+          "distance": 2.62,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991078,
+          "distance": 2.4,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140547": {
+      "lat": 6.2013268,
+      "lon": -75.5763281,
+      "neighbors": [
+        {
+          "id": 4121140535,
+          "distance": 4.83,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140536,
+          "distance": 17.49,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140548,
+          "distance": 78.18,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140548": {
+      "lat": 6.2019569,
+      "lon": -75.5760143,
+      "neighbors": [
+        {
+          "id": 4121140537,
+          "distance": 16.47,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140547,
+          "distance": 78.18,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140549,
+          "distance": 16.78,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054597": {
+      "lat": 6.1976022,
+      "lon": -75.5796352,
+      "neighbors": [
+        {
+          "id": 5408074095,
+          "distance": 5.27,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054607,
+          "distance": 7.97,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054598": {
+      "lat": 6.1975837,
+      "lon": -75.5794827,
+      "neighbors": [
+        {
+          "id": 5408074095,
+          "distance": 11.78,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054599,
+          "distance": 8.41,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140549": {
+      "lat": 6.2020485,
+      "lon": -75.5761349,
+      "neighbors": [
+        {
+          "id": 4121140538,
+          "distance": 17.88,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140540,
+          "distance": 80.76,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140548,
+          "distance": 16.78,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140550": {
+      "lat": 6.2011411,
+      "lon": -75.5759789,
+      "neighbors": [
+        {
+          "id": 4121140536,
+          "distance": 26.29,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140551,
+          "distance": 71.89,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140551": {
+      "lat": 6.2017351,
+      "lon": -75.5757222,
+      "neighbors": [
+        {
+          "id": 4121140537,
+          "distance": 24.16,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140550,
+          "distance": 71.89,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054595": {
+      "lat": 6.1976042,
+      "lon": -75.5799746,
+      "neighbors": [
+        {
+          "id": 10716587797,
+          "distance": 4.16,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054596,
+          "distance": 28.65,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054603": {
+      "lat": 6.1978631,
+      "lon": -75.57933,
+      "neighbors": [
+        {
+          "id": 5408054602,
+          "distance": 4.26,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054604,
+          "distance": 25.36,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054604": {
+      "lat": 6.1980911,
+      "lon": -75.5793228,
+      "neighbors": [
+        {
+          "id": 9868991069,
+          "distance": 8.11,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054603,
+          "distance": 25.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784919,
+          "distance": 15.42,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054596": {
+      "lat": 6.1975397,
+      "lon": -75.5797237,
+      "neighbors": [
+        {
+          "id": 5408054595,
+          "distance": 28.65,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054607,
+          "distance": 4.04,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054607": {
+      "lat": 6.197562,
+      "lon": -75.5796949,
+      "neighbors": [
+        {
+          "id": 5408054597,
+          "distance": 7.97,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054596,
+          "distance": 4.04,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10716587796,
+          "distance": 34.76,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054599": {
+      "lat": 6.1975982,
+      "lon": -75.579408,
+      "neighbors": [
+        {
+          "id": 5408054598,
+          "distance": 8.41,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054600,
+          "distance": 17.91,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054600": {
+      "lat": 6.1977593,
+      "lon": -75.5794056,
+      "neighbors": [
+        {
+          "id": 5408054599,
+          "distance": 17.91,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054601,
+          "distance": 3.71,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054605": {
+      "lat": 6.1980752,
+      "lon": -75.5790114,
+      "neighbors": [
+        {
+          "id": 9868991069,
+          "distance": 26.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054618,
+          "distance": 14.24,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054613,
+          "distance": 4.84,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054610": {
+      "lat": 6.1982768,
+      "lon": -75.5795378,
+      "neighbors": [
+        {
+          "id": 9868991062,
+          "distance": 4.22,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054611,
+          "distance": 4.59,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054601": {
+      "lat": 6.1977593,
+      "lon": -75.579372,
+      "neighbors": [
+        {
+          "id": 5408054600,
+          "distance": 3.71,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054602,
+          "distance": 11.16,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140569": {
+      "lat": 6.2001871,
+      "lon": -75.5785807,
+      "neighbors": [
+        {
+          "id": 13172216584,
+          "distance": 16.93,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 4121140524,
+          "distance": 18.4,
+          "surface": "sett",
+          "name": ""
+        }
+      ]
+    },
+    "4121140570": {
+      "lat": 6.2001805,
+      "lon": -75.5789849,
+      "neighbors": [
+        {
+          "id": 13172224475,
+          "distance": 6.25,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 13172224476,
+          "distance": 12.37,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172217363,
+          "distance": 32.22,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140571": {
+      "lat": 6.1992835,
+      "lon": -75.5790125,
+      "neighbors": [
+        {
+          "id": 5408098625,
+          "distance": 10.86,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 3276242874,
+          "distance": 3.83,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 3276242875,
+          "distance": 1.67,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054618": {
+      "lat": 6.1982033,
+      "lon": -75.5790115,
+      "neighbors": [
+        {
+          "id": 5408054605,
+          "distance": 14.24,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784925,
+          "distance": 16.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054619,
+          "distance": 30.54,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172290909": {
+      "lat": 6.2018193,
+      "lon": -75.5788406,
+      "neighbors": [
+        {
+          "id": 9737539907,
+          "distance": 12.21,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288636,
+          "distance": 5.22,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293440,
+          "distance": 5.38,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054602": {
+      "lat": 6.1978596,
+      "lon": -75.5793684,
+      "neighbors": [
+        {
+          "id": 5408054603,
+          "distance": 4.26,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054601,
+          "distance": 11.16,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140577": {
+      "lat": 6.2018013,
+      "lon": -75.5774808,
+      "neighbors": [
+        {
+          "id": 10537412021,
+          "distance": 1.26,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140581": {
+      "lat": 6.2018049,
+      "lon": -75.5775008,
+      "neighbors": [
+        {
+          "id": 9691866147,
+          "distance": 2.08,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10537412021,
+          "distance": 0.99,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140582": {
+      "lat": 6.2018217,
+      "lon": -75.5786133,
+      "neighbors": [
+        {
+          "id": 13172288635,
+          "distance": 12.16,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288636,
+          "distance": 19.91,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140583,
+          "distance": 30.79,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140583": {
+      "lat": 6.2020986,
+      "lon": -75.5786096,
+      "neighbors": [
+        {
+          "id": 4121140582,
+          "distance": 30.79,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054608": {
+      "lat": 6.1981055,
+      "lon": -75.5794783,
+      "neighbors": [
+        {
+          "id": 5408074096,
+          "distance": 7.78,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784919,
+          "distance": 1.84,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054609": {
+      "lat": 6.1981708,
+      "lon": -75.5795463,
+      "neighbors": [
+        {
+          "id": 5408074096,
+          "distance": 6.83,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991062,
+          "distance": 7.62,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "9691856265": {
+      "lat": 6.2018167,
+      "lon": -75.5789811,
+      "neighbors": [
+        {
+          "id": 9737539907,
+          "distance": 3.33,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 386271623,
+          "distance": 4.8,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054611": {
+      "lat": 6.1982869,
+      "lon": -75.5795781,
+      "neighbors": [
+        {
+          "id": 5408054610,
+          "distance": 4.59,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054612,
+          "distance": 2.9,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102237": {
+      "lat": 6.1993219,
+      "lon": -75.57822,
+      "neighbors": [
+        {
+          "id": 13172216578,
+          "distance": 14.45,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102236,
+          "distance": 3.25,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250111,
+          "distance": 2.92,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054612": {
+      "lat": 6.1983124,
+      "lon": -75.5795728,
+      "neighbors": [
+        {
+          "id": 5408054611,
+          "distance": 2.9,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102238": {
+      "lat": 6.199106,
+      "lon": -75.5782307,
+      "neighbors": [
+        {
+          "id": 13172216578,
+          "distance": 9.59,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172216580,
+          "distance": 8.61,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054613": {
+      "lat": 6.1980744,
+      "lon": -75.5789676,
+      "neighbors": [
+        {
+          "id": 5408054605,
+          "distance": 4.84,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054614,
+          "distance": 16.78,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784907,
+          "distance": 8.33,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408103830": {
+      "lat": 6.201332,
+      "lon": -75.5784625,
+      "neighbors": [
+        {
+          "id": 13172290901,
+          "distance": 2.32,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054614": {
+      "lat": 6.1979236,
+      "lon": -75.5789629,
+      "neighbors": [
+        {
+          "id": 5408054613,
+          "distance": 16.78,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054615,
+          "distance": 26.16,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102240": {
+      "lat": 6.1985406,
+      "lon": -75.5782398,
+      "neighbors": [
+        {
+          "id": 5408102241,
+          "distance": 3.28,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054615": {
+      "lat": 6.1978795,
+      "lon": -75.5787304,
+      "neighbors": [
+        {
+          "id": 4121140517,
+          "distance": 42.53,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054614,
+          "distance": 26.16,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784905,
+          "distance": 14.14,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054616": {
+      "lat": 6.1981418,
+      "lon": -75.5786535,
+      "neighbors": [
+        {
+          "id": 13165784905,
+          "distance": 16.41,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054617,
+          "distance": 5.59,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054617": {
+      "lat": 6.1981801,
+      "lon": -75.5786862,
+      "neighbors": [
+        {
+          "id": 5408054616,
+          "distance": 5.59,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054619,
+          "distance": 5.52,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "10537412021": {
+      "lat": 6.2018033,
+      "lon": -75.577492,
+      "neighbors": [
+        {
+          "id": 4121140577,
+          "distance": 1.26,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140581,
+          "distance": 0.99,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054619": {
+      "lat": 6.1981846,
+      "lon": -75.5787359,
+      "neighbors": [
+        {
+          "id": 5408054618,
+          "distance": 30.54,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054617,
+          "distance": 5.52,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784924,
+          "distance": 18.28,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408054620": {
+      "lat": 6.1992856,
+      "lon": -75.5787128,
+      "neighbors": [
+        {
+          "id": 5408098624,
+          "distance": 11.3,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250114,
+          "distance": 21.42,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250112,
+          "distance": 24.98,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "10537412032": {
+      "lat": 6.2000477,
+      "lon": -75.5776708,
+      "neighbors": [
+        {
+          "id": 5408098635,
+          "distance": 5.38,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "10537412033": {
+      "lat": 6.1995329,
+      "lon": -75.5777624,
+      "neighbors": [
+        {
+          "id": 9868991073,
+          "distance": 3.08,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "10537412036": {
+      "lat": 6.1974159,
+      "lon": -75.5784381,
+      "neighbors": [
+        {
+          "id": 4121140516,
+          "distance": 4.05,
+          "surface": "asphalt",
+          "name": ""
+        }
+      ]
+    },
+    "13172280792": {
+      "lat": 6.2002728,
+      "lon": -75.5790841,
+      "neighbors": [
+        {
+          "id": 13172224476,
+          "distance": 4.53,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172280793,
+          "distance": 22.87,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172280793": {
+      "lat": 6.2004784,
+      "lon": -75.5790779,
+      "neighbors": [
+        {
+          "id": 13172224477,
+          "distance": 1.87,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172280792,
+          "distance": 22.87,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172280794": {
+      "lat": 6.2006242,
+      "lon": -75.5784156,
+      "neighbors": [
+        {
+          "id": 6425980987,
+          "distance": 18.35,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980771,
+          "distance": 16.08,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 13179434883,
+          "distance": 41.88,
+          "surface": "sett",
+          "name": ""
+        }
+      ]
+    },
+    "13172280400": {
+      "lat": 6.2013076,
+      "lon": -75.5788351,
+      "neighbors": [
+        {
+          "id": 13172293419,
+          "distance": 26.62,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172290905,
+          "distance": 2.19,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293432,
+          "distance": 8.26,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172250114": {
+      "lat": 6.1992842,
+      "lon": -75.5789066,
+      "neighbors": [
+        {
+          "id": 5408054620,
+          "distance": 21.42,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 3276242875,
+          "distance": 10.04,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250113,
+          "distance": 25.12,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172250112": {
+      "lat": 6.1995102,
+      "lon": -75.578718,
+      "neighbors": [
+        {
+          "id": 13172216585,
+          "distance": 7.53,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054620,
+          "distance": 24.98,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 3276242880,
+          "distance": 6.29,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434890,
+          "distance": 4.36,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172250111": {
+      "lat": 6.1993227,
+      "lon": -75.5781936,
+      "neighbors": [
+        {
+          "id": 5408102237,
+          "distance": 2.92,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172250113": {
+      "lat": 6.1995101,
+      "lon": -75.5789103,
+      "neighbors": [
+        {
+          "id": 13172216583,
+          "distance": 11.0,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250114,
+          "distance": 25.12,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 3276242881,
+          "distance": 2.39,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172250119": {
+      "lat": 6.1994383,
+      "lon": -75.5793774,
+      "neighbors": [
+        {
+          "id": 13172261373,
+          "distance": 14.71,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172250120": {
+      "lat": 6.1994747,
+      "lon": -75.5793208,
+      "neighbors": [
+        {
+          "id": 13172261372,
+          "distance": 8.57,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172250122": {
+      "lat": 6.1995248,
+      "lon": -75.5790096,
+      "neighbors": [
+        {
+          "id": 13172216583,
+          "distance": 1.64,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408056122,
+          "distance": 3.75,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250121,
+          "distance": 50.95,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172217358": {
+      "lat": 6.1997592,
+      "lon": -75.5789855,
+      "neighbors": [
+        {
+          "id": 5408056121,
+          "distance": 15.5,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172217363,
+          "distance": 14.62,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172250121": {
+      "lat": 6.1995306,
+      "lon": -75.5794705,
+      "neighbors": [
+        {
+          "id": 10716587794,
+          "distance": 111.18,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250122,
+          "distance": 50.95,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10716587793,
+          "distance": 6.64,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172217363": {
+      "lat": 6.1998907,
+      "lon": -75.5789853,
+      "neighbors": [
+        {
+          "id": 4121140570,
+          "distance": 32.22,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172217358,
+          "distance": 14.62,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172217364,
+          "distance": 4.05,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172217364": {
+      "lat": 6.1998921,
+      "lon": -75.5790219,
+      "neighbors": [
+        {
+          "id": 13172217363,
+          "distance": 4.05,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172290904": {
+      "lat": 6.201101,
+      "lon": -75.5790701,
+      "neighbors": [
+        {
+          "id": 13172290908,
+          "distance": 19.04,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172290905": {
+      "lat": 6.2012879,
+      "lon": -75.5788347,
+      "neighbors": [
+        {
+          "id": 13172290903,
+          "distance": 20.79,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172290907,
+          "distance": 3.95,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172280400,
+          "distance": 2.19,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408064829": {
+      "lat": 6.1995535,
+      "lon": -75.578701,
+      "neighbors": [
+        {
+          "id": 9691988371,
+          "distance": 2.63,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991076,
+          "distance": 1.86,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408064830": {
+      "lat": 6.199538,
+      "lon": -75.578275,
+      "neighbors": [
+        {
+          "id": 9868991075,
+          "distance": 42.75,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064831,
+          "distance": 4.98,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102244,
+          "distance": 3.25,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102235,
+          "distance": 4.71,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6458072675": {
+      "lat": 6.2017733,
+      "lon": -75.5768971,
+      "neighbors": [
+        {
+          "id": 12264340408,
+          "distance": 9.46,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 12264340418,
+          "distance": 10.3,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408064831": {
+      "lat": 6.1995429,
+      "lon": -75.5782302,
+      "neighbors": [
+        {
+          "id": 9868991071,
+          "distance": 29.0,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408064830,
+          "distance": 4.98,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408064832": {
+      "lat": 6.1995434,
+      "lon": -75.5778212,
+      "neighbors": [
+        {
+          "id": 5408082192,
+          "distance": 1.48,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9868991074,
+          "distance": 1.31,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172290906": {
+      "lat": 6.2012878,
+      "lon": -75.5790177,
+      "neighbors": [
+        {
+          "id": 13172290907,
+          "distance": 16.28,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "4121140515": {
+      "lat": 6.1978235,
+      "lon": -75.578474,
+      "neighbors": [
+        {
+          "id": 4121140514,
+          "distance": 41.52,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "10716587792": {
+      "lat": 6.2014388,
+      "lon": -75.5791488,
+      "neighbors": [
+        {
+          "id": 386271624,
+          "distance": 40.44,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10716587793,
+          "distance": 208.52,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "10716587793": {
+      "lat": 6.1995888,
+      "lon": -75.5794572,
+      "neighbors": [
+        {
+          "id": 13172250121,
+          "distance": 6.64,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10716587792,
+          "distance": 208.52,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "10716587795": {
+      "lat": 6.197716,
+      "lon": -75.5799735,
+      "neighbors": [
+        {
+          "id": 10716587794,
+          "distance": 98.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10716587796,
+          "distance": 7.96,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "10716587797": {
+      "lat": 6.1976004,
+      "lon": -75.580012,
+      "neighbors": [
+        {
+          "id": 5408054595,
+          "distance": 4.16,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10716587796,
+          "distance": 5.59,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "10716587796": {
+      "lat": 6.1976484,
+      "lon": -75.5799971,
+      "neighbors": [
+        {
+          "id": 5408054607,
+          "distance": 34.76,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10716587795,
+          "distance": 7.96,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 10716587797,
+          "distance": 5.59,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293416": {
+      "lat": 6.20145,
+      "lon": -75.5788366,
+      "neighbors": [
+        {
+          "id": 13172288627,
+          "distance": 10.82,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293432,
+          "distance": 7.57,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293418,
+          "distance": 26.37,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293417": {
+      "lat": 6.2014685,
+      "lon": -75.5779236,
+      "neighbors": [
+        {
+          "id": 386271622,
+          "distance": 42.35,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172280399,
+          "distance": 16.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293438,
+          "distance": 17.41,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293418": {
+      "lat": 6.2014549,
+      "lon": -75.5785981,
+      "neighbors": [
+        {
+          "id": 13172293416,
+          "distance": 26.37,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293425,
+          "distance": 7.68,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293435,
+          "distance": 7.38,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293419": {
+      "lat": 6.2013099,
+      "lon": -75.5785943,
+      "neighbors": [
+        {
+          "id": 13172290901,
+          "distance": 14.72,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172280400,
+          "distance": 26.62,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293435,
+          "distance": 8.75,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293421": {
+      "lat": 6.2013126,
+      "lon": -75.5783176,
+      "neighbors": [
+        {
+          "id": 13172290901,
+          "distance": 15.86,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293445,
+          "distance": 26.31,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293420,
+          "distance": 16.45,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293422": {
+      "lat": 6.2014595,
+      "lon": -75.5783674,
+      "neighbors": [
+        {
+          "id": 13172293425,
+          "distance": 17.82,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293420,
+          "distance": 4.82,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293423,
+          "distance": 11.59,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293420": {
+      "lat": 6.2014604,
+      "lon": -75.5783238,
+      "neighbors": [
+        {
+          "id": 13172293421,
+          "distance": 16.45,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293422,
+          "distance": 4.82,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293438,
+          "distance": 26.84,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293423": {
+      "lat": 6.2015637,
+      "lon": -75.5783694,
+      "neighbors": [
+        {
+          "id": 13172293422,
+          "distance": 11.59,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293426,
+          "distance": 9.09,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293425": {
+      "lat": 6.2014563,
+      "lon": -75.5785286,
+      "neighbors": [
+        {
+          "id": 13172293418,
+          "distance": 7.68,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293422,
+          "distance": 17.82,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293424,
+          "distance": 12.07,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293426": {
+      "lat": 6.2015657,
+      "lon": -75.5784516,
+      "neighbors": [
+        {
+          "id": 13172293423,
+          "distance": 9.09,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293424,
+          "distance": 8.29,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293427,
+          "distance": 3.04,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293424": {
+      "lat": 6.2015648,
+      "lon": -75.5785266,
+      "neighbors": [
+        {
+          "id": 13172293425,
+          "distance": 12.07,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293426,
+          "distance": 8.29,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293432": {
+      "lat": 6.2013819,
+      "lon": -75.5788359,
+      "neighbors": [
+        {
+          "id": 13172280400,
+          "distance": 8.26,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293416,
+          "distance": 7.57,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293433,
+          "distance": 1.81,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293427": {
+      "lat": 6.201593,
+      "lon": -75.5784516,
+      "neighbors": [
+        {
+          "id": 13172293426,
+          "distance": 3.04,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293435": {
+      "lat": 6.2013886,
+      "lon": -75.5785964,
+      "neighbors": [
+        {
+          "id": 13172293418,
+          "distance": 7.38,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293419,
+          "distance": 8.75,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293434,
+          "distance": 3.63,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293433": {
+      "lat": 6.2013814,
+      "lon": -75.5788195,
+      "neighbors": [
+        {
+          "id": 13172293432,
+          "distance": 1.81,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293438": {
+      "lat": 6.2014653,
+      "lon": -75.5780811,
+      "neighbors": [
+        {
+          "id": 13172293417,
+          "distance": 17.41,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293420,
+          "distance": 26.84,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293439,
+          "distance": 35.3,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293445,
+          "distance": 16.52,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293434": {
+      "lat": 6.2013879,
+      "lon": -75.5786292,
+      "neighbors": [
+        {
+          "id": 13172293435,
+          "distance": 3.63,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293440": {
+      "lat": 6.2017709,
+      "lon": -75.5788401,
+      "neighbors": [
+        {
+          "id": 13172288627,
+          "distance": 24.86,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172290909,
+          "distance": 5.38,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172288629,
+          "distance": 26.31,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293439": {
+      "lat": 6.2017827,
+      "lon": -75.5780855,
+      "neighbors": [
+        {
+          "id": 13172288630,
+          "distance": 28.98,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293438,
+          "distance": 35.3,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293445": {
+      "lat": 6.2013167,
+      "lon": -75.5780796,
+      "neighbors": [
+        {
+          "id": 13172293421,
+          "distance": 26.31,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293438,
+          "distance": 16.52,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293446,
+          "distance": 6.88,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293446": {
+      "lat": 6.2013166,
+      "lon": -75.5780174,
+      "neighbors": [
+        {
+          "id": 13172280399,
+          "distance": 10.47,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293445,
+          "distance": 6.88,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293447,
+          "distance": 43.73,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172293447": {
+      "lat": 6.2009233,
+      "lon": -75.5780162,
+      "neighbors": [
+        {
+          "id": 9869056575,
+          "distance": 44.24,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9869056576,
+          "distance": 10.25,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293446,
+          "distance": 43.73,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784904": {
+      "lat": 6.1974806,
+      "lon": -75.5786247,
+      "neighbors": [
+        {
+          "id": 11987927248,
+          "distance": 5.0,
+          "surface": "asphalt",
+          "name": ""
+        },
+        {
+          "id": 4121140514,
+          "distance": 1.55,
+          "surface": "asphalt",
+          "name": ""
+        }
+      ]
+    },
+    "13165784905": {
+      "lat": 6.1979968,
+      "lon": -75.578681,
+      "neighbors": [
+        {
+          "id": 5408054615,
+          "distance": 14.14,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054616,
+          "distance": 16.41,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784906,
+          "distance": 24.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784916,
+          "distance": 5.22,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784906": {
+      "lat": 6.1980186,
+      "lon": -75.5789052,
+      "neighbors": [
+        {
+          "id": 13165784905,
+          "distance": 24.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784907,
+          "distance": 5.86,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784907": {
+      "lat": 6.1980697,
+      "lon": -75.5788924,
+      "neighbors": [
+        {
+          "id": 5408054613,
+          "distance": 8.33,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784906,
+          "distance": 5.86,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784916": {
+      "lat": 6.1979961,
+      "lon": -75.5786338,
+      "neighbors": [
+        {
+          "id": 13165784905,
+          "distance": 5.22,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784917": {
+      "lat": 6.1986899,
+      "lon": -75.5782098,
+      "neighbors": [
+        {
+          "id": 13165784918,
+          "distance": 8.71,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102241,
+          "distance": 16.65,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784918": {
+      "lat": 6.1987677,
+      "lon": -75.5782188,
+      "neighbors": [
+        {
+          "id": 13165784917,
+          "distance": 8.71,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102239,
+          "distance": 7.76,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784919": {
+      "lat": 6.198104,
+      "lon": -75.5794617,
+      "neighbors": [
+        {
+          "id": 13165784933,
+          "distance": 33.02,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054604,
+          "distance": 15.42,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054608,
+          "distance": 1.84,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784920": {
+      "lat": 6.198469,
+      "lon": -75.5794625,
+      "neighbors": [
+        {
+          "id": 13165784933,
+          "distance": 7.56,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784921,
+          "distance": 8.65,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784921": {
+      "lat": 6.1985468,
+      "lon": -75.5794625,
+      "neighbors": [
+        {
+          "id": 13165784932,
+          "distance": 3.2,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784920,
+          "distance": 8.65,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784922": {
+      "lat": 6.1985488,
+      "lon": -75.5790118,
+      "neighbors": [
+        {
+          "id": 5408098621,
+          "distance": 23.84,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784929,
+          "distance": 6.59,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784931,
+          "distance": 8.13,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784925,
+          "distance": 22.06,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784923": {
+      "lat": 6.1985479,
+      "lon": -75.5787379,
+      "neighbors": [
+        {
+          "id": 5408098320,
+          "distance": 23.69,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784929,
+          "distance": 23.69,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784924,
+          "distance": 22.12,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784924": {
+      "lat": 6.198349,
+      "lon": -75.5787368,
+      "neighbors": [
+        {
+          "id": 13165784930,
+          "distance": 23.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054619,
+          "distance": 18.28,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784923,
+          "distance": 22.12,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784925": {
+      "lat": 6.1983504,
+      "lon": -75.5790116,
+      "neighbors": [
+        {
+          "id": 13165784930,
+          "distance": 6.48,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408054618,
+          "distance": 16.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784922,
+          "distance": 22.06,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102234": {
+      "lat": 6.2001854,
+      "lon": -75.5783384,
+      "neighbors": [
+        {
+          "id": 4121140524,
+          "distance": 8.4,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434884,
+          "distance": 31.27,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102245,
+          "distance": 9.49,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102235": {
+      "lat": 6.1994999,
+      "lon": -75.5782564,
+      "neighbors": [
+        {
+          "id": 5408064830,
+          "distance": 4.71,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102236,
+          "distance": 19.46,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13165784928": {
+      "lat": 6.1987644,
+      "lon": -75.5789554,
+      "neighbors": [
+        {
+          "id": 5408098320,
+          "distance": 24.9,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408098621,
+          "distance": 6.26,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102236": {
+      "lat": 6.199325,
+      "lon": -75.5782492,
+      "neighbors": [
+        {
+          "id": 5408102237,
+          "distance": 3.25,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102235,
+          "distance": 19.46,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102242": {
+      "lat": 6.1999958,
+      "lon": -75.5783143,
+      "neighbors": [
+        {
+          "id": 5408102243,
+          "distance": 8.54,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102245,
+          "distance": 11.8,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980771": {
+      "lat": 6.2007688,
+      "lon": -75.578416,
+      "neighbors": [
+        {
+          "id": 6425980986,
+          "distance": 17.21,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9869056575,
+          "distance": 16.51,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 13172280794,
+          "distance": 16.08,
+          "surface": "sett",
+          "name": ""
+        }
+      ]
+    },
+    "5408102243": {
+      "lat": 6.1999195,
+      "lon": -75.5783055,
+      "neighbors": [
+        {
+          "id": 5408102242,
+          "distance": 8.54,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102244,
+          "distance": 39.34,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980773": {
+      "lat": 6.2008231,
+      "lon": -75.5778465,
+      "neighbors": [
+        {
+          "id": 6425980985,
+          "distance": 19.74,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140498,
+          "distance": 5.87,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980772,
+          "distance": 22.54,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102245": {
+      "lat": 6.2001017,
+      "lon": -75.5783216,
+      "neighbors": [
+        {
+          "id": 5408102234,
+          "distance": 9.49,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102242,
+          "distance": 11.8,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102244": {
+      "lat": 6.1995665,
+      "lon": -75.5782815,
+      "neighbors": [
+        {
+          "id": 5408064830,
+          "distance": 3.25,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102243,
+          "distance": 39.34,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102239": {
+      "lat": 6.1988375,
+      "lon": -75.5782197,
+      "neighbors": [
+        {
+          "id": 13172216580,
+          "distance": 21.27,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784918,
+          "distance": 7.76,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "5408102241": {
+      "lat": 6.1985402,
+      "lon": -75.5782101,
+      "neighbors": [
+        {
+          "id": 5408102240,
+          "distance": 3.28,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13165784917,
+          "distance": 16.65,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980778": {
+      "lat": 6.2020447,
+      "lon": -75.5778709,
+      "neighbors": [
+        {
+          "id": 7029819731,
+          "distance": 12.03,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 9378798586,
+          "distance": 34.75,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140493,
+          "distance": 19.5,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980772": {
+      "lat": 6.2008135,
+      "lon": -75.5776428,
+      "neighbors": [
+        {
+          "id": 6425980773,
+          "distance": 22.54,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980780": {
+      "lat": 6.2017001,
+      "lon": -75.5778728,
+      "neighbors": [
+        {
+          "id": 4121140494,
+          "distance": 16.43,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140495,
+          "distance": 19.04,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 6425980779,
+          "distance": 32.73,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980774": {
+      "lat": 6.2027234,
+      "lon": -75.5775355,
+      "neighbors": [
+        {
+          "id": 4121140490,
+          "distance": 36.24,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980775": {
+      "lat": 6.2025561,
+      "lon": -75.5775053,
+      "neighbors": [
+        {
+          "id": 4121140491,
+          "distance": 39.78,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980776": {
+      "lat": 6.2023834,
+      "lon": -75.5775268,
+      "neighbors": [
+        {
+          "id": 4121140492,
+          "distance": 37.63,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980777": {
+      "lat": 6.2022088,
+      "lon": -75.5775509,
+      "neighbors": [
+        {
+          "id": 4121140493,
+          "distance": 35.17,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980779": {
+      "lat": 6.2016761,
+      "lon": -75.5775777,
+      "neighbors": [
+        {
+          "id": 6425980780,
+          "distance": 32.73,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980781": {
+      "lat": 6.2015168,
+      "lon": -75.5775697,
+      "neighbors": [
+        {
+          "id": 4121140495,
+          "distance": 32.38,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980782": {
+      "lat": 6.2013461,
+      "lon": -75.5775824,
+      "neighbors": [
+        {
+          "id": 4121140496,
+          "distance": 28.21,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980783": {
+      "lat": 6.2011795,
+      "lon": -75.5775918,
+      "neighbors": [
+        {
+          "id": 4121140497,
+          "distance": 26.23,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "6425980784": {
+      "lat": 6.2009961,
+      "lon": -75.577618,
+      "neighbors": [
+        {
+          "id": 6425980985,
+          "distance": 24.23,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13179434883": {
+      "lat": 6.2002476,
+      "lon": -75.5784146,
+      "neighbors": [
+        {
+          "id": 4121140524,
+          "distance": 6.46,
+          "surface": "sett",
+          "name": ""
+        },
+        {
+          "id": 13172280794,
+          "distance": 41.88,
+          "surface": "sett",
+          "name": ""
+        }
+      ]
+    },
+    "13179434884": {
+      "lat": 6.20017,
+      "lon": -75.578056,
+      "neighbors": [
+        {
+          "id": 5408098631,
+          "distance": 15.11,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 5408102234,
+          "distance": 31.27,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434885,
+          "distance": 7.69,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13179434886": {
+      "lat": 6.1991892,
+      "lon": -75.5786703,
+      "neighbors": [
+        {
+          "id": 5408098624,
+          "distance": 4.17,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434888,
+          "distance": 40.66,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13179434887": {
+      "lat": 6.1990231,
+      "lon": -75.5786649,
+      "neighbors": [
+        {
+          "id": 13172216579,
+          "distance": 3.86,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434889,
+          "distance": 40.79,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13179434888": {
+      "lat": 6.1991895,
+      "lon": -75.5783025,
+      "neighbors": [
+        {
+          "id": 13172216578,
+          "distance": 8.42,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434886,
+          "distance": 40.66,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13179434889": {
+      "lat": 6.1990297,
+      "lon": -75.578296,
+      "neighbors": [
+        {
+          "id": 13172216580,
+          "distance": 7.57,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13179434887,
+          "distance": 40.79,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13179434885": {
+      "lat": 6.2002391,
+      "lon": -75.5780578,
+      "neighbors": [
+        {
+          "id": 13179434884,
+          "distance": 7.69,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13179434890": {
+      "lat": 6.1994983,
+      "lon": -75.5786804,
+      "neighbors": [
+        {
+          "id": 13172250112,
+          "distance": 4.36,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288628": {
+      "lat": 6.201544,
+      "lon": -75.5788892,
+      "neighbors": [
+        {
+          "id": 13172288627,
+          "distance": 5.71,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "13172288629": {
+      "lat": 6.2017746,
+      "lon": -75.5786021,
+      "neighbors": [
+        {
+          "id": 13172288631,
+          "distance": 11.02,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172293440,
+          "distance": 26.31,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "3276242874": {
+      "lat": 6.1993179,
+      "lon": -75.5790121,
+      "neighbors": [
+        {
+          "id": 13172216582,
+          "distance": 15.36,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 4121140571,
+          "distance": 3.83,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "3276242875": {
+      "lat": 6.1992836,
+      "lon": -75.5789974,
+      "neighbors": [
+        {
+          "id": 4121140571,
+          "distance": 1.67,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 13172250114,
+          "distance": 10.04,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "3276242880": {
+      "lat": 6.1995101,
+      "lon": -75.5787749,
+      "neighbors": [
+        {
+          "id": 13172250112,
+          "distance": 6.29,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 3276242881,
+          "distance": 12.58,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    },
+    "3276242881": {
+      "lat": 6.1995101,
+      "lon": -75.5788887,
+      "neighbors": [
+        {
+          "id": 13172250113,
+          "distance": 2.39,
+          "surface": "unknown",
+          "name": ""
+        },
+        {
+          "id": 3276242880,
+          "distance": 12.58,
+          "surface": "unknown",
+          "name": ""
+        }
+      ]
+    }
+  }
+}

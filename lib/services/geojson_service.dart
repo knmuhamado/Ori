@@ -10,34 +10,49 @@ class GeoJsonService extends ChangeNotifier {
 
   List<CampusPlace> _all = [];
   List<CampusPlace> _filtered = [];
+  Map<String, CategoryMeta> _categories = {};
   bool _isLoaded = false;
-  List<List<double>>? _campusPerimeter;
+  List<List<List<double>>> _campusPerimeters = [];
 
   List<CampusPlace> get places => _filtered;
   List<CampusPlace> get allPlaces => _all;
+  List<CategoryMeta> get categories {
+    final list = _categories.values.toList();
+    list.sort((a, b) => a.order.compareTo(b.order));
+    return list;
+  }
   bool get isLoaded => _isLoaded;
 
   Future<void> load() async {
     if (_isLoaded) return;
     try {
+      final categoriesRaw =
+          await rootBundle.loadString('assets/data/campus_eafit_categories.json');
+      final categoriesJson = jsonDecode(categoriesRaw) as Map<String, dynamic>;
+      final categoriesMap =
+          categoriesJson['categories'] as Map<String, dynamic>? ?? {};
+      _categories = categoriesMap.map(
+        (key, value) => MapEntry(
+          key,
+          CategoryMeta.fromJson(key, value as Map<String, dynamic>),
+        ),
+      );
+
       final raw = await rootBundle.loadString('assets/data/campus_eafit.geojson');
       final json = jsonDecode(raw) as Map<String, dynamic>;
       final features = json['features'] as List<dynamic>;
 
       final List<CampusPlace> loaded = [];
       final Set<String> seen = {};
-      final Set<String> seenBanos = {};
 
-      // Encontrar perímetro principal (el de más puntos)
-      int maxPoints = 0;
+      // Carga todos los polígonos marcados como perimetro para validar campus.
+      _campusPerimeters.clear();
       for (final f in features) {
-        final name = (f['properties']['name'] ?? '') as String;
-        if (name == 'Perímetro del campus') {
+        final props = f['properties'] as Map<String, dynamic>? ?? {};
+        final featureCategories = _parseCategories(props);
+        if (featureCategories.contains('perimetro')) {
           final coords = _parseCoords(f['geometry']['coordinates'][0] as List);
-          if (coords.length > maxPoints) {
-            maxPoints = coords.length;
-            _campusPerimeter = coords;
-          }
+          _campusPerimeters.add(coords);
         }
       }
 
@@ -45,8 +60,13 @@ class GeoJsonService extends ChangeNotifier {
         final props = f['properties'] as Map<String, dynamic>;
         final name = (props['name'] ?? '').toString().trim();
         final desc = (props['description'] ?? '').toString().trim();
+        final parsedCategories = _parseCategories(props);
+        if (parsedCategories.contains('perimetro')) continue;
 
-        if (!_isRelevant(name)) continue;
+        final validCategories = parsedCategories
+            .where((id) => _categories.containsKey(id))
+            .toList();
+        if (validCategories.isEmpty) continue;
 
         final coords = _parseCoords(f['geometry']['coordinates'][0] as List);
         double sumLat = 0, sumLng = 0;
@@ -60,32 +80,14 @@ class GeoJsonService extends ChangeNotifier {
         if (seen.contains(key)) continue;
         seen.add(key);
 
-        final category = CampusPlace.categorize(name, desc);
         loaded.add(CampusPlace(
           name: name,
           description: desc.isEmpty ? name : desc,
           latitude: lat,
           longitude: lng,
-          category: category,
+          categories: validCategories,
           polygon: coords,
         ));
-
-        // Generar baño si el lugar lo menciona
-        final dl = desc.toLowerCase();
-        if (dl.contains('baño') || dl.contains('baños')) {
-          final bKey = 'bano|$name';
-          if (!seenBanos.contains(bKey)) {
-            seenBanos.add(bKey);
-            loaded.add(CampusPlace(
-              name: 'Baños - $name',
-              description: 'Baños públicos en $name',
-              latitude: lat,
-              longitude: lng,
-              category: PlaceCategory.bano,
-              polygon: coords,
-            ));
-          }
-        }
       }
 
       _all = loaded;
@@ -93,13 +95,39 @@ class GeoJsonService extends ChangeNotifier {
       _isLoaded = true;
       notifyListeners();
 
-      final stats = <PlaceCategory, int>{};
-      for (final p in _all) stats[p.category] = (stats[p.category] ?? 0) + 1;
+      final stats = <String, int>{};
+      for (final p in _all) {
+        for (final cat in p.categories) {
+          stats[cat] = (stats[cat] ?? 0) + 1;
+        }
+      }
       debugPrint('✅ GeoJSON: ${_all.length} lugares');
-      stats.forEach((c, n) => debugPrint('   ${c.displayName}: $n'));
+      stats.forEach((id, n) {
+        final label = _categories[id]?.label ?? id;
+        debugPrint('   $label: $n');
+      });
     } catch (e) {
       debugPrint('❌ GeoJSON error: $e');
     }
+  }
+
+  List<String> _parseCategories(Map<String, dynamic> props) {
+    final rawList = props['categories'];
+    if (rawList is List) {
+      final values = rawList
+          .map((e) => e.toString().trim())
+          .where((e) => e.isNotEmpty)
+          .toSet()
+          .toList();
+      if (values.isNotEmpty) return values;
+    }
+
+    final single = props['category'];
+    if (single != null && single.toString().trim().isNotEmpty) {
+      return [single.toString().trim()];
+    }
+
+    return const [];
   }
 
   List<List<double>> _parseCoords(List raw) {
@@ -108,20 +136,11 @@ class GeoJsonService extends ChangeNotifier {
     ).toList();
   }
 
-  bool _isRelevant(String name) {
-    final n = name.toLowerCase();
-    if (n == 'perímetro del campus') return false;
-    if (n.contains('acceso a casas')) return false;
-    if (RegExp(r'^casa \d+$').hasMatch(n)) return false;
-    if (n == 'casa graduados' || n == 'casa urbam' || n == 'casas 1 y 2') return false;
-    return true;
-  }
-
   bool isInsideCampus(double lat, double lng) {
-    if (_campusPerimeter == null) {
+    if (_campusPerimeters.isEmpty) {
       return lat >= 6.196 && lat <= 6.204 && lng >= -75.582 && lng <= -75.575;
     }
-    return _pip(lat, lng, _campusPerimeter!);
+    return _campusPerimeters.any((poly) => _pip(lat, lng, poly));
   }
 
   CampusPlace? getPlaceContaining(double lat, double lng) {
@@ -145,12 +164,23 @@ class GeoJsonService extends ChangeNotifier {
     return inside;
   }
 
-  void filterByCategory(PlaceCategory? category) {
+  void filterByCategory(String? categoryId) {
     var result = List<CampusPlace>.from(_all);
-    if (category != null) result = result.where((p) => p.category == category).toList();
+    if (categoryId != null) {
+      result = result
+          .where((p) => p.categories.contains(categoryId))
+          .toList();
+    }
     result.sort((a, b) => a.name.compareTo(b.name));
     _filtered = result;
     notifyListeners();
+  }
+
+  CategoryMeta? categoryById(String id) => _categories[id];
+
+  IconData iconForPlace(CampusPlace place) {
+    final meta = categoryById(place.primaryCategory);
+    return meta?.iconData ?? Icons.place_rounded;
   }
 
   List<CampusPlace> getNearby(double lat, double lng, {int limit = 3}) {
@@ -158,5 +188,28 @@ class GeoJsonService extends ChangeNotifier {
     final sorted = List<CampusPlace>.from(_all)
       ..sort((a, b) => a.distanceFrom(lat, lng).compareTo(b.distanceFrom(lat, lng)));
     return sorted.take(limit).toList();
+  }
+
+  String? getNearestBlockReference(
+    double lat,
+    double lng, {
+    double maxDistanceMeters = 45,
+  }) {
+    if (_all.isEmpty) return null;
+
+    CampusPlace? nearest;
+    double bestDistance = double.infinity;
+
+    for (final place in _all) {
+      if (place.primaryCategory != 'bloque') continue;
+      final d = place.distanceFrom(lat, lng);
+      if (d < bestDistance) {
+        bestDistance = d;
+        nearest = place;
+      }
+    }
+
+    if (nearest == null || bestDistance > maxDistanceMeters) return null;
+    return nearest.name;
   }
 }
