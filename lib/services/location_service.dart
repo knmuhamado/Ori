@@ -1,5 +1,6 @@
 // Servicio de geolocalización en tiempo real: Maneja permisos, precisión y estados del GPS
 
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -106,11 +107,22 @@ class LocationService extends ChangeNotifier {
 
   // Iniciar escucha en tiempo real
   Future<void> _startListening() async {
-    // Configuración de precisión para navegación
-    const LocationSettings locationSettings = LocationSettings(
-      accuracy: LocationAccuracy.bestForNavigation,
-      distanceFilter: 5, // Actualizar cada 5 metros
-    );
+    // En Android usamos AndroidSettings para forzar explícitamente el uso del
+    // FusedLocationProvider de Google Play Services, que combina GPS + WiFi +
+    // Cell towers con filtro Kalman interno — más preciso que el GPS puro.
+    // forceLocationManager: false  →  FusedLocationProvider (recomendado)
+    // forceLocationManager: true   →  Android LocationManager nativo (menos preciso)
+    final LocationSettings locationSettings = Platform.isAndroid
+        ? AndroidSettings(
+            accuracy: LocationAccuracy.bestForNavigation,
+            distanceFilter: 3, // metros — más frecuente que 5m para peatones
+            forceLocationManager: false, // Usar FusedLocationProvider
+            intervalDuration: const Duration(seconds: 1),
+          )
+        : const LocationSettings(
+            accuracy: LocationAccuracy.bestForNavigation,
+            distanceFilter: 3,
+          );
 
     _positionStream = Geolocator.getPositionStream(
       locationSettings: locationSettings,
@@ -123,29 +135,36 @@ class LocationService extends ChangeNotifier {
     );
 
     // Obtener una ubicación inicial inmediata
+    // timeLimit evita que la app se cuelgue si el GPS tarda en adquirir señal
     try {
       Position initialPosition = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation,
+        timeLimit: const Duration(seconds: 15),
       );
       _handlePositionUpdate(initialPosition);
     } catch (e) {
-      debugPrint('Error obteniendo posición inicial: $e');
+      // No es fatal: el stream seguirá entregando posiciones una vez haya señal
+      debugPrint('GPS: posición inicial no disponible aún — $e');
     }
   }
 
   // Manejar actualización de posición
   void _handlePositionUpdate(Position position) {
-    LocationData newLocation = LocationData.fromPosition(position);
-    
-    // Determinar estado según precisión
-    LocationStatus newStatus;
-    if (position.accuracy > 30) {
-      newStatus = LocationStatus.lowAccuracy;
-    } else if (position.accuracy > 15) {
-      newStatus = LocationStatus.lowAccuracy;
-    } else {
-      newStatus = LocationStatus.active;
+    // Filtro de calidad: si ya tenemos una posición buena (< 15m) y llega una
+    // muy mala (> 30m), la descartamos para evitar saltos bruscos en la ruta.
+    // Si aún no tenemos ninguna posición, aceptamos cualquier precisión.
+    if (_currentLocation != null &&
+        _currentLocation!.accuracy < 15.0 &&
+        position.accuracy > 30.0) {
+      debugPrint('GPS: posición descartada (precisión ${position.accuracy.toStringAsFixed(1)}m > 30m, manteniendo la anterior).');
+      return;
     }
+
+    LocationData newLocation = LocationData.fromPosition(position);
+
+    // Determinar estado según precisión
+    final LocationStatus newStatus =
+        position.accuracy <= 15.0 ? LocationStatus.active : LocationStatus.lowAccuracy;
 
     // Anunciar cambios importantes de estado
     if (_status != newStatus) {
@@ -164,11 +183,7 @@ class LocationService extends ChangeNotifier {
     }
 
     _currentLocation = newLocation;
-    final statusChanged = _status != newStatus;
     _updateStatus(newStatus);
-    if (!statusChanged) {
-      notifyListeners();
-    }
   }
 
   // Manejar errores del stream
