@@ -12,6 +12,8 @@ import '../services/location_service.dart';
 import '../services/route_guidance_builder.dart';
 import '../services/routing_service.dart';
 import '../services/voice_guidance_service.dart';
+import '../utils/accessibility_scale.dart';
+import '../services/haptic_service.dart';
 
 class NavigationMapScreen extends StatefulWidget {
   final String destinationName;
@@ -22,6 +24,7 @@ class NavigationMapScreen extends StatefulWidget {
   final String? highlightCategoryId;
   final RouteResult? initialRoute;
   final List<List<double>>? destinationPolygon;
+  final bool autoStartSimulation;
 
   const NavigationMapScreen({
     super.key,
@@ -33,6 +36,7 @@ class NavigationMapScreen extends StatefulWidget {
     this.highlightCategoryId,
     this.initialRoute,
     this.destinationPolygon,
+    this.autoStartSimulation = false,
   });
 
   @override
@@ -50,6 +54,12 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
   bool _isLoading = true;
   bool _hasError = false;
   bool _voiceStarted = false;
+  bool _isNavigationPaused = false;
+  bool _isResumingNavigation = false;
+  String? _navigationLiveMessage;
+  bool _usageInstructionsShown = false;
+  bool _routeSimulationRunning = false;
+  bool _autoSimulationScheduled = false;
 
   late LatLng _destination;
   late LatLng _currentUser;
@@ -59,7 +69,7 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
   double _currentZoom = 17;
 
   List<LatLng> _routePoints = [];
-  List<_RouteStep> _routeSteps = [];
+  List<GuidanceStep> _routeSteps = [];
   double? _routeDistanceMeters;
   // HU-16: distancia restante calculada desde VoiceGuidanceService
   double? _remainingDistanceMeters;
@@ -152,6 +162,29 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
     );
   }
 
+  void _syncVoiceGuidanceState() {
+    final voice = _voiceService;
+    if (voice == null || !mounted) return;
+
+    setState(() {
+      _activeRoute = voice.activeRoute;
+      _routePoints = voice.activePolyline
+          .map((point) => LatLng(point.latitude, point.longitude))
+          .toList();
+      _routeSteps = List<GuidanceStep>.from(voice.guidanceSteps);
+
+      final routeDistance = voice.activeRoute?.totalDistanceMeters;
+      if (routeDistance != null) {
+        _routeDistanceMeters = routeDistance;
+      }
+
+      if (voice.isNavigating) {
+        _hasError = false;
+        _isLoading = false;
+      }
+    });
+  }
+
   Color _areaFillColor({required bool highlighted}) {
     return highlighted
         ? const Color(0xFF7E57C2).withValues(alpha: 0.22)
@@ -227,22 +260,6 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
     return minDist;
   }
 
-  int _nextStepIndex(LatLng current) {
-    if (_routeSteps.isEmpty) return 0;
-
-    for (var i = 0; i < _routeSteps.length; i++) {
-      final d = _distanceMeters(
-        current.latitude,
-        current.longitude,
-        _routeSteps[i].location.latitude,
-        _routeSteps[i].location.longitude,
-      );
-      if (d > 10) return i;
-    }
-
-    return _routeSteps.length - 1;
-  }
-
   String _formatDistance(double meters) {
     if (meters >= 1000) return '${(meters / 1000).toStringAsFixed(1)} km';
     return '${meters.round()} m';
@@ -251,6 +268,23 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
   String _formatAccuracy(double? accuracyMeters) {
     if (accuracyMeters == null || !accuracyMeters.isFinite) return '--';
     return '±${accuracyMeters.round()} m';
+  }
+
+  int _nextStepIndex(LatLng current) {
+    if (_routeSteps.isEmpty) return 0;
+
+    for (var i = 0; i < _routeSteps.length; i++) {
+      final step = _routeSteps[i];
+      final d = _distanceMeters(
+        current.latitude,
+        current.longitude,
+        step.endPoint.latitude,
+        step.endPoint.longitude,
+      );
+      if (d > 10) return i;
+    }
+
+    return _routeSteps.length - 1;
   }
 
   String _normalizeText(String text) {
@@ -284,9 +318,10 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
     if (geo == null) return false;
 
     final place = geo.getPlaceContaining(origin.latitude, origin.longitude);
-    final polygon = place?.polygon;
+    if (place == null) return false;
+
+    final polygon = place.polygon;
     final mustWait =
-        place != null &&
         polygon != null &&
         polygon.length >= 3 &&
         _isInsidePolygon(origin.latitude, origin.longitude, polygon);
@@ -302,10 +337,11 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
       return false;
     }
 
+    final placeName = place.name;
     final firstTime = _waitingExitPolygon == null;
     if (mounted) {
       setState(() {
-        _waitingExitPlaceName = place!.name;
+        _waitingExitPlaceName = placeName;
         _waitingExitPolygon = polygon;
         _waitingExitOutsideSamples = 0;
         _isLoading = false;
@@ -315,7 +351,7 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
 
     if (firstTime) {
       await _announceAndSpeak(
-        'Estás dentro de ${_normalizeText(place!.name)}. Sal para iniciar la navegación.',
+        'Estás dentro de ${_normalizeText(placeName)}. Sal para iniciar la navegación.',
       );
     }
 
@@ -328,26 +364,12 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
         .map((p) => LatLng(p.latitude, p.longitude))
         .toList();
 
-    final guidanceSteps = RouteGuidanceBuilder.buildSteps(
-      polyline: route.polyline,
-      destinationLat: widget.destLat,
-      destinationLng: widget.destLng,
-      destinationName: widget.destinationName,
-      landmarkResolver: (lat, lng) =>
-          _geoService?.getNearestBlockReference(lat, lng),
-      initialHeadingDegrees: _voiceService?.mapReferenceHeadingDegrees,
-    );
-
     setState(() {
       _routePoints = points;
-      _routeSteps = guidanceSteps
-          .map(
-            (step) => _RouteStep(
-              instruction: step.instruction,
-              location: LatLng(step.endPoint.latitude, step.endPoint.longitude),
-            ),
-          )
-          .toList();
+      final voiceService = _voiceService;
+      final voiceSteps =
+          voiceService == null ? const <GuidanceStep>[] : voiceService.guidanceSteps;
+      _routeSteps = List<GuidanceStep>.from(voiceSteps);
       _routeDistanceMeters = route.totalDistanceMeters;
       _hasError = points.length < 2;
       _isLoading = false;
@@ -367,17 +389,228 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
     }
 
     _voiceStarted = true;
-    await voice.startNavigation(
-      route: route,
-      locationService: location,
-      routingService: routing,
-      destinationName: widget.destinationName,
-      destinationLat: widget.destLat,
-      destinationLng: widget.destLng,
-      announceForTalkBack: _announce,
-      landmarkResolver: (lat, lng) =>
-          _geoService?.getNearestBlockReference(lat, lng),
+    // Detectar si las features de accesibilidad (p. ej. lector de pantalla)
+    // están activas y, en ese caso, solicitar al servicio de voz que
+    // suprima la reproducción TTS para evitar duplicidad.
+    final semanticsBinding = SemanticsBinding.instance;
+    final semanticsEnabled = semanticsBinding.semanticsEnabled;
+    voice.setSuppressTtsWhenAccessibility(semanticsEnabled);
+
+    if (!voice.isNavigating) {
+      final geoService = _geoService;
+      await voice.startNavigation(
+        route: route,
+        locationService: location,
+        routingService: routing,
+        destinationName: widget.destinationName,
+        destinationLat: widget.destLat,
+        destinationLng: widget.destLng,
+        announceForTalkBack: _announce,
+        landmarkResolver: (lat, lng) => geoService == null
+            ? null
+            : geoService.getNearestBlockReference(lat, lng),
+        onArrival: _showArrivalOverlay,
+        skipInitialCalibration: widget.autoStartSimulation,
+      );
+    } else {
+      _syncVoiceGuidanceState();
+    }
+
+    if (widget.autoStartSimulation && !_autoSimulationScheduled) {
+      _autoSimulationScheduled = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _runRouteSimulation();
+        }
+      });
+      return;
+    }
+
+    await _showUsageInstructionsIfNeeded();
+  }
+
+  String _usageInstructionsText() {
+    return 'Navegación iniciada. Toca una vez la pantalla para repetir tu ubicación e indicaciones. '
+        'Mantén presionada la pantalla para finalizar la navegación.';
+  }
+
+  Future<void> _showUsageInstructionsIfNeeded() async {
+    if (_usageInstructionsShown || !mounted) return;
+    _usageInstructionsShown = true;
+
+    final accessibilityOn =
+        SemanticsBinding.instance.semanticsEnabled ||
+        WidgetsBinding.instance.platformDispatcher.accessibilityFeatures
+            .accessibleNavigation;
+
+    if (accessibilityOn) {
+      return;
+    }
+
+    final message = _usageInstructionsText();
+    await _voiceService?.speak(message);
+    if (!mounted) return;
+
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF12263A),
+          title: const Text(
+            'Instrucciones de uso',
+            style: TextStyle(color: Colors.white),
+          ),
+          content: Text(
+            message,
+            style: const TextStyle(color: Colors.white70, height: 1.4),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text(
+                'Entendido',
+                style: TextStyle(color: Color(0xFF82B1FF)),
+              ),
+            ),
+          ],
+        );
+      },
     );
+  }
+
+  Future<void> _repeatCurrentGuidanceFromGesture() async {
+    final voice = _voiceService;
+    if (voice == null || !voice.isNavigating) return;
+
+    final location = _locationService?.currentLocation;
+    final lat = location?.latitude ?? _currentUser.latitude;
+    final lng = location?.longitude ?? _currentUser.longitude;
+
+    final placeName = _geoService?.getPlaceContaining(lat, lng)?.name;
+    final nearbyRef = _geoService?.getNearestBlockReference(lat, lng);
+
+    final locationText = placeName != null
+        ? 'Ubicación actual: ${_normalizeText(placeName)}.'
+        : (nearbyRef != null
+              ? 'Ubicación actual: cerca de ${_normalizeText(nearbyRef)}.'
+              : 'Ubicación actual registrada.');
+
+    final instruction = voice.currentInstruction.isNotEmpty
+        ? voice.currentInstruction
+      : (_routeSteps.isNotEmpty
+          ? _routeSteps.first.instruction
+              : 'Sin indicaciones disponibles por ahora.');
+
+    final remaining = _remainingDistanceMeters ?? voice.getRemainingDistance(lat, lng);
+    final remainingText = (remaining > 0)
+        ? ' Distancia restante ${_formatDistance(remaining)}.'
+        : '';
+
+    await HapticFeedback.selectionClick();
+    await voice.speak('$locationText $instruction$remainingText');
+  }
+
+  Future<void> _showArrivalOverlay() async {
+    try {
+      await HapticService.trigger(HapticEvent.destinationReached);
+    } catch (_) {}
+
+    await Future<void>.delayed(const Duration(milliseconds: 900));
+    if (!mounted) return;
+    Navigator.of(context).maybePop();
+  }
+
+  Future<void> _stopRouteSimulation() async {
+    final location = _locationService;
+    location?.stopSimulation();
+    if (!mounted) return;
+    setState(() {
+      _routeSimulationRunning = false;
+    });
+    await _announce('Simulación detenida.');
+  }
+
+  Future<void> _runRouteSimulation() async {
+    if (_routeSimulationRunning) return;
+
+    final voice = _voiceService;
+    final location = _locationService;
+    if (voice == null || location == null) return;
+
+    final simulationPath = _routePoints.isNotEmpty
+      ? List<LatLng>.from(_routePoints)
+      : _routeSteps
+          .map((step) => LatLng(step.endPoint.latitude, step.endPoint.longitude))
+          .toList();
+
+    if (simulationPath.length < 2) {
+      await _announce('No hay una ruta suficiente para simular.');
+      return;
+    }
+
+    if (!voice.isNavigating) {
+      await _announce('Primero inicia una navegación para simularla.');
+      return;
+    }
+
+    setState(() {
+      _routeSimulationRunning = true;
+    });
+
+    location.startSimulation();
+
+    try {
+      await _announceAndSpeak('Simulación de navegación iniciada.');
+
+      final firstPoint = simulationPath.first;
+      location.seedLocation(
+        LocationData(
+          latitude: firstPoint.latitude,
+          longitude: firstPoint.longitude,
+          accuracy: 5,
+          speed: 0,
+          heading: null,
+          timestamp: DateTime.now(),
+        ),
+      );
+
+      for (var i = 1; i < simulationPath.length && mounted; i++) {
+        if (!_routeSimulationRunning) break;
+
+        final currentPoint = simulationPath[i];
+        location.setSimulatedLocation(
+          LocationData(
+            latitude: currentPoint.latitude,
+            longitude: currentPoint.longitude,
+            accuracy: 5,
+            speed: i == simulationPath.length - 1 ? 0.6 : 1.2,
+            heading: null,
+            timestamp: DateTime.now(),
+          ),
+        );
+
+        await Future<void>.delayed(const Duration(milliseconds: 3600));
+      }
+
+      await voice.completeNavigationIfActive();
+    } finally {
+      location.stopSimulation();
+      if (mounted) {
+        setState(() {
+          _routeSimulationRunning = false;
+        });
+      } else {
+        _routeSimulationRunning = false;
+      }
+    }
+  }
+
+  Future<void> _finishNavigationFromLongPress() async {
+    if (_routeSimulationRunning) {
+      await _stopRouteSimulation();
+    }
+    await _finishNavigation();
   }
 
   Future<void> _loadLocalRoute({required LatLng origin}) async {
@@ -417,9 +650,10 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
     }
   }
 
-  Future<void> _recalculateLocalRoute({
+  Future<RouteResult?> _recalculateLocalRoute({
     required LatLng newOrigin,
     bool force = false,
+    bool announceReroute = true,
   }) async {
     final now = DateTime.now();
     final enoughTime =
@@ -435,15 +669,15 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
     final offRouteDistance = _distanceToRouteMeters(newOrigin, _routePoints);
     final isOffRoute = offRouteDistance > _maxDistanceFromRouteMeters;
 
-    if (!force && !enoughTime) return;
+    if (!force && !enoughTime) return _activeRoute;
     if (!force &&
         !(isOffRoute ||
             movedSinceLastOrigin >= _minMoveToOptionalRerouteMeters)) {
-      return;
+      return _activeRoute;
     }
 
     final routing = _routingService;
-    if (routing == null) return;
+    if (routing == null) return null;
 
     _lastRouteOrigin = newOrigin;
     _lastRouteUpdate = now;
@@ -465,26 +699,31 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
       destinationPolygon: widget.destinationPolygon,
     );
 
-    if (!mounted) return;
+    if (!mounted) return null;
     if (updated == null) {
       setState(() {
         _hasError = true;
         _isLoading = false;
       });
-      return;
+      return null;
     }
 
     _applyLocalRoute(updated);
 
-    if (now.difference(_lastAnnouncedReroute) >= _minTimeBetweenAnnouncements) {
+    if (announceReroute &&
+        now.difference(_lastAnnouncedReroute) >= _minTimeBetweenAnnouncements) {
       _lastAnnouncedReroute = now;
       _announce('Ruta local recalculada por cambio de ubicación.');
     }
+
+    return updated;
   }
 
   void _onLocationChanged() {
     final here = _locationService?.currentLocation;
     if (here == null) return;
+    if (_isNavigationPaused) return;
+
     final next = LatLng(here.latitude, here.longitude);
 
     if (!mounted) return;
@@ -502,6 +741,10 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
           ? remaining
           : _routeDistanceMeters;
     });
+
+    if (voice?.isNavigating == true) {
+      return;
+    }
 
     final waitingPolygon = _waitingExitPolygon;
     if (waitingPolygon != null && waitingPolygon.length >= 3) {
@@ -643,6 +886,13 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
     _currentZoom = 17;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (_usesLocalRouting && widget.autoStartSimulation) {
+        _announce('Mostrando ruta local a ${widget.destinationName}.');
+        _applyLocalRoute(widget.initialRoute!);
+        await _startVoiceGuidanceIfNeeded();
+        return;
+      }
+
       final mustWaitForExit = await _waitForExitIfInsideArea(_currentUser);
       if (mustWaitForExit) return;
 
@@ -681,11 +931,13 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
 
     final nextVoice = Provider.of<VoiceGuidanceService>(context, listen: false);
     if (!identical(_voiceService, nextVoice)) {
+      _voiceService?.removeListener(_syncVoiceGuidanceState);
       _voiceService = nextVoice;
+      _voiceService?.addListener(_syncVoiceGuidanceState);
     }
 
     final here = _locationService?.currentLocation;
-    if (here != null) {
+    if (here != null && !_isNavigationPaused) {
       _currentUser = LatLng(here.latitude, here.longitude);
       _lastRouteOrigin = _currentUser;
     }
@@ -694,21 +946,233 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
   @override
   void dispose() {
     _locationService?.removeListener(_onLocationChanged);
+    _voiceService?.removeListener(_syncVoiceGuidanceState);
     super.dispose();
   }
 
-  Future<void> _cancelNavigation() async {
-    HapticFeedback.heavyImpact();
+  void _setNavigationLiveMessage(String message) {
+    if (!mounted) return;
+    setState(() {
+      _navigationLiveMessage = message;
+    });
+  }
+
+  Future<void> _pauseNavigation() async {
+    if (_isNavigationPaused) return;
+
+    HapticFeedback.mediumImpact();
+    setState(() {
+      _isNavigationPaused = true;
+      _isLoading = false;
+      _navigationLiveMessage = NavigationMessages.navigationPaused();
+    });
+
+    await _voiceService?.pauseNavigation(speak: false);
+    await _announceAndSpeak(NavigationMessages.navigationPaused());
+  }
+
+  Future<void> _resumeNavigation() async {
+    if (!_isNavigationPaused || _isResumingNavigation) return;
+
+    final here = _locationService?.currentLocation;
+    final origin = here == null
+        ? _currentUser
+        : LatLng(here.latitude, here.longitude);
+
+    HapticFeedback.mediumImpact();
+    setState(() {
+      _isResumingNavigation = true;
+      _isLoading = true;
+      _hasError = false;
+      _currentUser = origin;
+    });
+
+    final resumedRoute = await _recalculateLocalRoute(
+      newOrigin: origin,
+      force: true,
+      announceReroute: false,
+    );
+
+    if (!mounted) return;
+    if (resumedRoute == null) {
+      setState(() {
+        _isResumingNavigation = false;
+        _isLoading = false;
+        _hasError = true;
+      });
+      await _announceAndSpeak('No se pudo reanudar la navegación.');
+      return;
+    }
+
     final voice = _voiceService;
-    if (voice != null) {
-      await voice.stopNavigation();
+    if (voice != null && voice.isNavigating) {
+      await voice.resumeNavigation(route: resumedRoute, speak: false);
+    } else {
+      _voiceStarted = false;
+      await _startVoiceGuidanceIfNeeded();
     }
     if (!mounted) return;
+
+    setState(() {
+      _isNavigationPaused = false;
+      _isResumingNavigation = false;
+      _isLoading = false;
+      _navigationLiveMessage = NavigationMessages.navigationResumed();
+    });
+
+    final currentInstruction = _voiceService?.currentInstruction ?? '';
+    final message = currentInstruction.isEmpty
+        ? NavigationMessages.navigationResumed()
+        : '${NavigationMessages.navigationResumed()}. $currentInstruction';
+    await _announceAndSpeak(message);
+  }
+
+  Future<void> _finishNavigation() async {
+    HapticFeedback.heavyImpact();
+    _setNavigationLiveMessage(NavigationMessages.navigationFinished());
+
+    final voice = _voiceService;
+    await _announceAndSpeak(NavigationMessages.navigationFinished());
+    await voice?.finishNavigation(speak: false);
+    _routingService?.clearCurrentRoute();
+
+    if (!mounted) return;
+    setState(() {
+      _isNavigationPaused = false;
+      _isResumingNavigation = false;
+      _voiceStarted = false;
+      _activeRoute = null;
+      _routePoints = [];
+      _routeSteps = [];
+      _routeDistanceMeters = null;
+      _remainingDistanceMeters = null;
+      _waitingExitPlaceName = null;
+      _waitingExitPolygon = null;
+      _waitingExitOutsideSamples = 0;
+    });
+
     Navigator.of(context).pop();
+  }
+
+  Widget _buildNavigationLiveRegion(TextScaler textScaler) {
+    final message = _navigationLiveMessage;
+    if (message == null) return const SizedBox.shrink();
+
+    return Semantics(
+      container: true,
+      liveRegion: true,
+      label: message,
+      child: ExcludeSemantics(
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: _isNavigationPaused
+                ? const Color(0xFF5D4037).withValues(alpha: 0.50)
+                : const Color(0xFF1B5E20).withValues(alpha: 0.42),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.white24),
+          ),
+          child: Text(
+            message,
+            textScaler: textScaler,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 13,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRouteControlButton({
+    required String label,
+    required String semanticsLabel,
+    required String hint,
+    required IconData icon,
+    required VoidCallback? onPressed,
+    Color color = const Color(0xFF82B1FF),
+  }) {
+    return Semantics(
+      button: true,
+      enabled: onPressed != null,
+      label: semanticsLabel,
+      hint: hint,
+      onTap: onPressed,
+      child: ExcludeSemantics(
+        child: OutlinedButton.icon(
+          onPressed: onPressed,
+          icon: Icon(icon, size: 18),
+          label: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(label, maxLines: 1),
+          ),
+          style: OutlinedButton.styleFrom(
+            foregroundColor: color,
+            disabledForegroundColor: Colors.white38,
+            side: BorderSide(color: onPressed == null ? Colors.white24 : color),
+            minimumSize: const Size(0, 48),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+            textStyle: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavigationControls() {
+    return Row(
+      children: [
+        Expanded(
+          child: _buildRouteControlButton(
+            label: 'Pausar',
+            semanticsLabel: 'Pausar navegación',
+            hint: 'Detiene temporalmente las instrucciones de guía.',
+            icon: Icons.pause_circle_filled_rounded,
+            onPressed: _isNavigationPaused || _isResumingNavigation
+                ? null
+                : _pauseNavigation,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: _buildRouteControlButton(
+            label: 'Reanudar',
+            semanticsLabel: 'Reanudar navegación',
+            hint: 'Continúa la ruta desde tu ubicación actual.',
+            icon: Icons.play_circle_fill_rounded,
+            onPressed: !_isNavigationPaused || _isResumingNavigation
+                ? null
+                : _resumeNavigation,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: _buildRouteControlButton(
+            label: 'Finalizar',
+            semanticsLabel: 'Finalizar navegación',
+            hint: 'Cancela la ruta activa y vuelve a la pantalla principal.',
+            icon: Icons.stop_circle_rounded,
+            color: const Color(0xFFFF8A80),
+            onPressed: _finishNavigation,
+          ),
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final textScaler = clampedTextScaler(context);
+    final titleScaler = clampedTextScaler(context, maxScale: 1.3);
+    final textScale = clampScaleFactor(context, maxScale: 1.5);
     final geo = Provider.of<GeoJsonService>(context, listen: false);
     final polygons = _buildCampusPolygons(geo);
     final polygonLabels = _buildPolygonLabels(geo);
@@ -770,15 +1234,27 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        await _cancelNavigation();
+        await _finishNavigation();
         return false;
       },
       child: Scaffold(
         backgroundColor: const Color(0xFF0D1B2A),
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            final mapHeight = constraints.maxHeight / 3;
-            final topHeight = constraints.maxHeight - mapHeight;
+        body: Semantics(
+          container: true,
+          label: 'Pantalla de navegación activa',
+          hint: 'Toca dos veces para repetir la instrucción actual. Mantén presionado para cancelar la navegación.',
+          onTapHint: 'Repetir instrucción',
+          onLongPressHint: 'Cancelar navegación',
+          onTap: _repeatCurrentGuidanceFromGesture,
+          onLongPress: _finishNavigationFromLongPress,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: _repeatCurrentGuidanceFromGesture,
+            onLongPress: _finishNavigationFromLongPress,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final mapHeight = constraints.maxHeight * (textScale > 1.3 ? 0.28 : 1 / 3);
+                final topHeight = constraints.maxHeight - mapHeight;
 
             return Stack(
               children: [
@@ -788,23 +1264,32 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
                       height: topHeight,
                       child: SafeArea(
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+                          padding: EdgeInsets.fromLTRB(
+                            responsiveSpace(context, 12),
+                            responsiveSpace(context, 8),
+                            responsiveSpace(context, 12),
+                            responsiveSpace(context, 8),
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              // Fila: botón cancelar + nombre destino
+                              // Fila: botón finalizar + nombre destino
                               Row(
                                 children: [
                                   Semantics(
                                     button: true,
-                                    label: 'Cancelar ruta',
+                                    label: 'Finalizar navegación',
                                     child: Material(
                                       color: const Color(0xCC1A237E),
                                       borderRadius: BorderRadius.circular(12),
                                       child: IconButton(
-                                        onPressed: _cancelNavigation,
+                                        constraints: const BoxConstraints(
+                                          minWidth: 48,
+                                          minHeight: 48,
+                                        ),
+                                        onPressed: _finishNavigation,
                                         icon: const Icon(
-                                          Icons.close_rounded,
+                                          Icons.stop_circle_rounded,
                                           color: Colors.white,
                                         ),
                                       ),
@@ -826,6 +1311,7 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
                                       ),
                                       child: Text(
                                         _normalizeText(widget.destinationName),
+                                        textScaler: titleScaler,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
@@ -843,6 +1329,10 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
                                       color: const Color(0xCC1A237E),
                                       borderRadius: BorderRadius.circular(12),
                                       child: IconButton(
+                                        constraints: const BoxConstraints(
+                                          minWidth: 48,
+                                          minHeight: 48,
+                                        ),
                                         onPressed: _openGuidanceSettings,
                                         icon: const Icon(
                                           Icons.tune_rounded,
@@ -871,6 +1361,9 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
                                     ),
                                     child: Text(
                                       'Filtro: ${_normalizeText(selectedLabel)}',
+                                      textScaler: textScaler,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
                                         color: Colors.white70,
                                         fontSize: 12,
@@ -879,7 +1372,6 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
                                   ),
                                 ),
                               ],
-
                               const SizedBox(height: 10),
 
                               // Panel principal de métricas e indicaciones
@@ -891,165 +1383,198 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
                                     borderRadius: BorderRadius.circular(18),
                                     border: Border.all(color: Colors.white24),
                                   ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      // Chips de métricas
-                                      Row(
-                                        children: [
-                                          // HU-16: chip de distancia restante
-                                          Expanded(
-                                            child: Semantics(
-                                              label:
-                                                  _remainingDistanceMeters ==
-                                                      null
-                                                  ? 'Distancia restante no disponible'
-                                                  : 'Distancia restante: ${_formatDistance(_remainingDistanceMeters!)}',
-                                              child: _MetricChip(
-                                                icon: Icons.straighten_rounded,
-                                                label: 'Distancia restante',
-                                                value:
+                                  child: SingleChildScrollView(
+                                    physics: const ClampingScrollPhysics(),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        _buildNavigationLiveRegion(textScaler),
+                                        if (_navigationLiveMessage != null)
+                                          const SizedBox(height: 10),
+                                        _buildNavigationControls(),
+                                        const SizedBox(height: 12),
+
+                                        // Chips de métricas
+                                        Row(
+                                          children: [
+                                            // HU-16: chip de distancia restante
+                                            Expanded(
+                                              child: Semantics(
+                                                label:
                                                     _remainingDistanceMeters ==
                                                         null
-                                                    ? '--'
-                                                    : _formatDistance(
-                                                        _remainingDistanceMeters!,
-                                                      ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Expanded(
-                                            child: _MetricChip(
-                                              icon: Icons.gps_fixed_rounded,
-                                              label: 'Error GPS',
-                                              value: _formatAccuracy(
-                                                _locationService
-                                                    ?.currentLocation
-                                                    ?.accuracy,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-
-                                      const SizedBox(height: 10),
-
-                                      // HU-16: botón "¿Cuánto falta?"
-                                      Semantics(
-                                        button: true,
-                                        label: 'Escuchar distancia restante',
-                                        hint:
-                                            'Toca dos veces para escuchar cuánto falta para llegar',
-                                        child: SizedBox(
-                                          width: double.infinity,
-                                          child: OutlinedButton.icon(
-                                            onPressed: () => _voiceService
-                                                ?.announceRemainingDistance(),
-                                            icon: const Icon(
-                                              Icons.record_voice_over_rounded,
-                                              size: 18,
-                                            ),
-                                            label: const Text('¿Cuánto falta?'),
-                                            style: OutlinedButton.styleFrom(
-                                              foregroundColor: Colors.white,
-                                              side: const BorderSide(
-                                                color: Color(0xFF82B1FF),
-                                              ),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                    vertical: 10,
-                                                  ),
-                                              textStyle: const TextStyle(
-                                                fontSize: 13,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-
-                                      const SizedBox(height: 14),
-
-                                      const Text(
-                                        'Próximas indicaciones',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Expanded(
-                                        child: nextSteps.isEmpty
-                                            ? Align(
-                                                alignment: Alignment.topLeft,
-                                                child: Text(
-                                                  _waitingExitPolygon != null
-                                                      ? waitingExitText
-                                                      : 'Sin indicaciones disponibles todavía.',
-                                                  style: const TextStyle(
-                                                    color: Colors.white60,
-                                                  ),
+                                                    ? 'Distancia restante no disponible'
+                                                    : 'Distancia restante: ${_formatDistance(_remainingDistanceMeters!)}',
+                                                child: _MetricChip(
+                                                  icon:
+                                                      Icons.straighten_rounded,
+                                                  label: 'Distancia restante',
+                                                  value:
+                                                      _remainingDistanceMeters ==
+                                                          null
+                                                      ? '--'
+                                                      : _formatDistance(
+                                                          _remainingDistanceMeters!,
+                                                        ),
                                                 ),
-                                              )
-                                            : ListView.separated(
-                                                itemCount: nextSteps.length,
-                                                separatorBuilder: (_, __) =>
-                                                    const SizedBox(height: 8),
-                                                itemBuilder: (context, i) {
-                                                  return Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Container(
-                                                        width: 22,
-                                                        height: 22,
-                                                        alignment:
-                                                            Alignment.center,
-                                                        decoration: BoxDecoration(
-                                                          color: const Color(
-                                                            0xFF1565C0,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                11,
-                                                              ),
-                                                        ),
-                                                        child: Text(
-                                                          '${i + 1}',
-                                                          style:
-                                                              const TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(width: 10),
-                                                      Expanded(
-                                                        child: Text(
-                                                          _normalizeText(
-                                                            nextSteps[i]
-                                                                .instruction,
-                                                          ),
-                                                          style:
-                                                              const TextStyle(
-                                                                color: Colors
-                                                                    .white70,
-                                                                height: 1.3,
-                                                              ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
                                               ),
-                                      ),
-                                    ],
+                                            ),
+                                            const SizedBox(width: 10),
+                                            Expanded(
+                                              child: _MetricChip(
+                                                icon: Icons.gps_fixed_rounded,
+                                                label: 'Error GPS',
+                                                value: _formatAccuracy(
+                                                  _locationService
+                                                      ?.currentLocation
+                                                      ?.accuracy,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        const SizedBox(height: 10),
+
+                                        // HU-16: botón "¿Cuánto falta?"
+                                        Semantics(
+                                          button: true,
+                                          enabled:
+                                              !_isNavigationPaused &&
+                                              !_isResumingNavigation,
+                                          label: _isNavigationPaused
+                                              ? 'Escuchar distancia restante no disponible mientras la navegación está pausada'
+                                              : 'Escuchar distancia restante',
+                                          hint: _isNavigationPaused
+                                              ? 'Reanuda la navegación para escuchar la distancia restante.'
+                                              : 'Toca dos veces para escuchar cuánto falta para llegar',
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            child: OutlinedButton.icon(
+                                              onPressed:
+                                                  _isNavigationPaused ||
+                                                      _isResumingNavigation
+                                                  ? null
+                                                  : () => _voiceService
+                                                        ?.announceRemainingDistance(),
+                                              icon: const Icon(
+                                                Icons.record_voice_over_rounded,
+                                                size: 18,
+                                              ),
+                                              label: FittedBox(
+                                                fit: BoxFit.scaleDown,
+                                                child: Text(
+                                                  '¿Cuánto falta?',
+                                                  textScaler: textScaler,
+                                                ),
+                                              ),
+                                              style: OutlinedButton.styleFrom(
+                                                foregroundColor: Colors.white,
+                                                side: const BorderSide(
+                                                  color: Color(0xFF82B1FF),
+                                                ),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                    ),
+                                                minimumSize: const Size(
+                                                  double.infinity,
+                                                  48,
+                                                ),
+                                                textStyle: const TextStyle(
+                                                  fontSize: 13,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        const SizedBox(height: 14),
+
+                                        Text(
+                                          'Próximas indicaciones',
+                                          textScaler: textScaler,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        if (nextSteps.isEmpty)
+                                          Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              _waitingExitPolygon != null
+                                                  ? waitingExitText
+                                                  : 'Sin indicaciones disponibles todavía.',
+                                              textScaler: textScaler,
+                                              softWrap: true,
+                                              style: const TextStyle(
+                                                color: Colors.white60,
+                                              ),
+                                            ),
+                                          )
+                                        else
+                                          ListView.separated(
+                                            shrinkWrap: true,
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            itemCount: nextSteps.length,
+                                            separatorBuilder: (_, __) =>
+                                                const SizedBox(height: 8),
+                                            itemBuilder: (context, i) {
+                                              return Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    width: 22,
+                                                    height: 22,
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                      color: const Color(
+                                                        0xFF1565C0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            11,
+                                                          ),
+                                                    ),
+                                                    child: Text(
+                                                      '${i + 1}',
+                                                      textScaler: textScaler,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 10),
+                                                  Expanded(
+                                                    child: Text(
+                                                      _normalizeText(
+                                                        nextSteps[i]
+                                                            .instruction,
+                                                      ),
+                                                      textScaler: textScaler,
+                                                      softWrap: true,
+                                                      style: const TextStyle(
+                                                        color: Colors.white70,
+                                                        height: 1.3,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -1060,58 +1585,63 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
                     ),
 
                     // Mapa en el tercio inferior
-                    SizedBox(
-                      height: mapHeight,
-                      width: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(18),
-                          topRight: Radius.circular(18),
-                        ),
-                        child: FlutterMap(
-                          mapController: _mapController,
-                          options: MapOptions(
-                            initialCenter: _currentUser,
-                            initialZoom: _currentZoom,
-                            minZoom: minZoom,
-                            maxZoom: maxZoom,
-                            interactionOptions: const InteractionOptions(
-                              flags:
-                                  InteractiveFlag.drag |
-                                  InteractiveFlag.pinchZoom |
-                                  InteractiveFlag.doubleTapZoom |
-                                  InteractiveFlag.scrollWheelZoom,
-                            ),
-                            onPositionChanged: (camera, hasGesture) {
-                              _currentZoom = camera.zoom;
-                            },
+                    SafeArea(
+                      top: false,
+                      child: SizedBox(
+                        height: mapHeight,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(18),
+                            topRight: Radius.circular(18),
                           ),
-                          children: [
-                            TileLayer(
-                              urlTemplate:
-                                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                              userAgentPackageName: 'campus_guia',
-                            ),
-                            if (polygons.isNotEmpty)
-                              PolygonLayer(polygons: polygons),
-                            if (_routePoints.length >= 2)
-                              PolylineLayer(
-                                polylines: [
-                                  Polyline(
-                                    points: _routePoints,
-                                    strokeWidth: 5,
-                                    color: const Color(0xFF1976D2),
-                                  ),
-                                ],
+                          child: ExcludeSemantics(
+                            child: FlutterMap(
+                              mapController: _mapController,
+                              options: MapOptions(
+                                initialCenter: _currentUser,
+                                initialZoom: _currentZoom,
+                                minZoom: minZoom,
+                                maxZoom: maxZoom,
+                                interactionOptions: const InteractionOptions(
+                                  flags:
+                                      InteractiveFlag.drag |
+                                      InteractiveFlag.pinchZoom |
+                                      InteractiveFlag.doubleTapZoom |
+                                      InteractiveFlag.scrollWheelZoom,
+                                ),
+                                onPositionChanged: (camera, hasGesture) {
+                                  _currentZoom = camera.zoom;
+                                },
                               ),
-                            MarkerLayer(
-                              markers: [
-                                ...polygonLabels,
-                                ...routeNodeMarkers,
-                                userMarker,
+                              children: [
+                                TileLayer(
+                                  urlTemplate:
+                                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                  userAgentPackageName: 'campus_guia',
+                                ),
+                                if (polygons.isNotEmpty)
+                                  PolygonLayer(polygons: polygons),
+                                if (_routePoints.length >= 2)
+                                  PolylineLayer(
+                                    polylines: [
+                                      Polyline(
+                                        points: _routePoints,
+                                        strokeWidth: 5,
+                                        color: const Color(0xFF1976D2),
+                                      ),
+                                    ],
+                                  ),
+                                MarkerLayer(
+                                  markers: [
+                                    ...polygonLabels,
+                                    ...routeNodeMarkers,
+                                    userMarker,
+                                  ],
+                                ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
@@ -1143,7 +1673,9 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
                   ),
               ],
             );
-          },
+              },
+            ),
+          ),
         ),
       ),
     );
@@ -1180,11 +1712,15 @@ class _MetricChip extends StatelessWidget {
               children: [
                 Text(
                   label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(color: Colors.white54, fontSize: 11),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   value,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -1199,9 +1735,3 @@ class _MetricChip extends StatelessWidget {
   }
 }
 
-class _RouteStep {
-  final String instruction;
-  final LatLng location;
-
-  const _RouteStep({required this.instruction, required this.location});
-}

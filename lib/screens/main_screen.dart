@@ -9,6 +9,7 @@ import '../services/geojson_service.dart';
 import '../services/routing_service.dart';
 import '../services/voice_guidance_service.dart';
 import '../models/campus_place.dart';
+import '../utils/accessibility_scale.dart';
 import 'destination_screen.dart';
 import 'navigation_map_screen.dart';
 
@@ -86,7 +87,9 @@ class _MainScreenState extends State<MainScreen> {
     final loc = Provider.of<LocationService>(context, listen: false);
 
     if (loc.currentLocation == null) {
-      _announce('No se puede mostrar lugares cercanos. Ubicación no disponible.');
+      _announce(
+        'No se puede mostrar lugares cercanos. Ubicación no disponible.',
+      );
       return;
     }
 
@@ -96,21 +99,137 @@ class _MainScreenState extends State<MainScreen> {
     final here = loc.currentLocation!;
     geo.filterByProximity(here.latitude, here.longitude, limit: 10);
 
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => MultiProvider(
-        providers: [
-          ChangeNotifierProvider.value(value: geo),
-          ChangeNotifierProvider.value(value: loc),
-        ],
-        child: DestinationScreen(
-          categoryName: 'Cerca de ti',
-          onDestinationSelected: (place) {
-            Navigator.of(context).pop();
-            _onSelected(place);
-          },
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider.value(value: geo),
+            ChangeNotifierProvider.value(value: loc),
+          ],
+          child: DestinationScreen(
+            categoryName: 'Cerca de ti',
+            onDestinationSelected: (place) {
+              Navigator.of(context).pop();
+              _onSelected(place);
+            },
+          ),
         ),
       ),
-    ));
+    );
+  }
+
+  CampusPlace? _pickTestDestination(
+    GeoJsonService geo,
+    LocationService loc,
+  ) {
+    final current = loc.currentLocation;
+    if (current == null) return null;
+
+    final currentPlace = geo.getPlaceContaining(
+      current.latitude,
+      current.longitude,
+    );
+    final nearby = geo.getNearby(current.latitude, current.longitude, limit: 10);
+
+    for (final place in nearby) {
+      final samePlace = currentPlace != null &&
+          place.name == currentPlace.name &&
+          place.description == currentPlace.description;
+      final tooClose = place.distanceFrom(current.latitude, current.longitude) < 20;
+      if (!samePlace && !tooClose) {
+        return place;
+      }
+    }
+
+    return nearby.isNotEmpty ? nearby.first : null;
+  }
+
+  Future<void> _startRouteTest() async {
+    HapticFeedback.mediumImpact();
+
+    final location = Provider.of<LocationService>(context, listen: false);
+    final routing = Provider.of<RoutingService>(context, listen: false);
+    final geo = Provider.of<GeoJsonService>(context, listen: false);
+
+    if (location.currentLocation == null) {
+      _announce('No se puede iniciar la prueba. Ubicación no disponible.');
+      return;
+    }
+
+    if (!geo.isLoaded) {
+      await geo.load();
+    }
+
+    if (!location.canStartNavigation()) {
+      _announce('No se puede iniciar la prueba de navegación ahora.');
+      return;
+    }
+
+    final origin = location.currentLocation!;
+    if (!geo.isInsideCampus(origin.latitude, origin.longitude)) {
+      _announce('Debes estar dentro del campus para probar la navegación.');
+      return;
+    }
+
+    final destination = _pickTestDestination(geo, location);
+    if (destination == null) {
+      _announce('No encontré un destino cercano para la prueba.');
+      return;
+    }
+
+    _announce('Iniciando prueba de ruta hacia ${destination.name}.');
+
+    final route = await routing.buildRoute(
+      originLat: origin.latitude,
+      originLng: origin.longitude,
+      destinationLat: destination.latitude,
+      destinationLng: destination.longitude,
+      originPolygon: geo
+          .getPlaceContaining(origin.latitude, origin.longitude)
+          ?.polygon,
+      destinationPolygon: destination.polygon,
+    );
+
+    if (route == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No se pudo generar una ruta de prueba.'),
+          backgroundColor: Color(0xFFB00020),
+        ),
+      );
+      return;
+    }
+
+    final voice = Provider.of<VoiceGuidanceService>(context, listen: false);
+    await voice.startNavigation(
+      route: route,
+      locationService: location,
+      routingService: routing,
+      destinationName: destination.name,
+      destinationLat: destination.latitude,
+      destinationLng: destination.longitude,
+      announceForTalkBack: _announce,
+      landmarkResolver: (lat, lng) => geo.getNearestBlockReference(lat, lng),
+      skipInitialCalibration: true,
+    );
+
+    if (!mounted) return;
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => NavigationMapScreen(
+          destinationName: destination.name,
+          startLat: origin.latitude,
+          startLng: origin.longitude,
+          destLat: destination.latitude,
+          destLng: destination.longitude,
+          highlightCategoryId: destination.primaryCategory,
+          initialRoute: route,
+          destinationPolygon: destination.polygon,
+          autoStartSimulation: true,
+        ),
+      ),
+    );
   }
 
   Future<void> _onSelected(CampusPlace place) async {
@@ -286,14 +405,22 @@ class _MainScreenState extends State<MainScreen> {
             ),
             const SizedBox(height: 14),
             if (hasRoute) ...[
-              Text('Distancia: ${route.totalDistanceMeters.round()} m',
-                  style: const TextStyle(color: Color(0xFF82B1FF))),
-              Text('Tiempo estimado: ${route.estimatedWalkTime.inMinutes} min',
-                  style: const TextStyle(color: Color(0xFF82B1FF))),
-              Text('Nodos de ruta: ${route.nodePath.length}',
-                  style: const TextStyle(color: Color(0xFF82B1FF))),
-              Text('Cálculo: ${route.computationTimeMs} ms',
-                  style: const TextStyle(color: Color(0xFF82B1FF))),
+              Text(
+                'Distancia: ${route.totalDistanceMeters.round()} m',
+                style: const TextStyle(color: Color(0xFF82B1FF)),
+              ),
+              Text(
+                'Tiempo estimado: ${route.estimatedWalkTime.inMinutes} min',
+                style: const TextStyle(color: Color(0xFF82B1FF)),
+              ),
+              Text(
+                'Nodos de ruta: ${route.nodePath.length}',
+                style: const TextStyle(color: Color(0xFF82B1FF)),
+              ),
+              Text(
+                'Cálculo: ${route.computationTimeMs} ms',
+                style: const TextStyle(color: Color(0xFF82B1FF)),
+              ),
             ] else ...[
               Text(
                 routing.lastError.isEmpty
@@ -319,6 +446,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textScaler = clampedTextScaler(context);
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -338,8 +466,6 @@ class _MainScreenState extends State<MainScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const _VoiceGuidanceCard(),
-
                       // HU-13: Lista de 3 cercanos + botón ver más
                       _NearbySection(
                         onSeeMore: _openNearby,
@@ -378,13 +504,20 @@ class _MainScreenState extends State<MainScreen> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 14, 20, 12),
+                        padding: EdgeInsets.fromLTRB(
+                          responsiveSpace(context, 20),
+                          responsiveSpace(context, 14),
+                          responsiveSpace(context, 20),
+                          responsiveSpace(context, 12),
+                        ),
                         child: Semantics(
                           header: true,
                           label: 'Categorías de lugares',
-                          child: const ExcludeSemantics(
+                          child: ExcludeSemantics(
                             child: Text(
                               '¿A dónde quieres ir?',
+                              textScaler: textScaler,
+                              softWrap: true,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -396,26 +529,72 @@ class _MainScreenState extends State<MainScreen> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: responsiveSpace(context, 16),
+                        ),
+                        child: Semantics(
+                          button: true,
+                          label: 'Test ruta',
+                          hint:
+                              'Inicia una navegación de prueba y la recorre automáticamente',
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              onPressed: _startRouteTest,
+                              icon: const Icon(Icons.route_rounded),
+                              label: const Text('Test ruta'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF1565C0),
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
+                                textStyle: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 12),
+
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: responsiveSpace(context, 16),
+                        ),
                         child: Consumer<GeoJsonService>(
                           builder: (_, geo, __) {
                             final cats = geo.categories;
-                            return Wrap(
-                              spacing: 12,
-                              runSpacing: 12,
-                              children: [
-                                for (final cat in cats)
-                                  SizedBox(
-                                    width:
-                                        (MediaQuery.of(context).size.width -
-                                            56) /
-                                        3,
-                                    child: _CatBtn(
-                                      cat: cat,
-                                      onTap: _openCategory,
-                                    ),
-                                  ),
-                              ],
+                            return LayoutBuilder(
+                              builder: (context, constraints) {
+                                final availableWidth = constraints.maxWidth;
+                                final columns = availableWidth < 330
+                                    ? 2
+                                    : availableWidth > 520
+                                    ? 4
+                                    : 3;
+                                final spacing = responsiveSpace(context, 12);
+                                final itemWidth =
+                                    (availableWidth - spacing * (columns - 1)) /
+                                    columns;
+                                return Wrap(
+                                  spacing: spacing,
+                                  runSpacing: spacing,
+                                  children: [
+                                    for (final cat in cats)
+                                      SizedBox(
+                                        width: itemWidth,
+                                        child: _CatBtn(
+                                          cat: cat,
+                                          onTap: _openCategory,
+                                        ),
+                                      ),
+                                  ],
+                                );
+                              },
                             );
                           },
                         ),
@@ -448,6 +627,7 @@ class _NearbySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textScaler = clampedTextScaler(context);
     return Consumer2<LocationService, GeoJsonService>(
       builder: (_, loc, geo, __) {
         if (loc.currentLocation == null || !geo.isLoaded) {
@@ -458,16 +638,22 @@ class _NearbySection extends StatelessWidget {
         if (nearby.isEmpty) return const SizedBox.shrink();
 
         return Container(
-          margin: const EdgeInsets.fromLTRB(16, 20, 16, 0),
+          margin: EdgeInsets.fromLTRB(
+            responsiveSpace(context, 16),
+            responsiveSpace(context, 20),
+            responsiveSpace(context, 16),
+            0,
+          ),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.05),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: Colors.white.withOpacity(0.08)),
             boxShadow: const [
               BoxShadow(
-                  color: Color(0x33000000),
-                  blurRadius: 8,
-                  offset: Offset(0, 3)),
+                color: Color(0x33000000),
+                blurRadius: 8,
+                offset: Offset(0, 3),
+              ),
             ],
           ),
           child: Column(
@@ -475,18 +661,29 @@ class _NearbySection extends StatelessWidget {
             children: [
               // Encabezado
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 14, 16, 0),
+                padding: EdgeInsets.fromLTRB(
+                  responsiveSpace(context, 16),
+                  responsiveSpace(context, 14),
+                  responsiveSpace(context, 16),
+                  0,
+                ),
                 child: Semantics(
                   header: true,
                   label: 'Cerca de ti',
                   child: Row(
-                    children: const [
-                      Icon(Icons.near_me_rounded,
-                          color: Color(0xFF82B1FF), size: 18),
-                      SizedBox(width: 8),
+                    children: [
+                      const Icon(
+                        Icons.near_me_rounded,
+                        color: Color(0xFF82B1FF),
+                        size: 18,
+                      ),
+                      SizedBox(width: responsiveSpace(context, 8)),
                       ExcludeSemantics(
                         child: Text(
                           'Cerca de ti',
+                          textScaler: textScaler,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -500,11 +697,12 @@ class _NearbySection extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Divider(
-                  height: 1,
-                  thickness: 1,
-                  color: Color(0x15FFFFFF),
-                  indent: 16,
-                  endIndent: 16),
+                height: 1,
+                thickness: 1,
+                color: Color(0x15FFFFFF),
+                indent: 16,
+                endIndent: 16,
+              ),
               const SizedBox(height: 6),
 
               // Lista de 3 lugares (tapeable)
@@ -522,42 +720,59 @@ class _NearbySection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     onTap: () => onSelect(p),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 9),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: responsiveSpace(context, 16),
+                        vertical: responsiveSpace(context, 10),
+                      ),
                       child: Row(
                         children: [
                           Container(
-                            width: 34,
-                            height: 34,
+                            width: 48,
+                            height: 48,
                             decoration: BoxDecoration(
                               color: const Color(0xFF1565C0).withOpacity(0.2),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Icon(geo.iconForPlace(p),
-                                color: const Color(0xFF82B1FF), size: 18),
+                            child: Icon(
+                              geo.iconForPlace(p),
+                              color: const Color(0xFF82B1FF),
+                              size: 18,
+                            ),
                           ),
                           const SizedBox(width: 12),
                           Expanded(
-                            child: Text(p.name,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis),
+                            child: Text(
+                              p.name,
+                              textScaler: textScaler,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 4),
+                              horizontal: 10,
+                              vertical: 4,
+                            ),
                             decoration: BoxDecoration(
                               color: const Color(0xFF1565C0).withOpacity(0.2),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Text(dt,
-                                style: const TextStyle(
-                                    color: Color(0xFF82B1FF),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600)),
+                            child: Text(
+                              dt,
+                              textScaler: textScaler,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Color(0xFF82B1FF),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -568,11 +783,12 @@ class _NearbySection extends StatelessWidget {
 
               // Divisor
               const Divider(
-                  height: 1,
-                  thickness: 1,
-                  color: Color(0x15FFFFFF),
-                  indent: 16,
-                  endIndent: 16),
+                height: 1,
+                thickness: 1,
+                color: Color(0x15FFFFFF),
+                indent: 16,
+                endIndent: 16,
+              ),
 
               // Botón "Ver más opciones cercanas"
               Semantics(
@@ -587,21 +803,32 @@ class _NearbySection extends StatelessWidget {
                   ),
                   onTap: onSeeMore,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 12),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: responsiveSpace(context, 16),
+                      vertical: responsiveSpace(context, 14),
+                    ),
                     child: ExcludeSemantics(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(Icons.expand_more_rounded,
-                              color: Color(0xFF82B1FF), size: 18),
-                          SizedBox(width: 6),
-                          Text(
-                            'Ver más opciones cercanas',
-                            style: TextStyle(
-                              color: Color(0xFF82B1FF),
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
+                        children: [
+                          const Icon(
+                            Icons.expand_more_rounded,
+                            color: Color(0xFF82B1FF),
+                            size: 18,
+                          ),
+                          SizedBox(width: responsiveSpace(context, 6)),
+                          Flexible(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Ver más opciones cercanas',
+                                textScaler: textScaler,
+                                style: TextStyle(
+                                  color: Color(0xFF82B1FF),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -660,6 +887,7 @@ class _LocationHeaderState extends State<_LocationHeader> {
 
   @override
   Widget build(BuildContext context) {
+    final textScaler = clampedTextScaler(context);
     return Consumer2<LocationService, GeoJsonService>(
       builder: (_, loc, geo, __) {
         String title = 'Buscando ubicación...';
@@ -677,8 +905,9 @@ class _LocationHeaderState extends State<_LocationHeader> {
           } else {
             title = 'Fuera del campus';
             _fetchAddress(lat, lng);
-            subtitle =
-                _address.isNotEmpty ? _address : 'Obteniendo dirección...';
+            subtitle = _address.isNotEmpty
+                ? _address
+                : 'Obteniendo dirección...';
           }
         } else {
           switch (loc.status) {
@@ -725,41 +954,63 @@ class _LocationHeaderState extends State<_LocationHeader> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Ubicación actual',
-                            style: TextStyle(
-                                color: Colors.white54,
-                                fontSize: 12,
-                                letterSpacing: 0.8)),
+                        Text(
+                          'Ubicación actual',
+                          textScaler: textScaler,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 12,
+                            letterSpacing: 0.8,
+                          ),
+                        ),
                         const SizedBox(height: 4),
-                        Text(title,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                height: 1.1)),
+                        Text(
+                          title,
+                          textScaler: clampedTextScaler(context, maxScale: 1.3),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            height: 1.1,
+                          ),
+                        ),
                         if (subtitle.isNotEmpty) ...[
                           const SizedBox(height: 4),
-                          Text(subtitle,
-                              style: const TextStyle(
-                                  color: Colors.white70, fontSize: 13),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis),
+                          Text(
+                            subtitle,
+                            textScaler: textScaler,
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 13,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ],
                         if (showEafit) ...[
                           const SizedBox(height: 6),
                           Row(
-                            children: const [
-                              Icon(
+                            children: [
+                              const Icon(
                                 Icons.school_rounded,
                                 color: Colors.white38,
                                 size: 13,
                               ),
-                              SizedBox(width: 4),
-                              Text(
-                                'Universidad EAFIT, Medellín',
-                                style: TextStyle(
-                                  color: Colors.white38,
-                                  fontSize: 12,
+                              const SizedBox(width: 4),
+                              Expanded(
+                                child: Text(
+                                  'Universidad EAFIT, Medellín',
+                                  textScaler: textScaler,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: Colors.white38,
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                             ],
@@ -780,8 +1031,11 @@ class _LocationHeaderState extends State<_LocationHeader> {
                         width: 1.5,
                       ),
                     ),
-                    child: const Icon(Icons.navigation_rounded,
-                        color: Colors.white, size: 28),
+                    child: const Icon(
+                      Icons.navigation_rounded,
+                      color: Colors.white,
+                      size: 28,
+                    ),
                   ),
                 ],
               ),
@@ -826,21 +1080,29 @@ class _VoiceGuidanceCard extends StatelessWidget {
                         size: 20,
                       ),
                       SizedBox(width: 8),
-                      Text('Guía por voz activa',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14)),
+                      Text(
+                        'Guía por voz activa',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Text(voice.currentInstruction,
-                      style: const TextStyle(
-                          color: Colors.white70, fontSize: 13)),
+                  Text(
+                    voice.currentInstruction,
+                    style: const TextStyle(color: Colors.white70, fontSize: 13),
+                  ),
                   const SizedBox(height: 8),
-                  Text('Pasos restantes: ${voice.remainingSteps}',
-                      style: const TextStyle(
-                          color: Color(0xFFA5D6A7), fontSize: 12)),
+                  Text(
+                    'Pasos restantes: ${voice.remainingSteps}',
+                    style: const TextStyle(
+                      color: Color(0xFFA5D6A7),
+                      fontSize: 12,
+                    ),
+                  ),
                   const SizedBox(height: 10),
                   Align(
                     alignment: Alignment.centerRight,
@@ -851,10 +1113,15 @@ class _VoiceGuidanceCard extends StatelessWidget {
                           listen: false,
                         ).stopNavigation();
                       },
-                      icon: const Icon(Icons.stop_circle_rounded,
-                          color: Color(0xFFFFCDD2), size: 18),
-                      label: const Text('Detener voz',
-                          style: TextStyle(color: Color(0xFFFFCDD2))),
+                      icon: const Icon(
+                        Icons.stop_circle_rounded,
+                        color: Color(0xFFFFCDD2),
+                        size: 18,
+                      ),
+                      label: const Text(
+                        'Detener voz',
+                        style: TextStyle(color: Color(0xFFFFCDD2)),
+                      ),
                     ),
                   ),
                 ],
@@ -875,6 +1142,7 @@ class _CatBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textScaler = clampedTextScaler(context);
     return FocusTraversalOrder(
       order: NumericFocusOrder(cat.order.toDouble()),
       child: Semantics(
@@ -886,7 +1154,14 @@ class _CatBtn extends StatelessWidget {
         child: GestureDetector(
           onTap: () => onTap(cat),
           child: Container(
-            height: 90,
+            constraints: BoxConstraints(
+              minHeight: responsiveSpace(context, 90),
+              minWidth: 48,
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: responsiveSpace(context, 6),
+              vertical: responsiveSpace(context, 8),
+            ),
             decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(16),
@@ -904,8 +1179,8 @@ class _CatBtn extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 40,
-                    height: 40,
+                    width: responsiveSpace(context, 40),
+                    height: responsiveSpace(context, 40),
                     decoration: BoxDecoration(
                       color: const Color(0xFF1565C0).withValues(alpha: 0.22),
                       borderRadius: BorderRadius.circular(12),
@@ -917,14 +1192,18 @@ class _CatBtn extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 7),
-                  Text(cat.label,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600),
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis),
+                  Text(
+                    cat.label,
+                    textScaler: textScaler,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),
