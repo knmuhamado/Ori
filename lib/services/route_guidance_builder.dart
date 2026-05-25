@@ -241,15 +241,15 @@ class RouteGuidanceBuilder {
     final destinationText = _normalizeText(destinationName);
 
     if (delta.abs() <= 30) {
-      return 'Tu destino estará al frente. $destinationText';
+      return 'Llegaste a tu destino. $destinationText al frente';
     }
     if (delta.abs() >= 150) {
-      return 'Tu destino estará detrás de ti. $destinationText';
+      return 'Llegaste a tu destino. $destinationText detrás de ti';
     }
 
     return delta > 0
-        ? 'Tu destino estará a tu derecha. $destinationText'
-        : 'Tu destino estará a tu izquierda. $destinationText';
+        ? 'Llegaste a tu destino. $destinationText a tu derecha'
+        : 'Llegaste a tu destino. $destinationText a tu izquierda';
   }
 
   static String _normalizeText(String text) {
