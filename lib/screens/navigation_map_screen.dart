@@ -431,7 +431,8 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
 
   String _usageInstructionsText() {
     return 'Navegación iniciada. Toca una vez la pantalla para repetir tu ubicación e indicaciones. '
-        'Mantén presionada la pantalla para finalizar la navegación.';
+      'Usa el botón pausar o continuar para detener temporalmente la navegación sin cancelarla. '
+      'Mantén presionada la pantalla para finalizar la navegación.';
   }
 
   Future<void> _showUsageInstructionsIfNeeded() async {
@@ -971,6 +972,14 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
     await _announceAndSpeak(NavigationMessages.navigationPaused());
   }
 
+  Future<void> _toggleNavigationPause() async {
+    if (_isNavigationPaused) {
+      await _resumeNavigation();
+    } else {
+      await _pauseNavigation();
+    }
+  }
+
   Future<void> _resumeNavigation() async {
     if (!_isNavigationPaused || _isResumingNavigation) return;
 
@@ -1132,25 +1141,29 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
       children: [
         Expanded(
           child: _buildRouteControlButton(
-            label: 'Pausar',
-            semanticsLabel: 'Pausar navegación',
-            hint: 'Detiene temporalmente las instrucciones de guía.',
-            icon: Icons.pause_circle_filled_rounded,
-            onPressed: _isNavigationPaused || _isResumingNavigation
-                ? null
-                : _pauseNavigation,
+            label: _isNavigationPaused ? 'Continuar' : 'Pausar',
+            semanticsLabel: _isNavigationPaused
+                ? 'Continuar navegación'
+                : 'Pausar navegación',
+            hint: _isNavigationPaused
+                ? 'Reanuda la ruta desde tu ubicación actual.'
+                : 'Detiene temporalmente las instrucciones de guía sin cancelar la ruta.',
+            icon: _isNavigationPaused
+                ? Icons.play_circle_fill_rounded
+                : Icons.pause_circle_filled_rounded,
+            onPressed: _isResumingNavigation ? null : _toggleNavigationPause,
           ),
         ),
         const SizedBox(width: 8),
         Expanded(
           child: _buildRouteControlButton(
-            label: 'Reanudar',
-            semanticsLabel: 'Reanudar navegación',
-            hint: 'Continúa la ruta desde tu ubicación actual.',
-            icon: Icons.play_circle_fill_rounded,
-            onPressed: !_isNavigationPaused || _isResumingNavigation
+            label: 'Repetir',
+            semanticsLabel: 'Repetir instrucción actual',
+            hint: 'Lee otra vez la ubicación, la instrucción y la distancia restante.',
+            icon: Icons.record_voice_over_rounded,
+            onPressed: _isResumingNavigation || _isNavigationPaused
                 ? null
-                : _resumeNavigation,
+                : _repeatCurrentGuidanceFromGesture,
           ),
         ),
         const SizedBox(width: 8),
@@ -1242,7 +1255,7 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
         body: Semantics(
           container: true,
           label: 'Pantalla de navegación activa',
-          hint: 'Toca dos veces para repetir la instrucción actual. Mantén presionado para cancelar la navegación.',
+            hint: 'Toca dos veces para repetir la instrucción actual. Usa el botón pausar o continuar para detener temporalmente la navegación sin cancelarla. Mantén presionado para cancelar la navegación.',
           onTapHint: 'Repetir instrucción',
           onLongPressHint: 'Cancelar navegación',
           onTap: _repeatCurrentGuidanceFromGesture,
