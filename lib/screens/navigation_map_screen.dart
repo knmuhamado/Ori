@@ -1300,6 +1300,7 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
                                           minWidth: 48,
                                           minHeight: 48,
                                         ),
+                                        tooltip: 'Finalizar navegación',
                                         onPressed: _finishNavigation,
                                         icon: const Icon(
                                           Icons.stop_circle_rounded,
@@ -1346,6 +1347,7 @@ class _NavigationMapScreenState extends State<NavigationMapScreen> {
                                           minWidth: 48,
                                           minHeight: 48,
                                         ),
+                                        tooltip: 'Configuración de guía',
                                         onPressed: _openGuidanceSettings,
                                         icon: const Icon(
                                           Icons.tune_rounded,

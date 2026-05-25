@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
+import '../models/campus_place.dart';
 import '../services/geojson_service.dart';
 import '../services/location_service.dart';
-import '../models/campus_place.dart';
 import '../utils/accessibility_scale.dart';
 import 'place_detail_screen.dart';
 
 class DestinationScreen extends StatefulWidget {
   final String categoryName;
-  final Function(CampusPlace) onDestinationSelected;
+  final ValueChanged<CampusPlace> onDestinationSelected;
 
   const DestinationScreen({
     super.key,
@@ -124,17 +125,18 @@ class _DestinationScreenState extends State<DestinationScreen> {
   }
 
   void _onTap(CampusPlace place) {
+    final alreadySelected = _selected == place;
+    if (alreadySelected) {
+      HapticFeedback.heavyImpact();
+      widget.onDestinationSelected(place);
+      return;
+    }
+
     setState(() => _selected = place);
     HapticFeedback.lightImpact();
     _announce(
-      'Seleccionado: ${place.name}. Toca Confirmar al final para continuar.',
+      'Seleccionado: ${place.name}. Toca otra vez para ir a navegación o usa las opciones de abajo.',
     );
-  }
-
-  void _confirm() {
-    if (_selected == null) return;
-    HapticFeedback.heavyImpact();
-    widget.onDestinationSelected(_selected!);
   }
 
   @override
@@ -210,8 +212,6 @@ class _DestinationScreenState extends State<DestinationScreen> {
           const SizedBox(height: 4),
           _buildDetailButton(),
         ],
-        const SizedBox(height: 4),
-        _buildConfirmButton(),
       ],
     );
   }
@@ -228,8 +228,6 @@ class _DestinationScreenState extends State<DestinationScreen> {
           const SizedBox(height: 2),
           _buildDetailButton(compact: true),
         ],
-        const SizedBox(height: 2),
-        _buildConfirmButton(compact: true),
       ],
     );
   }
@@ -297,9 +295,9 @@ class _DestinationScreenState extends State<DestinationScreen> {
       width: double.infinity,
       child: OutlinedButton.icon(
         onPressed: () {
-          Navigator.push(
+          Navigator.push<void>(
             context,
-            MaterialPageRoute(
+            MaterialPageRoute<void>(
               builder: (_) => PlaceDetailScreen(place: _selected!),
             ),
           );
@@ -314,58 +312,6 @@ class _DestinationScreenState extends State<DestinationScreen> {
           side: const BorderSide(color: Color(0xFF82B1FF)),
           minimumSize: const Size(double.infinity, 48),
           padding: EdgeInsets.symmetric(vertical: compact ? 10 : 14),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildConfirmButton({bool compact = false}) {
-    final hasSelection = _selected != null;
-    final textScaler = clampedTextScaler(context);
-    return Semantics(
-      button: true,
-      label: hasSelection
-          ? 'Confirmar'
-          : 'Confirmar. Primero selecciona un lugar',
-      hint: hasSelection ? 'Toca dos veces para confirmar' : '',
-      child: SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: hasSelection ? _confirm : null,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: hasSelection
-                ? const Color(0xFF2E7D32)
-                : Colors.grey[800],
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            minimumSize: Size(double.infinity, compact ? 52 : 60),
-            textStyle: TextStyle(
-              fontSize: compact ? 16 : 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          child: ExcludeSemantics(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  hasSelection
-                      ? Icons.check_circle_rounded
-                      : Icons.touch_app_rounded,
-                  size: compact ? 20 : 24,
-                ),
-                const SizedBox(width: 10),
-                Flexible(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text('Confirmar', textScaler: textScaler),
-                  ),
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );
@@ -393,7 +339,7 @@ class _PlaceList extends StatelessWidget {
   Widget build(BuildContext context) {
     final textScaler = clampedTextScaler(context);
     return Consumer2<GeoJsonService, LocationService>(
-      builder: (_, geo, loc, __) {
+      builder: (context, geo, loc, unused) {
         if (!geo.isLoaded) {
           return const Center(
             child: CircularProgressIndicator(color: Color(0xFF1565C0)),
@@ -452,8 +398,8 @@ class _PlaceList extends StatelessWidget {
                   : 'Opción ${i + 1} de ${places.length}: ${place.name}'
                         '${distText.isNotEmpty ? ", $distText" : ""}',
               hint: isSelected
-                  ? 'Ya seleccionado. Toca Confirmar para continuar'
-                  : 'Toca dos veces para seleccionar',
+              ? 'Ya seleccionado. Toca otra vez para ir a navegación o usa las opciones de abajo'
+              : 'Toca una vez para seleccionar y mostrar las opciones. Doble toque rápido para ir a navegación',
               onTap: () => onTap(place),
               child: Container(
                 margin: const EdgeInsets.only(bottom: 8),
@@ -473,6 +419,7 @@ class _PlaceList extends StatelessWidget {
                   minLeadingWidth: 48,
                   minVerticalPadding: responsiveSpace(context, 10),
                   onTap: () => onTap(place),
+                  onLongPress: () => onTap(place),
                   leading: Container(
                     width: 48,
                     height: 48,
@@ -482,12 +429,14 @@ class _PlaceList extends StatelessWidget {
                           : const Color(0xFF0D1B2A),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
-                      geo.iconForPlace(place),
-                      color: isSelected
-                          ? Colors.white
-                          : const Color(0xFF82B1FF),
-                      size: 22,
+                    child: ExcludeSemantics(
+                      child: Icon(
+                        geo.iconForPlace(place),
+                        color: isSelected
+                            ? Colors.white
+                            : const Color(0xFF82B1FF),
+                        size: 22,
+                      ),
                     ),
                   ),
                   title: ExcludeSemantics(
@@ -535,10 +484,12 @@ class _PlaceList extends StatelessWidget {
                     ),
                   ),
                   trailing: isSelected
-                      ? const Icon(
-                          Icons.check_circle_rounded,
-                          color: Color(0xFF1565C0),
-                          size: 22,
+                      ? const ExcludeSemantics(
+                          child: Icon(
+                            Icons.check_circle_rounded,
+                            color: Color(0xFF1565C0),
+                            size: 22,
+                          ),
                         )
                       : null,
                 ),
